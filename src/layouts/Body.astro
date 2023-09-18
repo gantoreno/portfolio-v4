@@ -2,10 +2,20 @@
 import Container from "../components/Container.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import clsx from "clsx";
+
+const currentPath = new URL(Astro.request.url).pathname;
 ---
 
 <body class="pt-[100px]">
-  <div id="controller" transition:persist></div>
+  <div
+    id="controller"
+    class={clsx({
+      "no-animate": /^\/blog\/?$/i.test(currentPath),
+    })}
+    transition:persist
+  >
+  </div>
   <Navbar />
   <Container>
     <slot />
