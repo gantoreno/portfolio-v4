@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 
+import { format } from "date-fns";
+
 import Html from "../../layouts/Html.astro";
 import Head from "../../layouts/Head.astro";
 import Body from "../../layouts/Body.astro";
@@ -21,7 +23,6 @@ import Figure from "../../components/Figure.astro";
 import Entry from "../../components/Entry.astro";
 import Paragraph from "../../components/Paragraph.astro";
 
-import { getFormattedDate } from "../../utils/date";
 import Signature from "../../components/Signature.astro";
 
 export const prerender = true;
@@ -68,7 +69,7 @@ const { Content } = await post.render();
         {post.data.title}
       </PrimaryHeading>
       <Paragraph class="!text-disabled" style="--stagger:2" data-animate>
-        {getFormattedDate(post.data.date)}
+        {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
     </Header>
     <div style="--stagger:3" data-animate>

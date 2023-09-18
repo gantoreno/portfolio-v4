@@ -5,7 +5,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 <footer
   class="h-[100px] mt-[60px] flex items-center text-secondary"
   style="--stagger:7"
-  data-animate={currentPath === "/" ? true : false}
+  data-animate={currentPath === "/" || currentPath.startsWith("/blog/")}
 >
   &copy; 2023 Gabriel Moreno. All rights reserved.
 </footer>
