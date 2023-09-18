@@ -8,7 +8,7 @@ import Paragraph from "./Paragraph.astro";
 
 type Props = HTMLAttributes<"img">;
 
-const { src, alt, width = 600, height = 400, ...rest } = Astro.props;
+const { src, alt, width, height, ...rest } = Astro.props;
 ---
 
 <figure class="mb-[20px]">
@@ -17,7 +17,6 @@ const { src, alt, width = 600, height = 400, ...rest } = Astro.props;
     src={src ?? ""}
     alt={alt ?? ""}
     loading="lazy"
-    decoding="async"
     width={width as number}
     height={height as number}
   />
