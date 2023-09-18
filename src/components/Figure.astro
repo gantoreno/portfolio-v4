@@ -8,12 +8,12 @@ import Paragraph from "./Paragraph.astro";
 
 type Props = HTMLAttributes<"img">;
 
-const { src, alt, width, height, ...rest } = Astro.props;
+const { src, alt, width, height } = Astro.props;
 ---
 
 <figure class="mb-[20px]">
   <Image
-    class="rounded-md mb-[20px]"
+    class="rounded-md mb-[26px] mx-auto min-w-[400px] mt-[26px]"
     src={src ?? ""}
     alt={alt ?? ""}
     loading="lazy"
