@@ -59,4 +59,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   />
 
   <ViewTransitions />
+
+  <script is:inline>
+    document.addEventListener(
+      "astro:page-load",
+      () => {
+        window.addEventListener("animationend", () => {
+          setTimeout(() => {
+            document.getElementById("controller").classList.add("no-animate");
+          }, 1000);
+        });
+      },
+      { once: true }
+    );
+  </script>
 </head>
