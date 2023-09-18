@@ -37,7 +37,8 @@ export async function getStaticPaths() {
       post,
       otherPosts: posts
         .filter((p) => p.slug !== post.slug)
-        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+        .slice(0, 3),
     },
   }));
 }
@@ -63,35 +64,48 @@ const { Content } = await post.render();
   </Head>
   <Body>
     <Header>
-      <PrimaryHeading>{post.data.title}</PrimaryHeading>
-      <Paragraph class="!text-disabled">
+      <PrimaryHeading style="--stagger:1" data-animate>
+        {post.data.title}
+      </PrimaryHeading>
+      <Paragraph class="!text-disabled" style="--stagger:2" data-animate>
         {getFormattedDate(post.data.date)}
       </Paragraph>
     </Header>
-    <Content
-      components={{
-        p: Paragraph,
-        img: Figure,
-        h1: PrimaryHeading,
-        h2: SecondaryHeading,
-        ul: BulletedList,
-        strong: Bold,
-        em: Italic,
-        code: Mono,
-        blockquote: Blockquote,
-        pre: Snippet,
-      }}
-    />
-    <SecondaryHeading>Continue reading</SecondaryHeading>
+    <div style="--stagger:3" data-animate>
+      <Content
+        components={{
+          p: Paragraph,
+          img: Figure,
+          h1: PrimaryHeading,
+          h2: SecondaryHeading,
+          ul: BulletedList,
+          strong: Bold,
+          em: Italic,
+          code: Mono,
+          blockquote: Blockquote,
+          pre: Snippet,
+        }}
+      />
+    </div>
+    <SecondaryHeading style="--stagger:4" data-animate>
+      Continue reading
+    </SecondaryHeading>
     {
-      otherPosts.map((post: Post) => (
-        <Entry
-          title={post.data.title}
-          description={post.data.description}
-          link={"/blog/" + post.slug}
-        />
+      otherPosts.map((post: Post, i: number) => (
+        <div style={"--stagger:" + ((5 + i) as number)} data-animate>
+          <Entry
+            title={post.data.title}
+            description={post.data.description}
+            link={"/blog/" + post.slug}
+          />
+        </div>
       ))
     }
-    <Signature />
+    <div
+      style={"--stagger:" + ((5 + otherPosts.length) as number)}
+      data-animate
+    >
+      <Signature />
+    </div>
   </Body>
 </Html>
