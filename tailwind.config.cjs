@@ -11,9 +11,9 @@ module.exports = {
       inverse: "rgb(var(--color-inverse) / <alpha-value>)",
     },
     fontFamily: {
-      sans: ["Figtree", 'sans-serif'],
-      serif: ["'Source Serif 4'", 'serif'],
-      mono: ["Menlo", 'monospace'],
+      sans: ["Figtree", "sans-serif"],
+      serif: ["'Source Serif 4'", "serif"],
+      mono: ["Menlo", "monospace"],
     },
   },
   plugins: [],

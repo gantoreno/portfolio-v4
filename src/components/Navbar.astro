@@ -17,8 +17,13 @@ const routes: Route[] = [
 ];
 ---
 
+<div
+  class="fixed top-0 w-full h-[100px] z-10 pointer-events-none"
+  style="background: linear-gradient(rgb(var(--background)), transparent)"
+>
+</div>
 <nav
-  class="h-[100px] fixed top-0 left-0 w-full bg-inverse z-10 backdrop-blur-lg bg-opacity-75"
+  class="h-[100px] w-full z-20 absolute top-0 left-0"
   style="--stagger:7"
   data-animate={currentPath === "/" ? true : false}
 >
