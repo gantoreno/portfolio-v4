@@ -1,0 +1,23 @@
+---
+import Link from "./Link.astro";
+
+type Props = {
+  title: string;
+  link: string;
+  date: Date;
+};
+
+const { title, link, date } = Astro.props;
+
+const month = date.getMonth();
+const day = date.getDay();
+
+function formatDate(date: number) {
+  return date.toString().length < 2 ? `0${date}` : date;
+}
+---
+
+<div class="flex justify-between mb-5">
+  <Link href={link}>{title}</Link>
+  <span class="text-disabled">{formatDate(month)}/{formatDate(day)}</span>
+</div>

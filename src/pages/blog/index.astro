@@ -1,0 +1,75 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import Html from "../../layouts/Html.astro";
+import Head from "../../layouts/Head.astro";
+import Body from "../../layouts/Body.astro";
+
+import Header from "../../components/Header.astro";
+import EntryAlt from "../../components/EntryAlt.astro";
+import Section from "../../components/Section.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+type PostsByYear = {
+  [year: string]: CollectionEntry<"blog">[];
+};
+
+const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
+  const year = post.data.date.getFullYear();
+
+  if (!posts[year]) posts[year] = [];
+
+  posts[year].push(post);
+
+  return posts;
+}, {});
+---
+
+<Html>
+  <Head>
+    <meta name="title" content="Blog" />
+    <meta name="description" content="Experiences, lessons & more" />
+    <meta name="keywords" content="blog, writing, learning" />
+
+    <meta name="og:title" content="Blog" />
+    <meta name="og:description" content="Experiences, lessons & more" />
+
+    <meta name="twitter:title" content="Blog" />
+    <meta name="twitter:description" content="Experiences, lessons & more" />
+
+    <title>Blog</title>
+  </Head>
+  <Body>
+    <Header>
+      <h1 class="font-bold text-2xl text-primary">
+        Experiences, lessons & more {"📖"}
+      </h1>
+    </Header>
+    <div class="mt-[60px]">
+      {
+        Object.keys(postsGroupedByYear).map((year) => (
+          <SectionDivider>
+            <span slot="title" class="text-disabled">
+              {year}
+            </span>
+            <div slot="items">
+              {postsGroupedByYear[year].map((post) => (
+                <Section>
+                  <EntryAlt
+                    title={post.data.shorthand}
+                    date={post.data.date}
+                    link={"/blog/" + post.slug}
+                  />
+                </Section>
+              ))}
+            </div>
+          </SectionDivider>
+        ))
+      }
+    </div>
+  </Body>
+</Html>

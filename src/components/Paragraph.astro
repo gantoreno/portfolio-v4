@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import clsx from "clsx";
+
+type Props = HTMLAttributes<"p">;
+
+const { class: classNames, ...rest } = Astro.props;
+---
+
+<p class={clsx("mb-[20px] text-secondary", classNames)} {...rest}>
+  <slot />
+</p>

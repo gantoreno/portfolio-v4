@@ -1,0 +1,19 @@
+---
+import Link from "./Link.astro";
+import Paragraph from "./Paragraph.astro";
+
+type Props = {
+  title: string;
+  description: string;
+  link: string;
+  external?: boolean;
+};
+const { title, description, link, external = false } = Astro.props;
+---
+
+<div>
+  <Link href={link} class="mb-[5px]" target={external ? "_blank" : ""}>
+    {title}
+  </Link>
+  <Paragraph>{description}</Paragraph>
+</div>

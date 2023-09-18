@@ -1,0 +1,62 @@
+---
+import "../styles/index.css";
+
+import { ViewTransitions } from "astro:transitions";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="generator" content={Astro.generator} />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <link rel="canonical" href={canonicalURL} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta
+    property="og:image"
+    content={new URL("/assets/img/og.png", Astro.url)}
+  />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={Astro.url} />
+  <meta
+    property="twitter:image"
+    content={new URL("/assets/img/og.png", Astro.url)}
+  />
+
+  <slot />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap"
+  />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?&family=Source+Serif+4:ital,wght@1,400;1,600&display=swap"
+  />
+
+  <link
+    rel="stylesheet"
+    media="print"
+    onload="this.onload = null; this.removeAttribute('media'); "
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    media="print"
+    onload="this.onload = null; this.removeAttribute('media');"
+    href="https://fonts.googleapis.com/css2?&family=Source+Serif+4:ital,wght@1,400;1,600&display=swap"
+  />
+
+  <ViewTransitions />
+</head>

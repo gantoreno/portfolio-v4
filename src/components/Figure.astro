@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import Italic from "./Italic.astro";
+import Paragraph from "./Paragraph.astro";
+
+type Props = HTMLAttributes<"img">;
+
+const { src, alt, ...rest } = Astro.props;
+---
+
+<figure class="mb-[20px]">
+  <img class="rounded-md mb-[20px]" src={src} alt={alt} {...rest} />
+  <figcaption>
+    <Paragraph class="text-center">
+      <Italic>
+        {alt}
+      </Italic>
+    </Paragraph>
+  </figcaption>
+</figure>

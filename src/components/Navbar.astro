@@ -1,0 +1,40 @@
+---
+import Container from "./Container.astro";
+import Link from "./Link.astro";
+
+type Route = {
+  name: string;
+  path: string;
+  target?: string;
+};
+
+const currentPath = new URL(Astro.request.url).pathname;
+
+const routes: Route[] = [
+  { name: "Home", path: "/" },
+  { name: "Blog", path: "/blog" },
+  { name: "GitHub", path: "https://github.com/gantoreno", target: "_blank" },
+];
+---
+
+<nav
+  class="h-[100px] fixed top-0 left-0 w-full bg-inverse z-10 backdrop-blur-lg bg-opacity-50"
+>
+  <Container class="flex items-center gap-5 h-full">
+    {
+      routes.map((route) => (
+        <Link
+          href={route.path}
+          active={
+            route.path === "/"
+              ? route.path === currentPath
+              : currentPath.startsWith(route.path)
+          }
+          target={route.target ?? ""}
+        >
+          {route.name}
+        </Link>
+      ))
+    }
+  </Container>
+</nav>

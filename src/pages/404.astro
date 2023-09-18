@@ -1,0 +1,41 @@
+---
+import Html from "../layouts/Html.astro";
+import Head from "../layouts/Head.astro";
+import Body from "../layouts/Body.astro";
+
+import PrimaryHeading from "../components/PrimaryHeading.astro";
+
+import Header from "../components/Header.astro";
+import Link from "../components/Link.astro";
+import Paragraph from "../components/Paragraph.astro";
+import Italic from "../components/Italic.astro";
+---
+
+<Html>
+  <Head>
+    <meta name="title" content="Whoops!" />
+    <meta name="description" content="Page not found" />
+
+    <meta name="og:title" content="Whoops!" />
+    <meta name="og:description" content="Page not found" />
+
+    <meta name="twitter:title" content="Whoops!" />
+    <meta name="twitter:description" content="Page not found" />
+
+    <title>Whoops!</title>
+  </Head>
+  <Body>
+    <Header>
+      <PrimaryHeading>Seems like I'm missing this one {"🤔"}</PrimaryHeading>
+    </Header>
+    <Paragraph>
+      I probably forgot to build the page you're looking for – but no worries,
+      you can still look around my <Link href="/">homepage</Link> or my <Link
+        href="/blog"
+      ><!---->blog<!----></Link> blog for some good reads.
+    </Paragraph>
+    <Paragraph>
+      <Italic>Perhaps this page will exist in the future...</Italic>
+    </Paragraph>
+  </Body>
+</Html>

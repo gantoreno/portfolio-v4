@@ -1,0 +1,97 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+
+import Html from "../../layouts/Html.astro";
+import Head from "../../layouts/Head.astro";
+import Body from "../../layouts/Body.astro";
+
+import Header from "../../components/Header.astro";
+import Snippet from "../../components/Snippet.astro";
+import Blockquote from "../../components/Blockquote.astro";
+import BulletedList from "../../components/BulletedList.astro";
+
+import PrimaryHeading from "../../components/PrimaryHeading.astro";
+import SecondaryHeading from "../../components/SecondaryHeading.astro";
+
+import Bold from "../../components/Bold.astro";
+import Mono from "../../components/Mono.astro";
+import Italic from "../../components/Italic.astro";
+
+import Figure from "../../components/Figure.astro";
+import Entry from "../../components/Entry.astro";
+import Paragraph from "../../components/Paragraph.astro";
+
+import { getFormattedDate } from "../../utils/date";
+import Signature from "../../components/Signature.astro";
+
+export const prerender = true;
+
+type Post = CollectionEntry<"blog">;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: {
+      post,
+      otherPosts: posts
+        .filter((p) => p.slug !== post.slug)
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { post, otherPosts } = Astro.props;
+
+const { Content } = await post.render();
+---
+
+<Html>
+  <Head>
+    <meta name="title" content={post.data.title} />
+    <meta name="description" content={post.data.description} />
+    <meta name="keywords" content={post.data.tags.join(", ").toLowerCase()} />
+
+    <meta name="og:title" content={post.data.title} />
+    <meta name="og:description" content={post.data.description} />
+
+    <meta name="twitter:title" content={post.data.title} />
+    <meta name="twitter:description" content={post.data.description} />
+
+    <title>{post.data.title}</title>
+  </Head>
+  <Body>
+    <Header>
+      <PrimaryHeading>{post.data.title}</PrimaryHeading>
+      <Paragraph class="!text-disabled">
+        {getFormattedDate(post.data.date)}
+      </Paragraph>
+    </Header>
+    <Content
+      components={{
+        p: Paragraph,
+        img: Figure,
+        h1: PrimaryHeading,
+        h2: SecondaryHeading,
+        ul: BulletedList,
+        strong: Bold,
+        em: Italic,
+        code: Mono,
+        blockquote: Blockquote,
+        pre: Snippet,
+      }}
+    />
+    <SecondaryHeading>Continue reading</SecondaryHeading>
+    {
+      otherPosts.map((post: Post) => (
+        <Entry
+          title={post.data.title}
+          description={post.data.description}
+          link={"/blog/" + post.slug}
+        />
+      ))
+    }
+    <Signature />
+  </Body>
+</Html>

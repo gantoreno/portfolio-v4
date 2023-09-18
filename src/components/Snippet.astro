@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import clsx from "clsx";
+
+type Props = HTMLAttributes<"pre">;
+
+const { class: classNames, ...rest } = Astro.props;
+---
+
+<pre
+  {...rest}
+  class={clsx(
+    "p-[20px] mb-[20px] rounded-md bg-[var(--astro-code-color-background)] [&>code]:bg-[var(--astro-code-color-background)] [&>code]:p-0",
+    classNames
+  )}><slot /></pre>
