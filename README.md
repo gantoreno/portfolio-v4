@@ -4,7 +4,7 @@
 
 # Portfolio
 
-Files for the second version of my my personal portfolio, built with [Astro](https://astro.build/) and deployed with [Vercel](https://vercel.com/).
+Files for the fourth version of my my personal portfolio, built with [Astro](https://astro.build/) and deployed with [Vercel](https://vercel.com/).
 
 ## Scripts
 
