@@ -1,16 +1,26 @@
 ---
+/* @ts-nocheck */
 import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
 
 import Italic from "./Italic.astro";
 import Paragraph from "./Paragraph.astro";
 
 type Props = HTMLAttributes<"img">;
 
-const { src, alt, ...rest } = Astro.props;
+const { src, alt, width = 600, height = 400, ...rest } = Astro.props;
 ---
 
 <figure class="mb-[20px]">
-  <img class="rounded-md mb-[20px]" src={src} alt={alt} {...rest} />
+  <Image
+    class="rounded-md mb-[20px]"
+    src={src ?? ""}
+    alt={alt ?? ""}
+    loading="lazy"
+    decoding="async"
+    width={width as number}
+    height={height as number}
+  />
   <figcaption>
     <Paragraph class="text-center">
       <Italic>
