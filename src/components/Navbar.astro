@@ -43,5 +43,12 @@ const routes: Route[] = [
         </Link>
       ))
     }
+    {
+      Astro.response.status === 404 && (
+        <Link href={currentPath} active={true}>
+          404
+        </Link>
+      )
+    }
   </Container>
 </nav>
