@@ -18,13 +18,13 @@
     --astro-code-color-background: #f8f8f8;
     --astro-code-token-constant: #001080;
     --astro-code-token-string: #a31515;
-    --astro-code-token-comment: 	#008000;
-    --astro-code-token-keyword: #0000FF;
+    --astro-code-token-comment: #008000;
+    --astro-code-token-keyword: #0000ff;
     --astro-code-token-parameter: #a31515;
-    --astro-code-token-function: 	#795E26;
-    --astro-code-token-string-expression: #A31515;
+    --astro-code-token-function: #795e26;
+    --astro-code-token-string-expression: #a31515;
     --astro-code-token-punctuation: #cccccc;
-    --astro-code-token-link: #0070C1;
+    --astro-code-token-link: #0070c1;
   }
 }
 
@@ -41,6 +41,26 @@ body {
   background: rgb(var(--background));
 }
 
+[data-animate] {
+  --start: 0ms;
+  --stagger: 0;
+  --delay: 120ms;
+  animation: enter 0.6s both;
+  animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+}
+
+@keyframes enter {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --selection: 255, 255, 255, 0.125;
@@ -55,14 +75,14 @@ body {
 
     --astro-code-color-text: #cccccc;
     --astro-code-color-background: #1f1f1f;
-    --astro-code-token-constant: #9CDCFE;
+    --astro-code-token-constant: #9cdcfe;
     --astro-code-token-string: #ce9178;
-    --astro-code-token-comment: 	#6a9955;
+    --astro-code-token-comment: #6a9955;
     --astro-code-token-keyword: #569cd6;
     --astro-code-token-parameter: #ce9178;
-    --astro-code-token-function: 	#DCDCAA;
-    --astro-code-token-string-expression: #CE9178;
+    --astro-code-token-function: #dcdcaa;
+    --astro-code-token-string-expression: #ce9178;
     --astro-code-token-punctuation: #cccccc;
-    --astro-code-token-link: #9CDCFE;
+    --astro-code-token-link: #9cdcfe;
   }
 }

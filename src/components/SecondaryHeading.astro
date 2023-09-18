@@ -1,7 +1,7 @@
 ---
-
+const props = Astro.props;
 ---
 
-<h2 class="font-bold text-primary mt-[60px] mb-[20px]">
+<h2 class="font-bold text-primary mt-[60px] mb-[20px]" {...props}>
   <slot />
 </h2>
