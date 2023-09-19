@@ -33,9 +33,10 @@ const routes: Route[] = [
         <Link
           href={route.path}
           active={
-            route.path === "/" && Astro.response.status !== 404
+            (route.path === "/"
               ? route.path === currentPath
-              : currentPath.startsWith(route.path)
+              : currentPath.startsWith(route.path)) &&
+            Astro.response.status !== 404
           }
           target={route.target ?? ""}
         >
