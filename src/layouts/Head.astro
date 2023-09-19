@@ -64,10 +64,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     document.addEventListener(
       "astro:page-load",
       () => {
-        window.addEventListener("animationend", () => {
-          setTimeout(() => {
-            document.getElementById("controller").classList.add("no-animate");
-          }, 1000);
+        const footer = document.getElementById("footer");
+        const animatedElements = document.querySelectorAll("[data-animate]");
+
+        footer.style = "--stagger:" + animatedElements.length;
+        footer.dataset.animate = true;
+
+        footer.addEventListener("animationend", () => {
+          document.getElementById("controller").classList.add("no-animate");
         });
       },
       { once: true }

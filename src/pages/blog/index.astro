@@ -9,6 +9,7 @@ import Header from "../../components/Header.astro";
 import EntryAlt from "../../components/EntryAlt.astro";
 import Section from "../../components/Section.astro";
 import SectionDivider from "../../components/SectionDivider.astro";
+import PrimaryHeading from "../../components/PrimaryHeading.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -45,9 +46,9 @@ const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
   </Head>
   <Body>
     <Header>
-      <h1 class="font-bold text-2xl text-primary">
+      <PrimaryHeading>
         Experiences, lessons & more {"📖"}
-      </h1>
+      </PrimaryHeading>
     </Header>
     <div class="mt-[60px]">
       {
