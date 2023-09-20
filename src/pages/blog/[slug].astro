@@ -7,7 +7,6 @@ import Html from "../../layouts/Html.astro";
 import Head from "../../layouts/Head.astro";
 import Body from "../../layouts/Body.astro";
 
-import Header from "../../components/Header.astro";
 import Snippet from "../../components/Snippet.astro";
 import Blockquote from "../../components/Blockquote.astro";
 import BulletedList from "../../components/BulletedList.astro";
@@ -64,15 +63,13 @@ const { Content } = await post.render();
     <title>{post.data.title}</title>
   </Head>
   <Body>
-    <Header>
-      <PrimaryHeading style="--stagger:1" data-animate>
+    <article id="article" style="opacity: 0">
+      <PrimaryHeading class="mt-[60px]">
         {post.data.title}
       </PrimaryHeading>
-      <Paragraph class="!text-disabled" style="--stagger:2" data-animate>
+      <Paragraph class="!text-disabled mb-[60px]">
         {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
-    </Header>
-    <article id="article" style="opacity: 0">
       <Content
         components={{
           p: Paragraph,
@@ -104,8 +101,8 @@ const { Content } = await post.render();
       var stagger = document
         .getElementById("controller")
         .classList.contains("no-animate")
-        ? 1
-        : 3;
+        ? 0
+        : 1;
 
       article.style = "opacity: 1";
 

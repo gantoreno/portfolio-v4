@@ -1,7 +1,12 @@
 ---
-const props = Astro.props;
+import clsx from "clsx";
+
+const { class: classNames, ...rest } = Astro.props;
 ---
 
-<h1 class="text-primary font-bold text-2xl mb-[20px]" {...props}>
+<h1
+  class={clsx("text-primary font-bold text-2xl mb-[20px]", classNames)}
+  {...rest}
+>
   <slot />
 </h1>
