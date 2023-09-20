@@ -8,9 +8,19 @@ const currentPath = new URL(Astro.request.url).pathname;
 
 <script is:inline>
 var footer = document.getElementById("footer");
+
 var animatedElementsCount =
   document.querySelectorAll("[data-animate]").length;
 
 footer.style = "--stagger:" + animatedElementsCount;
 footer.dataset.animate = true;
+
+footer.addEventListener(
+  "animationcancel",
+  () => {
+    console.log("cancelled");
+    document.getElementById("controller").classList.add("no-animate");
+  },
+  { once: true }
+  );
 </script>

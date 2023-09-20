@@ -53,14 +53,3 @@ const routes: Route[] = [
     }
   </Container>
 </nav>
-
-<script is:inline>
-document.getElementById("navbar").addEventListener(
-  "animationcancel",
-  () => {
-    console.log("cancelled");
-    document.getElementById("controller").classList.add("no-animate");
-    },
-    { once: true }
-  );
-</script>
