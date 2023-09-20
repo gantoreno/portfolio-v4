@@ -45,32 +45,43 @@ const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
     <title>Blog</title>
   </Head>
   <Body>
-    <Header>
-      <PrimaryHeading>
-        Experiences, lessons & more {"📖"}
-      </PrimaryHeading>
-    </Header>
-    <div class="mt-[60px]">
-      {
-        Object.keys(postsGroupedByYear).map((year) => (
-          <SectionDivider>
-            <span slot="title" class="text-disabled">
-              {year}
-            </span>
-            <div slot="items">
-              {postsGroupedByYear[year].map((post) => (
-                <Section>
-                  <EntryAlt
-                    title={post.data.shorthand}
-                    date={post.data.date}
-                    link={"/blog/" + post.slug}
-                  />
-                </Section>
-              ))}
-            </div>
-          </SectionDivider>
-        ))
-      }
-    </div>
+    <main>
+      <Header>
+        <PrimaryHeading style="--stagger:1" data-animate>
+          Experiences, lessons & more {"📖"}
+        </PrimaryHeading>
+      </Header>
+      <div class="mt-[60px]">
+        {
+          Object.keys(postsGroupedByYear).map((year, i) => (
+            <SectionDivider
+              style={"--stagger:" + (i * postsGroupedByYear[year].length + 2)}
+              data-animate
+            >
+              <span slot="title" class="text-disabled">
+                {year}
+              </span>
+              <div slot="items">
+                {postsGroupedByYear[year].map((post, j) => (
+                  <Section
+                    style={
+                      "--stagger:" +
+                      (i * postsGroupedByYear[year].length + j + 3)
+                    }
+                    data-animate
+                  >
+                    <EntryAlt
+                      title={post.data.shorthand}
+                      date={post.data.date}
+                      link={"/blog/" + post.slug}
+                    />
+                  </Section>
+                ))}
+              </div>
+            </SectionDivider>
+          ))
+        }
+      </div>
+    </main>
   </Body>
 </Html>

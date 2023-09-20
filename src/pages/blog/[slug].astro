@@ -101,21 +101,25 @@ const { Content } = await post.render();
     </article>
     <script is:inline>
       var article = document.getElementById("article");
-      var initialStagger = 1;
+      var stagger = 3;
 
       article.style = "opacity: 1";
 
       for (let node of article.childNodes) {
-        try {
-          node.style = "--stagger:" + initialStagger;
+        if (
+          !(
+            node instanceof HTMLScriptElement ||
+            node instanceof HTMLStyleElement
+          ) &&
+          node.tagName
+        ) {
+          node.style = "--stagger:" + stagger;
 
           node.dataset.animate = true;
 
-          if (initialStagger < 5) {
-            initialStagger += 1;
+          if (stagger < 10) {
+            stagger += 1;
           }
-        } catch (e) {
-          continue;
         }
       }
     </script>

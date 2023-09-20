@@ -8,14 +8,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 ---
 
 <body class="pt-[100px]">
-  <div
-    id="controller"
-    class={clsx({
-      "no-animate": /^\/blog\/?$/i.test(currentPath),
-    })}
-    transition:persist
-  >
-  </div>
+  <div id="controller" transition:persist></div>
   <Navbar />
   <Container>
     <slot />

@@ -1,9 +1,10 @@
 ---
-
+const props = Astro.props;
 ---
 
 <div
   class="border-t border-soft first:!border-0 first:pt-0 first:mt-0 pt-[20px] mt-[20px]"
+  {...props}
 >
   <slot />
 </div>

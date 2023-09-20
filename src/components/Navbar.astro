@@ -23,11 +23,9 @@ const routes: Route[] = [
 >
 </div>
 <nav
+  id="navbar"
   class="h-[100px] w-full z-20 absolute top-0 left-0"
-  style="--stagger:7"
-  data-animate={currentPath === "/" ||
-    currentPath.startsWith("/blog/") ||
-    Astro.response.status === 404}
+  data-animate
 >
   <Container class="flex items-center gap-5 h-full">
     {
@@ -55,3 +53,14 @@ const routes: Route[] = [
     }
   </Container>
 </nav>
+
+<script is:inline>
+document.getElementById("navbar").addEventListener(
+  "animationcancel",
+  () => {
+    console.log("cancelled");
+    document.getElementById("controller").classList.add("no-animate");
+    },
+    { once: true }
+  );
+</script>
