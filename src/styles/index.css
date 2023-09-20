@@ -47,6 +47,10 @@ body:has(#controller.no-animate) footer[data-animate] {
   animation: none;
 }
 
+:target {
+  scroll-margin-top: 100px;
+}
+
 [data-animate] {
   --start: 0ms;
   --stagger: 0;

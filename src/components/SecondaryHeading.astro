@@ -1,7 +1,37 @@
 ---
-const props = Astro.props;
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"div"> & {
+  linkable?: boolean;
+};
+
+const { linkable = true, ...rest } = Astro.props;
 ---
 
-<h2 class="font-bold text-primary mt-[60px] mb-[20px]" {...props}>
+<h2
+  class="font-bold text-primary mt-[60px] mb-[20px] inline-flex ml-auto gap-[1ch] group"
+  {...rest}
+>
   <slot />
+  {
+    linkable && (
+      <a href={"#" + rest.id} class="inline-flex">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-anchor text-disabled h-[1em] w-[1em] self-center opacity-0 group-hover:opacity-100 duration-[0.15s]"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2" />
+          <path d="M12 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        </svg>
+      </a>
+    )
+  }
 </h2>
