@@ -101,7 +101,13 @@ const { Content } = await post.render();
     </article>
     <script is:inline>
       var article = document.getElementById("article");
-      var stagger = 3;
+      var stagger = document
+        .getElementById("controller")
+        .classList.contains("no-animate")
+        ? 1
+        : 3;
+
+      console.log(stagger);
 
       article.style = "opacity: 1";
 
