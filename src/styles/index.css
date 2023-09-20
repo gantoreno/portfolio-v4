@@ -44,6 +44,10 @@ body {
   background: rgb(var(--background));
 }
 
+body {
+  position: relative;
+}
+
 /* Prevent navbar from animating more than once */
 body:has(#controller.no-animate) nav[data-animate],
 body:has(#controller.no-animate) footer[data-animate],
