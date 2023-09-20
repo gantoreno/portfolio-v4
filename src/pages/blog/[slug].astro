@@ -72,7 +72,7 @@ const { Content } = await post.render();
         {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
     </Header>
-    <div style="--stagger:3" data-animate>
+    <article id="article" style="opacity: 0">
       <Content
         components={{
           p: Paragraph,
@@ -87,26 +87,37 @@ const { Content } = await post.render();
           pre: Snippet,
         }}
       />
-    </div>
-    <SecondaryHeading style="--stagger:4" data-animate>
-      Continue reading
-    </SecondaryHeading>
-    {
-      otherPosts.map((post: Post, i: number) => (
-        <div style={"--stagger:" + ((5 + i) as number)} data-animate>
+      <SecondaryHeading>Continue reading</SecondaryHeading>
+      {
+        otherPosts.map((post: Post) => (
           <Entry
             title={post.data.title}
             description={post.data.description}
             link={"/blog/" + post.slug}
           />
-        </div>
-      ))
-    }
-    <div
-      style={"--stagger:" + ((5 + otherPosts.length) as number)}
-      data-animate
-    >
+        ))
+      }
       <Signature />
-    </div>
+    </article>
+    <script is:inline>
+      var article = document.getElementById("article");
+      var initialStagger = 1;
+
+      article.style = "opacity: 1";
+
+      for (let node of article.childNodes) {
+        try {
+          node.style = "--stagger:" + initialStagger;
+
+          node.dataset.animate = true;
+
+          if (initialStagger < 5) {
+            initialStagger += 1;
+          }
+        } catch (e) {
+          continue;
+        }
+      }
+    </script>
   </Body>
 </Html>
