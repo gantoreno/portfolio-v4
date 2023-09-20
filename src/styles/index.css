@@ -43,7 +43,8 @@ body {
 
 /* Prevent navbar from animating more than once */
 body:has(#controller.no-animate) nav[data-animate],
-body:has(#controller.no-animate) footer[data-animate] {
+body:has(#controller.no-animate) footer[data-animate],
+body:has(#controller.no-animate) main [data-animate] {
   animation: none;
 }
 

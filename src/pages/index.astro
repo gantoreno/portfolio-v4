@@ -17,9 +17,9 @@ import SectionDivider from "../components/SectionDivider.astro";
 import Italic from "../components/Italic.astro";
 import CompanyLogo from "../components/CompanyLogo.astro";
 
-const work = (await getCollection("work")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-).slice(0, 3);
+const work = (await getCollection("work"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -41,64 +41,92 @@ const posts = (await getCollection("blog")).sort(
     <title>Gabriel Moreno</title>
   </Head>
   <Body>
-    <Header>
-      <PrimaryHeading style="--stagger:1" data-animate>
-        Hey there! Gabriel here {"👋🏻"}
-      </PrimaryHeading> 
-    </Header>
-    <Paragraph style="--stagger:2" data-animate>
-      Software engineer dedicated to delivering exceptional digital experiences, creating scalable, secure &amp; performant solutions, exploring emerging technologies and continuously striving on delivering excellence.
-    </Paragraph>
-    <Paragraph style="--stagger:3" data-animate>Always evolving, learning and improving – <Italic>one day at a time</Italic>.</Paragraph>
-    <div class="mt-[60px]" style="--stagger:4" data-animate>
-      <SectionDivider>
-        <strong slot="title" class="text-primary">Working at</strong>
-        <div slot="items">
-          <Section>
-            <Paragraph>
-              <Link href="https://zemoga.com" target="_blank" class="inline-flex gap-1"><CompanyLogo/>Zemoga</Link>, helping organizations build better digital products as a technical leader.
-            </Paragrap>
-          </Section>
-        </div>
-      </SectionDivider>
-      <SectionDivider>
-        <strong slot="title" class="text-primary">Recently built</strong>
-        <div slot="items">
-          {work.map((project) => (
+    <main>
+      <Header>
+        <PrimaryHeading style="--stagger:1" data-animate>
+          Hey there! Gabriel here {"👋🏻"}
+        </PrimaryHeading>
+      </Header>
+      <Paragraph style="--stagger:2" data-animate>
+        Software engineer dedicated to delivering exceptional digital
+        experiences, creating scalable, secure &amp; performant solutions,
+        exploring emerging technologies and continuously striving on delivering
+        excellence.
+      </Paragraph>
+      <Paragraph style="--stagger:3" data-animate>
+        Always evolving, learning and improving – <Italic>
+          one day at a time
+        </Italic>.
+      </Paragraph>
+      <div class="mt-[60px]" style="--stagger:4" data-animate>
+        <SectionDivider>
+          <strong slot="title" class="text-primary">Working at</strong>
+          <div slot="items">
             <Section>
-              <Entry
-                title={project.data.title}
-                description={project.data.description}
-                link={project.data.link}
-                external
-              />
+              <Paragraph>
+                <Link
+                  href="https://zemoga.com"
+                  target="_blank"
+                  class="inline-flex gap-1"
+                >
+                  <CompanyLogo />Zemoga
+                </Link>, helping organizations build better digital products as
+                a technical leader.
+              </Paragraph>
             </Section>
-          ))}
-        </div>
-      </SectionDivider>
-      <SectionDivider>
-        <strong slot="title" class="text-primary">Writing about</strong>
-        <div slot="items">
-          {posts.map((post) => (
-            <Section>
-              <Entry
-                title={post.data.shorthand}
-                description={post.data.description}
-                link={"/blog/" + post.slug}
-              />
-            </Section>
-          ))}
-        </div>
-      </SectionDivider>
-    </div>
-    <SecondaryHeading style="--stagger:5" data-animate linkable={false}>
-      More about me
-    </SecondaryHeading>
-    <Paragraph style="--stagger:6" data-animate>
-      Apart from my work, I'm all about sharing knowledge, fostering growth, and building strong developer communities – <Italic>specially through mentoring</Italic>.
-    </Paragraph>
-    <Paragraph style="--stagger:7" data-animate>
-      If you're interested in my work and/or skillsets, you can always get in touch at <Link href="https://twitter.com/gantoreno">@gantoreno<!----></Link> or <Link href="mailto:gantoreno@gmail.com">gantoreno@gmail.com<!----></Link>.
-    </Paragraph>
+          </div>
+        </SectionDivider>
+        <SectionDivider>
+          <strong slot="title" class="text-primary">Recently built</strong>
+          <div slot="items">
+            {
+              work.map((project) => (
+                <Section>
+                  <Entry
+                    title={project.data.title}
+                    description={project.data.description}
+                    link={project.data.link}
+                    external
+                  />
+                </Section>
+              ))
+            }
+          </div>
+        </SectionDivider>
+        <SectionDivider>
+          <strong slot="title" class="text-primary">Writing about</strong>
+          <div slot="items">
+            {
+              posts.map((post) => (
+                <Section>
+                  <Entry
+                    title={post.data.shorthand}
+                    description={post.data.description}
+                    link={"/blog/" + post.slug}
+                  />
+                </Section>
+              ))
+            }
+          </div>
+        </SectionDivider>
+      </div>
+      <SecondaryHeading style="--stagger:5" data-animate linkable={false}>
+        More about me
+      </SecondaryHeading>
+      <Paragraph style="--stagger:6" data-animate>
+        Apart from my work, I'm all about sharing knowledge, fostering growth,
+        and building strong developer communities – <Italic>
+          specially through mentoring
+        </Italic>.
+      </Paragraph>
+      <Paragraph style="--stagger:7" data-animate>
+        If you're interested in my work and/or skillsets, you can always get in
+        touch at <Link href="https://twitter.com/gantoreno">
+          @gantoreno{/* */}
+        </Link> or <Link href="mailto:gantoreno@gmail.com">
+          gantoreno@gmail.com{/* */}
+        </Link>.
+      </Paragraph>
+    </main>
   </Body>
 </Html>
