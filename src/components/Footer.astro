@@ -16,11 +16,18 @@ footer.style = "--stagger:" + animatedElementsCount;
 footer.dataset.animate = true;
 
 footer.addEventListener(
-  "animationcancel",
+  "animationend",
   () => {
-    console.log("cancelled");
     document.getElementById("controller").classList.add("no-animate");
   },
   { once: true }
+);
+
+footer.addEventListener(
+  "animationcancel",
+  () => {
+    document.getElementById("controller").classList.add("no-animate");
+  },
+    { once: true }
   );
 </script>
