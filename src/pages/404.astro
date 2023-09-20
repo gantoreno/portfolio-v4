@@ -26,15 +26,19 @@ import Italic from "../components/Italic.astro";
   </Head>
   <Body>
     <Header>
-      <PrimaryHeading>Seems like I'm missing this one {"🤔"}</PrimaryHeading>
+      <PrimaryHeading style="--stagger:1" data-animate>
+        Seems like I'm missing this one {"🤔"}
+      </PrimaryHeading>
     </Header>
-    <Paragraph>
+    <Paragraph style="--stagger:2" data-animate>
       I probably forgot to build the page you're looking for – but no worries,
       you can still look around my <Link href="/">homepage</Link> or my <Link
         href="/blog"
-      ><!---->blog<!----></Link> blog for some good reads.
+      >
+        {/* */}blog{/* */}
+      </Link> blog for some good reads.
     </Paragraph>
-    <Paragraph>
+    <Paragraph style="--stagger:12" data-animate>
       <Italic>Perhaps this page will exist in the future...</Italic>
     </Paragraph>
   </Body>
