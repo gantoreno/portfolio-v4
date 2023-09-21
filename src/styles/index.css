@@ -38,10 +38,19 @@
 
 html,
 body {
-  height: 100%;
-  overflow-x: none;
+  height: 100vh;
+  overflow-x: hidden;
   overflow-y: scroll;
   background: rgb(var(--background));
+
+  touch-action: manipulation;
+
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+body:has(#controller.no-animate) {
+  overflow-y: initial;
 }
 
 body {
