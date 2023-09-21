@@ -66,39 +66,63 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       var article = document.getElementById("article");
       var footer = document.getElementById("footer");
 
-      var stagger = document
-        .getElementById("controller")
-        .classList.contains("no-animate")
-        ? 0
-        : 1;
+      if (article) {
+        var stagger = document
+          .getElementById("controller")
+          .classList.contains("no-animate")
+          ? 0
+          : 1;
 
-      try {
-        article.style = "opacity: 1";
+        try {
+          article.style = "opacity: 1";
 
-        for (let node of article.childNodes) {
-          if (
-            !(
-              node instanceof HTMLScriptElement ||
-              node instanceof HTMLStyleElement
-            ) &&
-            node.tagName
-          ) {
-            node.style = "--stagger:" + stagger;
-            node.dataset.animate = true;
+          for (let node of article.childNodes) {
+            if (
+              !(
+                node instanceof HTMLScriptElement ||
+                node instanceof HTMLStyleElement
+              ) &&
+              node.tagName
+            ) {
+              node.style = "--stagger:" + stagger;
+              node.dataset.animate = true;
 
-            if (stagger < 10) {
-              stagger += 1;
+              if (stagger < 10) {
+                stagger += 1;
+              }
             }
           }
+        } catch (e) {
+          //
         }
-      } catch (e) {
-        //
-      }
 
-      if (article) {
         footer.style = "--stagger:" + (stagger + 1);
         footer.dataset.animate = true;
       }
+
+      const animatedElementsCount =
+        document.querySelectorAll("[data-animate]").length;
+
+      footer.style =
+        "--stagger:" +
+        (animatedElementsCount < 10 ? animatedElementsCount : 11);
+      footer.dataset.animate = true;
+
+      footer.addEventListener(
+        "animationend",
+        () => {
+          document.getElementById("controller").classList.add("no-animate");
+        },
+        { once: true }
+      );
+
+      footer.addEventListener(
+        "animationcancel",
+        () => {
+          document.getElementById("controller").classList.add("no-animate");
+        },
+        { once: true }
+      );
     }
 
     document.addEventListener("astro:page-load", () => {
