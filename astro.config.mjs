@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import vercel from "@astrojs/vercel/serverless";
+import vercelEdge from "@astrojs/vercel/edge";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 
@@ -9,7 +9,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://gantoreno.com",
   output: "server",
-  adapter: vercel(),
+  adapter: vercelEdge(),
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
