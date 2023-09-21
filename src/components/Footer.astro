@@ -1,7 +1,33 @@
 ---
-
+const currentPath = new URL(Astro.request.url).pathname;
 ---
 
 <footer id="footer" class="h-[100px] mt-[60px] flex items-center text-disabled">
   &copy; 2023 Gabriel Moreno. All rights reserved.
 </footer>
+
+<script is:inline>
+var footer = document.getElementById("footer");
+
+var animatedElementsCount =
+  document.querySelectorAll("[data-animate]").length;
+
+footer.style = "--stagger:" + animatedElementsCount;
+footer.dataset.animate = true;
+
+footer.addEventListener(
+  "animationend",
+  () => {
+    document.getElementById("controller").classList.add("no-animate");
+  },
+  { once: true }
+);
+
+footer.addEventListener(
+  "animationcancel",
+  () => {
+    document.getElementById("controller").classList.add("no-animate");
+  },
+  { once: true }
+);
+</script>
