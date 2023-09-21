@@ -38,9 +38,7 @@
 
 html,
 body {
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  scroll-padding-top: 200px;
   background: rgb(var(--background));
 
   touch-action: manipulation;
