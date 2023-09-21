@@ -72,8 +72,8 @@ body:has(#controller.no-animate) main [data-animate] {
   --start: 0ms;
   --stagger: 0;
   --delay: 64ms;
-  animation: enter 0.6s backwards;
-  animation-fill-mode: backwards;
+  animation: enter 0.6s both;
+  animation-fill-mode: both;
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
 }
 
