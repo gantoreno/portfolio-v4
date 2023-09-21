@@ -59,4 +59,46 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   />
 
   <ViewTransitions />
+
+  <!-- Build article animations -->
+  <script>
+    function buildArticleAnimations() {
+      var article = document.getElementById("article");
+      var stagger = document
+        .getElementById("controller")
+        .classList.contains("no-animate")
+        ? 0
+        : 1;
+
+      try {
+        article.style = "opacity: 1";
+
+        for (let node of article.childNodes) {
+          if (
+            !(
+              node instanceof HTMLScriptElement ||
+              node instanceof HTMLStyleElement
+            ) &&
+            node.tagName
+          ) {
+            node.style = "--stagger:" + stagger;
+
+            node.dataset.animate = true;
+
+            if (stagger < 10) {
+              stagger += 1;
+            }
+          }
+        }
+      } catch (e) {
+        //
+      }
+    }
+
+    buildArticleAnimations();
+
+    document.addEventListener("astro:after-swap", () => {
+      buildArticleAnimations();
+    });
+  </script>
 </head>
