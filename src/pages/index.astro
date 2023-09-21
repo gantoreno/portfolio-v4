@@ -43,22 +43,22 @@ const posts = (await getCollection("blog")).sort(
   <Body>
     <main>
       <Header>
-        <PrimaryHeading style="--stagger:1" data-animate>
+        <PrimaryHeading>
           Hey there! Gabriel here {"👋🏻"}
         </PrimaryHeading>
       </Header>
-      <Paragraph style="--stagger:2" data-animate>
+      <Paragraph>
         Software engineer dedicated to delivering exceptional digital
         experiences, creating scalable, secure &amp; performant solutions,
         exploring emerging technologies and continuously striving on delivering
         excellence.
       </Paragraph>
-      <Paragraph style="--stagger:3" data-animate>
+      <Paragraph>
         Always evolving, learning and improving &ndash; <Italic>
           one day at a time{/* */}
         </Italic>.
       </Paragraph>
-      <div class="mt-[60px]" style="--stagger:4" data-animate>
+      <div class="mt-[60px]">
         <SectionDivider>
           <strong slot="title" class="text-primary">Working at</strong>
           <div slot="items">
@@ -110,16 +110,14 @@ const posts = (await getCollection("blog")).sort(
           </div>
         </SectionDivider>
       </div>
-      <SecondaryHeading style="--stagger:5" data-animate linkable={false}>
-        More about me
-      </SecondaryHeading>
-      <Paragraph style="--stagger:6" data-animate>
+      <SecondaryHeading linkable={false}>More about me</SecondaryHeading>
+      <Paragraph>
         Apart from my work, I'm all about sharing knowledge, fostering growth,
         and building strong developer communities &ndash; <Italic>
           specially through mentoring{/* */}
         </Italic>.
       </Paragraph>
-      <Paragraph style="--stagger:7" data-animate>
+      <Paragraph>
         If you're interested in my work and/or skillsets, you can always get in
         touch at <Link href="https://twitter.com/gantoreno">
           @gantoreno{/* */}
