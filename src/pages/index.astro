@@ -17,6 +17,8 @@ import SectionDivider from "../components/SectionDivider.astro";
 import Italic from "../components/Italic.astro";
 import CompanyLogo from "../components/CompanyLogo.astro";
 
+export const prerender = true;
+
 const work = (await getCollection("work"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);

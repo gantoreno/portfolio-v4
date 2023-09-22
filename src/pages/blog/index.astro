@@ -11,6 +11,8 @@ import Section from "../../components/Section.astro";
 import SectionDivider from "../../components/SectionDivider.astro";
 import PrimaryHeading from "../../components/PrimaryHeading.astro";
 
+export const prerender = true;
+
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
