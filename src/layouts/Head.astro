@@ -63,42 +63,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <!-- Build article animations -->
   <script>
     function buildArticleAnimations() {
-      var article = document.getElementById("article");
       var footer = document.getElementById("footer");
-
-      if (article) {
-        var stagger = document
-          .getElementById("controller")
-          .classList.contains("no-animate")
-          ? 0
-          : 1;
-
-        try {
-          article.style = "opacity: 1";
-
-          for (let node of article.childNodes) {
-            if (
-              !(
-                node instanceof HTMLScriptElement ||
-                node instanceof HTMLStyleElement
-              ) &&
-              node.tagName
-            ) {
-              node.style = "--stagger:" + stagger;
-              node.dataset.animate = true;
-
-              if (stagger < 10) {
-                stagger += 1;
-              }
-            }
-          }
-        } catch (e) {
-          //
-        }
-
-        footer.style = "--stagger:" + (stagger + 1);
-        footer.dataset.animate = true;
-      }
 
       const animatedElementsCount =
         document.querySelectorAll("[data-animate]").length;

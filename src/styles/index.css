@@ -66,13 +66,94 @@ body:has(#controller.no-animate) main [data-animate] {
   scroll-margin-top: 100px;
 }
 
-[data-animate] {
+[data-animate],
+article > * {
   --start: 0ms;
   --stagger: 0;
   --delay: 64ms;
   animation: enter 0.6s both;
   animation-fill-mode: both;
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+}
+
+article > * {
+  --stagger: 10;
+}
+
+article > *:nth-child(1) {
+  --stagger: 1;
+}
+
+article > *:nth-child(2) {
+  --stagger: 2;
+}
+
+article > *:nth-child(3) {
+  --stagger: 3;
+}
+
+article > *:nth-child(4) {
+  --stagger: 4;
+}
+
+article > *:nth-child(5) {
+  --stagger: 5;
+}
+
+article > *:nth-child(6) {
+  --stagger: 6;
+}
+
+article > *:nth-child(7) {
+  --stagger: 7;
+}
+
+article > *:nth-child(8) {
+  --stagger: 8;
+}
+
+article > *:nth-child(9) {
+  --stagger: 9;
+}
+
+body:has(#controller.no-animate) article *:nth-child(1) {
+  --stagger: 0;
+}
+
+body:has(#controller.no-animate) article *:nth-child(2) {
+  --stagger: 1;
+}
+
+body:has(#controller.no-animate) article *:nth-child(3) {
+  --stagger: 2;
+}
+
+body:has(#controller.no-animate) article *:nth-child(4) {
+  --stagger: 3;
+}
+
+body:has(#controller.no-animate) article *:nth-child(5) {
+  --stagger: 4;
+}
+
+body:has(#controller.no-animate) article *:nth-child(6) {
+  --stagger: 5;
+}
+
+body:has(#controller.no-animate) article *:nth-child(7) {
+  --stagger: 6;
+}
+
+body:has(#controller.no-animate) article *:nth-child(8) {
+  --stagger: 7;
+}
+
+body:has(#controller.no-animate) article *:nth-child(9) {
+  --stagger: 8;
+}
+
+body:has(article) footer {
+  --stagger: 11 !important;
 }
 
 ::-webkit-scrollbar {
