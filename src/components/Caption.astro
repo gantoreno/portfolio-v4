@@ -1,0 +1,10 @@
+---
+const { class: classList, ...rest } = Astro.props;
+---
+
+<figcaption
+  class:list={["text-secondary mb-[20px] font-serif text-center", classList]}
+  {...rest}
+>
+  <slot />
+</figcaption>

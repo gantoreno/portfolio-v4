@@ -7,6 +7,8 @@ import sitemap from "@astrojs/sitemap";
 
 import remarkMath from "remark-math";
 import rehypeMathjax from "rehype-mathjax";
+import rehypeBuildAnimations from "./plugins/rehype-build-animations.mjs";
+import rehypeConvertFigures from "./plugins/rehype-convert-figures.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,7 +19,7 @@ export default defineConfig({
   markdown: {
     remarkRehype: { footnoteLabel: "Reference" },
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeMathjax],
+    rehypePlugins: [rehypeMathjax, rehypeConvertFigures, rehypeBuildAnimations],
     shikiConfig: {
       theme: "css-variables",
       wrap: true,

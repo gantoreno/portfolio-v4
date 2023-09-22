@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^3.2.0",
     "@astrojs/mdx": "^1.1.0",
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/tailwind": "^5.0.0",
@@ -17,9 +18,12 @@
     "astro": "^3.1.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
+    "hast": "^1.0.0",
     "rehype-mathjax": "^5.0.0",
     "remark-math": "^5.1.1",
-    "tailwindcss": "^3.3.3"
+    "remark-rehype": "^11.0.0",
+    "tailwindcss": "^3.3.3",
+    "vfile": "^6.0.1"
   },
   "devDependencies": {
     "prettier": "^3.0.3",

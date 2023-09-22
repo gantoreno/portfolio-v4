@@ -1,13 +1,7 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
 
-import Italic from "./Italic.astro";
-import Paragraph from "./Paragraph.astro";
-
-type Props = HTMLAttributes<"img">;
-
-const { src, alt, width, height } = Astro.props;
+const { src, alt, width, height, ...rest } = Astro.props;
 ---
 
 <Image
@@ -17,9 +11,5 @@ const { src, alt, width, height } = Astro.props;
   loading="lazy"
   width={width as number}
   height={height as number}
+  {...rest}
 />
-<Paragraph class="text-center">
-  <Italic>
-    {alt}
-  </Italic>
-</Paragraph>

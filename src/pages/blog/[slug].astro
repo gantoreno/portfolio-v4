@@ -25,6 +25,9 @@ import Entry from "../../components/Entry.astro";
 import Paragraph from "../../components/Paragraph.astro";
 
 import Signature from "../../components/Signature.astro";
+import Caption from "../../components/Caption.astro";
+
+import Footer from "../../components/Footer.astro";
 
 export const prerender = true;
 
@@ -65,11 +68,15 @@ const { Content } = await post.render();
     <title>{post.data.title}</title>
   </Head>
   <Body>
-    <article id="article" style="opacity: 0">
-      <PrimaryHeading class="mt-[60px]">
+    <article id="article">
+      <PrimaryHeading class="mt-[60px]" style="--stagger:1" data-animate>
         {post.data.title}
       </PrimaryHeading>
-      <Paragraph class="!text-disabled mb-[60px]">
+      <Paragraph
+        class="!text-disabled mb-[60px]"
+        style="--stagger:2"
+        data-animate
+      >
         {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
       <Content
@@ -80,6 +87,7 @@ const { Content } = await post.render();
           h1: PrimaryHeading,
           h2: SecondaryHeading,
           img: Figure,
+          figcaption: Caption,
           ol: NumberedList,
           p: Paragraph,
           pre: Snippet,
@@ -88,17 +96,24 @@ const { Content } = await post.render();
           ul: BulletedList,
         }}
       />
-      <SecondaryHeading>Continue reading</SecondaryHeading>
+      <SecondaryHeading style="--stagger:10" data-animate>
+        Continue reading
+      </SecondaryHeading>
       {
         otherPosts.map((post: Post) => (
-          <Entry
-            title={post.data.title}
-            description={post.data.description}
-            link={"/blog/" + post.slug}
-          />
+          <div style="--stagger:10" data-animate>
+            <Entry
+              title={post.data.title}
+              description={post.data.description}
+              link={"/blog/" + post.slug}
+            />
+          </div>
         ))
       }
-      <Signature />
+      <div style="--stagger:10" data-animate>
+        <Signature />
+      </div>
     </article>
+    <Footer style="--stagger:11" data-animate />
   </Body>
 </Html>
