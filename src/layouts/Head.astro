@@ -107,6 +107,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "--stagger:" +
         (animatedElementsCount < 10 ? animatedElementsCount : 11);
       footer.dataset.animate = true;
+
+      footer.addEventListener(
+        "animationend",
+        () => {
+          document.getElementById("controller").classList.add("no-animate");
+        },
+        { once: true }
+      );
+
+      footer.addEventListener(
+        "animationcancel",
+        () => {
+          document.getElementById("controller").classList.add("no-animate");
+        },
+        { once: true }
+      );
     }
 
     document.addEventListener("astro:page-load", () => {
@@ -114,7 +130,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     });
 
     document.addEventListener("astro:after-swap", () => {
-      document.getElementById("controller").classList.add("no-animate");
+      buildArticleAnimations();
     });
   </script>
 </head>
