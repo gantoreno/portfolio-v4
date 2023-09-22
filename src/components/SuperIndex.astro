@@ -1,0 +1,13 @@
+---
+const { class: classNames, ...rest } = Astro.props;
+---
+
+<sup
+  class:list={[
+    "[&>a]:text-primary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:ml-px",
+    classNames,
+  ]}
+  {...rest}
+>
+  <slot />
+</sup>

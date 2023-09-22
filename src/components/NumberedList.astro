@@ -1,0 +1,15 @@
+---
+import clsx from "clsx";
+
+const { class: classNames, ...rest } = Astro.props;
+---
+
+<ol
+  class={clsx(
+    "list-decimal text-secondary mb-[20px] marker:text-primary pl-[34px] [&>li]:pl-[10px]",
+    classNames
+  )}
+  {...rest}
+>
+  <slot />
+</ol>

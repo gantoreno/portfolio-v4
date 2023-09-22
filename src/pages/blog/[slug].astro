@@ -10,6 +10,8 @@ import Body from "../../layouts/Body.astro";
 import Snippet from "../../components/Snippet.astro";
 import Blockquote from "../../components/Blockquote.astro";
 import BulletedList from "../../components/BulletedList.astro";
+import NumberedList from "../../components/NumberedList.astro";
+import SuperIndex from "../../components/SuperIndex.astro";
 
 import PrimaryHeading from "../../components/PrimaryHeading.astro";
 import SecondaryHeading from "../../components/SecondaryHeading.astro";
@@ -72,16 +74,18 @@ const { Content } = await post.render();
       </Paragraph>
       <Content
         components={{
-          p: Paragraph,
-          img: Figure,
+          blockquote: Blockquote,
+          code: Mono,
+          em: Italic,
           h1: PrimaryHeading,
           h2: SecondaryHeading,
-          ul: BulletedList,
-          strong: Bold,
-          em: Italic,
-          code: Mono,
-          blockquote: Blockquote,
+          img: Figure,
+          ol: NumberedList,
+          p: Paragraph,
           pre: Snippet,
+          strong: Bold,
+          sup: SuperIndex,
+          ul: BulletedList,
         }}
       />
       <SecondaryHeading>Continue reading</SecondaryHeading>

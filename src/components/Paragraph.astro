@@ -7,6 +7,12 @@ type Props = HTMLAttributes<"p">;
 const { class: classNames, ...rest } = Astro.props;
 ---
 
-<p class={clsx("mb-[20px] text-secondary", classNames)} {...rest}>
+<p
+  class={clsx(
+    "mb-[20px] text-secondary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:mx-px [&>[data-footnote-backref]]:text-disabled [&>[data-footnote-backref]]:no-underline [&>[data-footnote-backref]]:duration-[0.15s] [&>[data-footnote-backref]:hover]:text-primary",
+    classNames
+  )}
+  {...rest}
+>
   <slot />
 </p>

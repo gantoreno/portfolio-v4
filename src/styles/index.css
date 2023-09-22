@@ -40,6 +40,25 @@
   background: rgb(var(--selection));
 }
 
+mjx-container {
+  user-select: none;
+  font-size: 1rem;
+  border-radius: 3px;
+  vertical-align: middle;
+  color: rgb(var(--color-primary));
+}
+
+article p > mjx-container {
+  display: inline-flex;
+}
+
+article > mjx-container {
+  display: flex !important;
+  margin-top: 0px !important;
+  margin-bottom: 20px !important;
+  justify-content: center !important;
+}
+
 html,
 body {
   scroll-padding-top: 200px;

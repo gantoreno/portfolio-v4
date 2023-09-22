@@ -84,7 +84,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
               ) &&
               node.tagName
             ) {
-              node.style = "--stagger:" + stagger;
+              // node.style = "--stagger:" + stagger;
               node.dataset.animate = true;
 
               if (stagger < 10) {

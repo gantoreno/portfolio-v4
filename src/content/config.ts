@@ -23,8 +23,8 @@ const projects = defineCollection({
 const blog = defineCollection({
   type: "content",
   schema: z.object({
-    image: z.string(),
-    banner: z.string(),
+    image: z.string().optional(),
+    banner: z.string().optional(),
     title: z.string(),
     shorthand: z.string(),
     description: z.string(),
