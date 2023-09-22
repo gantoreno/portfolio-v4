@@ -51,12 +51,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body:has(#controller.no-animate) {
-  overflow-y: initial;
-}
-
 body {
-  position: relative;
+  overflow-y: scroll;
 }
 
 /* Prevent navbar from animating more than once */
