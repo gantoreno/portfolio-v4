@@ -1,9 +1,8 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import Link from "./Link.astro";
 import Paragraph from "./Paragraph.astro";
 
-type Props = HTMLAttributes<"div"> & {
+type Props = {
   title: string;
   description: string;
   link: string;

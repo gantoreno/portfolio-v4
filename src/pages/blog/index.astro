@@ -10,7 +10,6 @@ import EntryAlt from "../../components/EntryAlt.astro";
 import Section from "../../components/Section.astro";
 import SectionDivider from "../../components/SectionDivider.astro";
 import PrimaryHeading from "../../components/PrimaryHeading.astro";
-import Footer from "../../components/Footer.astro";
 
 export const prerender = true;
 
@@ -77,9 +76,5 @@ const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
         }
       </div>
     </main>
-    <Footer
-      style={"--stagger:" + (Object.keys(postsGroupedByYear).length + 2)}
-      data-animate
-    />
   </Body>
 </Html>

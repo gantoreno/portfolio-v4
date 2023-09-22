@@ -81,42 +81,6 @@ body:has(#controller.no-animate) main [data-animate] {
   animation: none;
 }
 
-body:has(#controller.no-animate) [data-animate]:nth-child(1) {
-  --stagger: 0 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(2) {
-  --stagger: 1 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(3) {
-  --stagger: 2 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(4) {
-  --stagger: 3 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(5) {
-  --stagger: 4 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(6) {
-  --stagger: 5 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(7) {
-  --stagger: 6 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(8) {
-  --stagger: 7 !important;
-}
-
-body:has(#controller.no-animate) [data-animate]:nth-child(9) {
-  --stagger: 8 !important;
-}
-
 :target {
   scroll-margin-top: 100px;
 }
@@ -162,18 +126,6 @@ body:has(#controller.no-animate) [data-animate]:nth-child(9) {
   to {
     transform: translateY(0px);
     opacity: 1;
-  }
-}
-
-@keyframes enter-second-to-last {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-    --enable: 1 !important;
   }
 }
 

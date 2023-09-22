@@ -17,8 +17,6 @@ import SectionDivider from "../components/SectionDivider.astro";
 import Italic from "../components/Italic.astro";
 import CompanyLogo from "../components/CompanyLogo.astro";
 
-import Footer from "../components/Footer.astro";
-
 export const prerender = true;
 
 const work = (await getCollection("work"))
@@ -132,6 +130,5 @@ const posts = (await getCollection("blog")).sort(
         </Link>.
       </Paragraph>
     </main>
-    <Footer style="--stagger:8" data-animate />
   </Body>
 </Html>
