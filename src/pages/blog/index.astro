@@ -5,11 +5,13 @@ import Html from "../../layouts/Html.astro";
 import Head from "../../layouts/Head.astro";
 import Body from "../../layouts/Body.astro";
 
-import Header from "../../components/Header.astro";
-import EntryAlt from "../../components/EntryAlt.astro";
-import Section from "../../components/Section.astro";
-import SectionDivider from "../../components/SectionDivider.astro";
-import PrimaryHeading from "../../components/PrimaryHeading.astro";
+import EntryAlt from "../../components/custom/EntryAlt.astro";
+import Section from "../../components/custom/Section.astro";
+import SectionDivider from "../../components/custom/SectionDivider.astro";
+
+import PrimaryHeading from "../../components/headings/PrimaryHeading.astro";
+
+import Header from "../../components/layout/Header.astro";
 
 export const prerender = true;
 
@@ -33,19 +35,11 @@ const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
 ---
 
 <Html>
-  <Head>
-    <meta name="title" content="Blog" />
-    <meta name="description" content="Experiences, lessons & more" />
-    <meta name="keywords" content="blog, writing, learning" />
-
-    <meta name="og:title" content="Blog" />
-    <meta name="og:description" content="Experiences, lessons & more" />
-
-    <meta name="twitter:title" content="Blog" />
-    <meta name="twitter:description" content="Experiences, lessons & more" />
-
-    <title>Blog</title>
-  </Head>
+  <Head
+    title="Blog"
+    description="Experiences, lessons & more"
+    keywords={["Blog", "Writing", "Learning"]}
+  />
   <Body>
     <main>
       <Header>

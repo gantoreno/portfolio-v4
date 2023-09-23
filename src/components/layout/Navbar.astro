@@ -1,0 +1,53 @@
+---
+import Container from "./Container.astro";
+import Link from "../navigation/Link.astro";
+
+type Route = {
+  name: string;
+  path: string;
+  target?: string;
+};
+
+const currentPath = new URL(Astro.request.url).pathname;
+
+const routes: Route[] = [
+  { name: "Home", path: "/" },
+  { name: "Blog", path: "/blog" },
+  { name: "GitHub", path: "https://github.com/gantoreno", target: "_blank" },
+];
+---
+
+<div
+  class="fixed top-0 w-full h-[100px] z-10 pointer-events-none"
+  style="background: linear-gradient(rgb(var(--background)), transparent)"
+>
+</div>
+<nav
+  id="navbar"
+  class="h-[100px] w-full z-20 absolute top-0 left-0 flex items-center gap-[20px]"
+  data-animate
+>
+  {
+    routes.map((route) => (
+      <Link
+        href={route.path}
+        active={
+          (route.path === "/"
+            ? route.path === currentPath
+            : currentPath.startsWith(route.path)) &&
+          Astro.response.status !== 404
+        }
+        target={route.target ?? ""}
+      >
+        {route.name}
+      </Link>
+    ))
+  }
+  {
+    Astro.response.status === 404 && (
+      <Link href={currentPath} active={true}>
+        What?
+      </Link>
+    )
+  }
+</nav>

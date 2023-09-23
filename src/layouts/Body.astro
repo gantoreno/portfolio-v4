@@ -1,13 +1,13 @@
 ---
-import Container from "../components/Container.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import Container from "../components/layout/Container.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
 ---
 
-<body class="pt-[100px]">
+<body>
   <div id="controller" transition:persist></div>
-  <Navbar />
   <Container>
+    <Navbar />
     <slot />
     <Footer />
   </Container>

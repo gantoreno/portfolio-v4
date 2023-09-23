@@ -7,24 +7,25 @@ import Html from "../../layouts/Html.astro";
 import Head from "../../layouts/Head.astro";
 import Body from "../../layouts/Body.astro";
 
-import Snippet from "../../components/Snippet.astro";
-import Blockquote from "../../components/Blockquote.astro";
-import BulletedList from "../../components/BulletedList.astro";
-import NumberedList from "../../components/NumberedList.astro";
-import SuperIndex from "../../components/SuperIndex.astro";
+import Entry from "../../components/custom/Entry.astro";
 
-import PrimaryHeading from "../../components/PrimaryHeading.astro";
-import SecondaryHeading from "../../components/SecondaryHeading.astro";
+import Signature from "../../components/extras/Signature.astro";
 
-import Bold from "../../components/Bold.astro";
-import Mono from "../../components/Mono.astro";
-import Italic from "../../components/Italic.astro";
+import Blockquote from "../../components/structure/Blockquote.astro";
+import BulletedList from "../../components/structure/BulletedList.astro";
+import NumberedList from "../../components/structure/NumberedList.astro";
+import Snippet from "../../components/structure/Snippet.astro";
+import SuperIndex from "../../components/structure/SuperIndex.astro";
 
-import Figure from "../../components/Figure.astro";
-import Entry from "../../components/Entry.astro";
-import Paragraph from "../../components/Paragraph.astro";
+import PrimaryHeading from "../../components/headings/PrimaryHeading.astro";
+import SecondaryHeading from "../../components/headings/SecondaryHeading.astro";
 
-import Signature from "../../components/Signature.astro";
+import Figure from "../../components/structure/Figure.astro";
+import Paragraph from "../../components/structure/Paragraph.astro";
+
+import Bold from "../../components/typography/Bold.astro";
+import Italic from "../../components/typography/Italic.astro";
+import Mono from "../../components/typography/Mono.astro";
 
 export const prerender = true;
 
@@ -51,19 +52,11 @@ const { Content } = await post.render();
 ---
 
 <Html>
-  <Head>
-    <meta name="title" content={post.data.title} />
-    <meta name="description" content={post.data.description} />
-    <meta name="keywords" content={post.data.tags.join(", ").toLowerCase()} />
-
-    <meta name="og:title" content={post.data.title} />
-    <meta name="og:description" content={post.data.description} />
-
-    <meta name="twitter:title" content={post.data.title} />
-    <meta name="twitter:description" content={post.data.description} />
-
-    <title>{post.data.title}</title>
-  </Head>
+  <Head
+    title={post.data.title}
+    description={post.data.description}
+    keywords={post.data.tags}
+  />
   <Body>
     <article id="article" style="opacity: 0">
       <PrimaryHeading class="mt-[60px]">

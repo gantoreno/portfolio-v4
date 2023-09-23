@@ -3,27 +3,19 @@ import Html from "../layouts/Html.astro";
 import Head from "../layouts/Head.astro";
 import Body from "../layouts/Body.astro";
 
-import PrimaryHeading from "../components/PrimaryHeading.astro";
+import PrimaryHeading from "../components/headings/PrimaryHeading.astro";
 
-import Header from "../components/Header.astro";
-import Link from "../components/Link.astro";
-import Paragraph from "../components/Paragraph.astro";
-import Italic from "../components/Italic.astro";
+import Header from "../components/layout/Header.astro";
+
+import Link from "../components/navigation/Link.astro";
+
+import Paragraph from "../components/structure/Paragraph.astro";
+
+import Italic from "../components/typography/Italic.astro";
 ---
 
 <Html>
-  <Head>
-    <meta name="title" content="Whoops!" />
-    <meta name="description" content="Page not found" />
-
-    <meta name="og:title" content="Whoops!" />
-    <meta name="og:description" content="Page not found" />
-
-    <meta name="twitter:title" content="Whoops!" />
-    <meta name="twitter:description" content="Page not found" />
-
-    <title>Whoops!</title>
-  </Head>
+  <Head title="Whoops!" description="Page not found" />
   <Body>
     <Header>
       <PrimaryHeading style="--stagger:1" data-animate>

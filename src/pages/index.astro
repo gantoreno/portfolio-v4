@@ -5,17 +5,22 @@ import Html from "../layouts/Html.astro";
 import Head from "../layouts/Head.astro";
 import Body from "../layouts/Body.astro";
 
-import PrimaryHeading from "../components/PrimaryHeading.astro";
-import SecondaryHeading from "../components/SecondaryHeading.astro";
+import Entry from "../components/custom/Entry.astro";
+import Section from "../components/custom/Section.astro";
+import SectionDivider from "../components/custom/SectionDivider.astro";
 
-import Header from "../components/Header.astro";
-import Link from "../components/Link.astro";
-import Entry from "../components/Entry.astro";
-import Paragraph from "../components/Paragraph.astro";
-import Section from "../components/Section.astro";
-import SectionDivider from "../components/SectionDivider.astro";
-import Italic from "../components/Italic.astro";
-import CompanyLogo from "../components/CompanyLogo.astro";
+import CompanyLogo from "../components/extras/CompanyLogo.astro";
+
+import PrimaryHeading from "../components/headings/PrimaryHeading.astro";
+import SecondaryHeading from "../components/headings/SecondaryHeading.astro";
+
+import Header from "../components/layout/Header.astro";
+
+import Italic from "../components/typography/Italic.astro";
+
+import Link from "../components/navigation/Link.astro";
+
+import Paragraph from "../components/structure/Paragraph.astro";
 
 export const prerender = true;
 
@@ -29,19 +34,7 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <Html>
-  <Head>
-    <meta name="title" content="Gabriel Moreno" />
-    <meta name="description" content="Software engineer" />
-    <meta name="keywords" content="software engineer, web developer" />
-
-    <meta name="og:title" content="Gabriel Moreno" />
-    <meta name="og:description" content="Software engineer" />
-
-    <meta name="twitter:title" content="Gabriel Moreno" />
-    <meta name="twitter:description" content="Software engineer" />
-
-    <title>Gabriel Moreno</title>
-  </Head>
+  <Head />
   <Body>
     <main>
       <Header>
