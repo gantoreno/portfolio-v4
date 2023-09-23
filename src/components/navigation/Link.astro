@@ -12,7 +12,7 @@ const { active = true, class: classNames, ...rest } = Astro.props;
   class:list={[
     classNames,
     {
-      ["text-disabled"]: !active,
+      ["text-disabled hover:text-secondary duration-[0.15s]"]: !active,
       ["decoration-disabled text-primary underline"]: active,
     },
   ]}
