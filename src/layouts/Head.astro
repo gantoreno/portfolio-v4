@@ -115,7 +115,7 @@ const {
               node.style = "--stagger:" + stagger;
               node.dataset.animate = true;
 
-              if (stagger < 10) {
+              if (stagger < 7) {
                 stagger += 1;
               }
             }
@@ -132,8 +132,7 @@ const {
         document.querySelectorAll("[data-animate]").length;
 
       footer.style =
-        "--stagger:" +
-        (animatedElementsCount < 10 ? animatedElementsCount : 11);
+        "--stagger:" + (animatedElementsCount < 7 ? animatedElementsCount : 8);
       footer.dataset.animate = true;
 
       footer.addEventListener(
