@@ -1,21 +1,22 @@
 ---
 import { type HTMLAttributes } from "astro/types";
 
-import clsx from "clsx";
-
 type Props = HTMLAttributes<"a"> & {
   active?: boolean;
 };
 
-const { active = true, class: c, ...rest } = Astro.props;
+const { active = true, class: classNames, ...rest } = Astro.props;
 ---
 
 <a
+  class:list={[
+    classNames,
+    {
+      ["text-disabled"]: !active,
+      ["decoration-disabled text-primary underline"]: active,
+    },
+  ]}
   {...rest}
-  class={clsx(c, {
-    ["text-disabled"]: !active,
-    ["decoration-disabled text-primary underline"]: active,
-  })}
 >
   <slot />
 </a>

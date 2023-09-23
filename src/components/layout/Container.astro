@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import clsx from "clsx";
 
 type Props = HTMLAttributes<"div">;
 
@@ -8,10 +7,10 @@ const { class: classNames, ...rest } = Astro.props;
 ---
 
 <div
-  class={clsx(
+  class:list={[
     "max-w-[600px] mx-auto px-[20px] sm:px-0 pt-[100px] relative",
-    classNames
-  )}
+    classNames,
+  ]}
   {...rest}
 >
   <slot />
