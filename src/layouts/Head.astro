@@ -1,6 +1,9 @@
 ---
 import "../styles/index.css";
 
+import "@fontsource-variable/figtree";
+import "@fontsource-variable/source-serif-4";
+
 import { ViewTransitions } from "astro:transitions";
 
 import {
@@ -61,30 +64,6 @@ const {
   <title>{title}</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap"
-  />
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap"
-  />
-
-  <link
-    rel="stylesheet"
-    media="print"
-    onload="this.onload = null; this.removeAttribute('media'); "
-    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap"
-  />
-  <link
-    rel="stylesheet"
-    media="print"
-    onload="this.onload = null; this.removeAttribute('media');"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap"
-  />
 
   <ViewTransitions />
 

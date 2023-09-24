@@ -1,10 +1,13 @@
 ---
+import { Image } from "astro:assets";
 
+import signature from "../../content/blog/assets/general/signature.webp";
 ---
 
-<img
-  src="/assets/img/signature.webp"
+<Image
+  src={signature}
   class="mt-[60px] dark:invert"
   width="128"
+  loading="lazy"
   alt="Gabriel's signature"
 />
