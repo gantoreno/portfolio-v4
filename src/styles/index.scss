@@ -127,7 +127,7 @@ article > p:nth-of-type(2)::first-letter {
   background: var(--scrollbar-thumb-focus);
 }
 
-article > * {
+article > *:not(:empty):not(style, script) {
   --start: 0ms;
   --stagger: 10;
   --delay: 64ms;
@@ -137,7 +137,7 @@ article > * {
 }
 
 @for $i from 1 to 10 {
-  article > *:nth-child(#{$i}):not(:empty):not(style, script) {
+  article > *:not(:empty):not(style, script):nth-child(#{$i}) {
     --start: 0ms;
     --delay: 64ms;
     --stagger: #{$i};
@@ -190,7 +190,8 @@ article > * {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-animate] {
-    animation: none;
+  [data-animate],
+  article > * {
+    animation: none !important;
   }
 }
