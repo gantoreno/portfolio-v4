@@ -171,16 +171,6 @@ article > *:not(style, script) {
   }
 }
 
-@keyframes fade {
-  from {
-    filter: blur(30px);
-  }
-
-  to {
-    filter: blur(0px);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   [data-animate],
   article > * {
