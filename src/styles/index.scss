@@ -110,14 +110,13 @@ body {
 
 body {
   overflow-y: scroll;
-}
 
-/* Prevent navbar from animating more than once */
-body:has(#controller.no-animate) {
-  & nav[data-animate],
-  & footer[data-animate],
-  & main [data-animate] {
-    animation: none;
+  &:has(#controller.no-animate) {
+    & nav[data-animate],
+    & footer[data-animate],
+    & main [data-animate] {
+      animation: none;
+    }
   }
 }
 
@@ -132,7 +131,7 @@ article > p:nth-of-type(2)::first-letter {
 }
 
 [data-animate],
-article > *:not(:empty):not(style, script) {
+article > *:not(style, script) {
   --start: 0ms;
   --stagger: 0;
   --delay: 64ms;
@@ -141,12 +140,12 @@ article > *:not(:empty):not(style, script) {
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
 }
 
-article > *:not(:empty):not(style, script) {
+article > *:not(style, script) {
   --stagger: 10;
 }
 
 @for $i from 1 to 10 {
-  article > *:not(:empty):not(style, script):nth-child(#{$i}) {
+  article > *:not(style, script):nth-child(#{$i}) {
     --stagger: #{$i};
   }
 }
