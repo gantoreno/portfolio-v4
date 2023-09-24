@@ -68,10 +68,6 @@ const {
   <ViewTransitions />
 
   <script>
-    document.addEventListener("astro:page-load", () => {
-      document.getElementById("footer").dataset.animate = true;
-    });
-
     document.addEventListener("astro:after-swap", () => {
       document.getElementById("controller").classList.add("no-animate");
     });
