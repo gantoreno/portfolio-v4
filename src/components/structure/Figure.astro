@@ -28,6 +28,8 @@ const blur = await getDownscaledPlaceholder(src);
     decoding="async"
     width={width as number}
     height={height as number}
+    onload="this.dataset.loaded = true"
+    data-loaded="false"
   />
 </div>
 <Paragraph class="text-center">

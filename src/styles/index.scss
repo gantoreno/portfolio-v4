@@ -140,6 +140,18 @@ article > *:not(style, script) {
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
 }
 
+img {
+  transition: all 0.6s ease-in-out;
+}
+
+img[data-loaded="false"] {
+  filter: blur(30px);
+}
+
+img[data-loaded="true"] {
+  filter: blur(0px);
+}
+
 article > *:not(style, script) {
   --stagger: 10;
 }
@@ -162,10 +174,24 @@ article > *:not(style, script) {
   }
 }
 
+@keyframes fade {
+  from {
+    filter: blur(30px);
+  }
+
+  to {
+    filter: blur(0px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-animate],
   article > * {
     animation: none !important;
+  }
+
+  img[data-loaded="false"] {
+    filter: none;
   }
 }
 
