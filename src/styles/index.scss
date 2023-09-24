@@ -136,7 +136,6 @@ article > *:not(style, script) {
   --stagger: 0;
   --delay: 64ms;
   animation: enter 0.6s both;
-  animation-fill-mode: both;
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
 }
 
