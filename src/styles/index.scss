@@ -189,10 +189,6 @@ article > *:not(style, script) {
   article > * {
     animation: none !important;
   }
-
-  img[data-loaded="false"] {
-    filter: none;
-  }
 }
 
 mjx-container {
