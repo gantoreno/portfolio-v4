@@ -57,58 +57,56 @@ const sg = new StaggerGenerator(1);
           one day at a time{/* */}
         </Italic>.
       </Paragraph>
-      <div class="mt-[60px]" style={sg.next()} data-animate>
-        <SectionDivider>
-          <strong slot="title" class="text-primary">Working at</strong>
-          <div slot="items">
-            <Section>
-              <Paragraph>
-                <Link
-                  href="https://zemoga.com"
-                  target="_blank"
-                  class="inline-flex gap-1"
-                >
-                  <CompanyLogo />Zemoga
-                </Link>, helping organizations build better digital products as
-                a technical leader.
-              </Paragraph>
-            </Section>
-          </div>
-        </SectionDivider>
-        <SectionDivider>
-          <strong slot="title" class="text-primary">Recently built</strong>
-          <div slot="items">
-            {
-              work.map((project) => (
-                <Section>
-                  <Entry
-                    title={project.data.title}
-                    description={project.data.description}
-                    link={project.data.link}
-                    external
-                  />
-                </Section>
-              ))
-            }
-          </div>
-        </SectionDivider>
-        <SectionDivider>
-          <strong slot="title" class="text-primary">Writing about</strong>
-          <div slot="items">
-            {
-              posts.map((post) => (
-                <Section>
-                  <Entry
-                    title={post.data.shorthand}
-                    description={post.data.description}
-                    link={"/blog/" + post.slug}
-                  />
-                </Section>
-              ))
-            }
-          </div>
-        </SectionDivider>
-      </div>
+      <SectionDivider class="mt-[60px]" style={sg.next()} data-animate>
+        <strong slot="title" class="text-primary">Working at</strong>
+        <div slot="items">
+          <Section>
+            <Paragraph>
+              <Link
+                href="https://zemoga.com"
+                target="_blank"
+                class="inline-flex gap-1"
+              >
+                <CompanyLogo />Zemoga
+              </Link>, helping organizations build better digital products as a
+              technical leader.
+            </Paragraph>
+          </Section>
+        </div>
+      </SectionDivider>
+      <SectionDivider style={sg.next()} data-animate>
+        <strong slot="title" class="text-primary">Recently built</strong>
+        <div slot="items">
+          {
+            work.map((project) => (
+              <Section>
+                <Entry
+                  title={project.data.title}
+                  description={project.data.description}
+                  link={project.data.link}
+                  external
+                />
+              </Section>
+            ))
+          }
+        </div>
+      </SectionDivider>
+      <SectionDivider style={sg.next()} data-animate>
+        <strong slot="title" class="text-primary">Writing about</strong>
+        <div slot="items">
+          {
+            posts.map((post) => (
+              <Section>
+                <Entry
+                  title={post.data.shorthand}
+                  description={post.data.description}
+                  link={"/blog/" + post.slug}
+                />
+              </Section>
+            ))
+          }
+        </div>
+      </SectionDivider>
       <SecondaryHeading style={sg.next()} data-animate linkable={false}>
         More about me
       </SecondaryHeading>
