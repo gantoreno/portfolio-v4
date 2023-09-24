@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import sharp from "sharp";
 
 import type { ImageMetadata } from "astro";
@@ -6,11 +7,11 @@ export async function getDownscaledPlaceholder(
   metadata: ImageMetadata,
   downscaleFactor = 0.25
 ) {
-  const originalBuffer = await fetch(
-    new URL(metadata.src, "http://localhost:4321")
-  )
-    .then((response) => response.arrayBuffer())
-    .then((buffer) => Buffer.from(buffer));
+  const originalBuffer = import.meta.env.PROD
+    ? readFileSync("./dist/" + metadata.src)
+    : await fetch(new URL(metadata.src, "http://localhost:4321"))
+        .then((response) => response.arrayBuffer())
+        .then((buffer) => Buffer.from(buffer));
 
   const downscaledBuffer = await sharp(originalBuffer)
     .resize(
