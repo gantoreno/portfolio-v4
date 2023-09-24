@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { Img } from "astro-imagetools/components";
+import { Image } from "astro:assets";
 
 import Italic from "../typography/Italic.astro";
 import Paragraph from "./Paragraph.astro";
@@ -8,21 +8,13 @@ import Paragraph from "./Paragraph.astro";
 type Props = HTMLAttributes<"img">;
 
 const { src, alt, width, height } = Astro.props;
-
-// @ts-expect-error
-const url = src?.src.replace("/@fs" + process.cwd(), "");
 ---
 
-<Img
-  attributes={{
-    img: {
-      class: "rounded-md mb-[6px] mx-auto mt-[6px] overflow-hidden",
-    },
-  }}
-  src={url}
+<Image
+  class="rounded-md mb-[26px] mx-auto mt-[26px]"
+  src={src ?? ""}
   alt={alt ?? ""}
   loading="lazy"
-  placeholder="blurred"
   width={width as number}
   height={height as number}
 />

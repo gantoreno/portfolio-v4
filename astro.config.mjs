@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import { astroImageTools } from "astro-imagetools";
 
 import vercel from "@astrojs/vercel/serverless";
 import tailwind from "@astrojs/tailwind";
@@ -14,7 +13,7 @@ export default defineConfig({
   site: "https://gantoreno.com",
   output: "server",
   adapter: vercel({ edgeMiddleware: true }),
-  integrations: [mdx(), tailwind(), sitemap(), astroImageTools],
+  integrations: [mdx(), tailwind(), sitemap()],
   markdown: {
     remarkRehype: { footnoteLabel: "Reference" },
     remarkPlugins: [remarkMath],
