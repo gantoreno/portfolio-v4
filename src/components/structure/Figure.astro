@@ -18,12 +18,14 @@ const blur = await getDownscaledPlaceholder(src);
 
 <div
   style={`background-image: url(${blur}); background-size: cover;`}
-  class="mb-[26px] mx-auto mt-[26px] rounded-md overflow-hidden"
+  class="mb-[26px] mx-auto mt-[26px] rounded-md overflow-hidden relative"
 >
   <Image
+    class="backdrop-blur-md"
     src={src ?? ""}
     alt={alt ?? ""}
     loading="lazy"
+    decoding="async"
     width={width as number}
     height={height as number}
   />
