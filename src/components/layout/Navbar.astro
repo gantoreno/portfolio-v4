@@ -44,7 +44,7 @@ const routes: Route[] = [
   }
   {
     Astro.response.status === 404 && (
-      <Link href={currentPath} active={true}>
+      <Link href={currentPath} active={true} style="--stagger:1" data-animate>
         What?
       </Link>
     )
