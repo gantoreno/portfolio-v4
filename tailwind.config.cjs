@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    extend: {},
+    extend: {
+      fontWeight: {
+        bold: 600,
+      },
+    },
     colors: {
       primary: "rgb(var(--color-primary) / <alpha-value>)",
       secondary: "rgb(var(--color-secondary) / <alpha-value>)",

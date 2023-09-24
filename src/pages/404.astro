@@ -12,17 +12,21 @@ import Link from "../components/navigation/Link.astro";
 import Paragraph from "../components/structure/Paragraph.astro";
 
 import Italic from "../components/typography/Italic.astro";
+
+import StaggerGenerator from "../utils/stagger";
+
+const sg = new StaggerGenerator();
 ---
 
 <Html>
   <Head title="Whoops!" description="Page not found" />
   <Body>
     <Header>
-      <PrimaryHeading style="--stagger:2" data-animate>
+      <PrimaryHeading style={sg.next()} data-animate>
         Seems like I'm missing this one {"🤔"}
       </PrimaryHeading>
     </Header>
-    <Paragraph style="--stagger:3" data-animate>
+    <Paragraph style={sg.next()} data-animate>
       I probably forgot to build the page you're looking for – but no worries,
       you can still look around my <Link href="/">homepage</Link> or my <Link
         href="/blog"
@@ -30,7 +34,7 @@ import Italic from "../components/typography/Italic.astro";
         {/* */}blog{/* */}
       </Link> blog for some good reads.
     </Paragraph>
-    <Paragraph style="--stagger:12" data-animate>
+    <Paragraph style={sg.custom(12)} data-animate>
       <Italic>Perhaps this page will exist in the future...</Italic>
     </Paragraph>
   </Body>

@@ -127,6 +127,26 @@ article > p:nth-of-type(2)::first-letter {
   background: var(--scrollbar-thumb-focus);
 }
 
+article > * {
+  --start: 0ms;
+  --stagger: 10;
+  --delay: 64ms;
+  animation: enter 0.6s both;
+  animation-fill-mode: both;
+  animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+}
+
+@for $i from 1 to 10 {
+  article > *:nth-child(#{$i}):not(:empty):not(style, script) {
+    --start: 0ms;
+    --delay: 64ms;
+    --stagger: #{$i};
+    animation: enter 0.6s both;
+    animation-fill-mode: both;
+    animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+  }
+}
+
 @keyframes enter {
   from {
     transform: translateY(10px);
