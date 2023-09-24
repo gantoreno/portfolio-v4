@@ -86,9 +86,13 @@ body:has(#controller.no-animate) main [data-animate] {
 }
 
 article > p:nth-of-type(2)::first-letter {
-  initial-letter: 2;
-  -webkit-initial-letter: 2;
-  font-family: "Source Serif 4", monospace;
+  font-size: calc(3em + 3px);
+  line-height: calc(1em - 3px);
+  float: left;
+  margin-right: 0.4rem;
+
+  font-family: "Source Serif 4", serif !important;
+  -webkit-font-family: "Source Serif 4", serif !important;
 }
 
 [data-animate] {
