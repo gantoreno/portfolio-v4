@@ -60,7 +60,7 @@ const { Content } = await post.render();
   <Body>
     <article
       id="article"
-      class="[&>p:nth-of-type(2)::first-letter]:font-serif [&>p:nth-of-type(2)::first-letter]:text-primary"
+      class="[&>p:nth-of-type(2)::first-letter]:font-serif [&>p:nth-of-type(2)::first-letter]:text-primary ::first-letter]:font-serif"
     >
       <PrimaryHeading class="mt-[60px]">
         {post.data.title}
