@@ -161,12 +161,12 @@ article > *:not(style, script) {
 
 @keyframes enter {
   from {
-    transform: translateY(10px);
+    transform: translateX(10px);
     opacity: 0;
   }
 
   to {
-    transform: translateY(0px);
+    transform: translateX(0px);
     opacity: 1;
   }
 }
