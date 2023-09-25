@@ -5,7 +5,7 @@ import type { ImageMetadata } from "astro";
 
 export async function getDownscaledPlaceholder(
   metadata: ImageMetadata,
-  downscaleFactor = 0.25
+  downscaleFactor = 0.1
 ) {
   const originalBuffer = import.meta.env.PROD
     ? readFileSync("./dist/" + metadata.src)
