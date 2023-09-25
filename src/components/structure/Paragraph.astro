@@ -8,7 +8,7 @@ const { class: classNames, ...rest } = Astro.props;
 
 <p
   class:list={[
-    "mb-[20px] text-secondary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:mx-px [&>[data-footnote-backref]]:text-disabled [&>[data-footnote-backref]]:no-underline [&>[data-footnote-backref]]:duration-[0.15s] [&>[data-footnote-backref]:hover]:text-secondary",
+    "mb-[20px] text-secondary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:mx-px [&>a]:decoration-[1px] [&>a]:underline-offset-[2px] [&>[data-footnote-backref]]:text-disabled [&>[data-footnote-backref]]:no-underline [&>[data-footnote-backref]]:duration-[0.15s] [&>[data-footnote-backref]:hover]:text-secondary",
     classNames,
   ]}
   {...rest}
