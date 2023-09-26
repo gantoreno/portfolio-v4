@@ -1,10 +1,6 @@
 ---
 import "../styles/index.scss";
 
-// import "@fontsource-variable/figtree";
-// import "@fontsource-variable/source-serif-4/standard.css";
-// import "@fontsource-variable/source-serif-4/standard-italic.css";
-
 import { ViewTransitions } from "astro:transitions";
 
 import {
@@ -69,9 +65,10 @@ const {
   <ViewTransitions />
 
   <script>
-    document.addEventListener("astro:page-load", () => {
+    window.onload = function () {
+      document.getElementById("navbar").dataset.animate = true;
       document.getElementById("footer").dataset.animate = true;
-    });
+    };
 
     document.addEventListener("astro:after-swap", () => {
       document.getElementById("controller").classList.add("no-animate");
