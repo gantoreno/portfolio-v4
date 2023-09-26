@@ -35,7 +35,7 @@ const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
   return posts;
 }, {});
 
-const sg = new StaggerGenerator();
+const sg = new StaggerGenerator(1);
 ---
 
 <Html>
