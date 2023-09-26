@@ -1,4 +1,5 @@
 ---
+import Logo from "../extras/Logo.astro";
 import Link from "../navigation/Link.astro";
 
 type Route = {
@@ -23,8 +24,11 @@ const routes: Route[] = [
 </div>
 <nav
   id="navbar"
-  class="h-[100px] w-full z-20 flex items-center gap-[20px] relative"
+  class="h-[100px] w-full z-20 flex items-center relative gap-[20px]"
 >
+  <div class="mr-[40px]">
+    <Logo />
+  </div>
   {
     routes.map((route) => (
       <Link
