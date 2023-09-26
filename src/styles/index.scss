@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Variables */
 @layer base {
   :root {
     --selection: 0, 0, 0, 0.125;
@@ -32,6 +33,7 @@
   }
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --selection: 255, 255, 255, 0.125;
@@ -62,14 +64,17 @@
   }
 }
 
+/* Scroll position */
 :target {
   scroll-margin-top: 100px;
 }
 
+/* Selection */
 ::selection {
   background: rgb(var(--selection));
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 16px;
 }
@@ -93,6 +98,7 @@
   background: var(--scrollbar-thumb-focus);
 }
 
+/* General configuration */
 * {
   box-sizing: border-box;
 }
@@ -110,22 +116,16 @@ body {
 
 body {
   overflow-y: scroll;
-
-  &:has(#controller.no-animate) {
-    & nav[data-animate],
-    & footer[data-animate],
-    & main [data-animate] {
-      animation: none;
-    }
-  }
 }
 
+/* Initial letter on articles */
 article > p:nth-of-type(2)::first-letter {
   initial-letter: 2;
   -webkit-initial-letter: 2;
   margin-right: 1ch;
 }
 
+/* Staggered animations */
 [data-animate],
 article > *:not(style, script) {
   --start: 0ms;
@@ -135,18 +135,6 @@ article > *:not(style, script) {
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
 }
 
-img {
-  transition: all 0.6s ease-in-out;
-}
-
-img[data-loaded="false"] {
-  filter: blur(30px);
-}
-
-img[data-loaded="true"] {
-  filter: blur(0px);
-}
-
 article > *:not(style, script) {
   --stagger: 10;
 }
@@ -154,6 +142,21 @@ article > *:not(style, script) {
 @for $i from 1 to 10 {
   article > *:not(style, script):nth-child(#{$i}) {
     --stagger: #{$i};
+  }
+}
+
+body:has(#controller.no-animate) {
+  & nav[data-animate],
+  & footer[data-animate],
+  & main [data-animate] {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  article > * {
+    animation: none !important;
   }
 }
 
@@ -169,13 +172,20 @@ article > *:not(style, script) {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  [data-animate],
-  article > * {
-    animation: none !important;
-  }
+/* Image optimization */
+img {
+  transition: all 0.6s ease-in-out;
 }
 
+img[data-loaded="false"] {
+  filter: blur(30px);
+}
+
+img[data-loaded="true"] {
+  filter: blur(0px);
+}
+
+/* MJX & LaTeX */
 mjx-container {
   user-select: none;
   font-size: 1rem;
