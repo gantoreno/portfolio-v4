@@ -65,11 +65,6 @@ const {
   <ViewTransitions />
 
   <script>
-    window.onload = function () {
-      document.getElementById("navbar").dataset.animate = true;
-      document.getElementById("footer").dataset.animate = true;
-    };
-
     document.addEventListener("astro:after-swap", () => {
       document.getElementById("controller").classList.add("no-animate");
     });
