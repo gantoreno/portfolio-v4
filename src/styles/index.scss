@@ -2,6 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* latin */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/figtree/v5/_Xms-HUzqDCFdgfMm4S9DaRvzig.woff2)
+    format("woff2");
+  unicode-range: 0020 — 007F;
+}
+
+/* latin */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/figtree/v5/_Xms-HUzqDCFdgfMm4S9DaRvzig.woff2)
+    format("woff2");
+  unicode-range: 0020 — 007F;
+}
+
+/* latin */
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourceserif4/v8/vEF02_tTDB4M7-auWDN0ahZJW1ge6NmXpVAHV83Bfb_US2D2QYxoUKIkn98pRl9tDMQCjDDUXmAz.woff2)
+    format("woff2");
+  unicode-range: 0020 — 007F;
+}
+
+/* latin */
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourceserif4/v8/vEFy2_tTDB4M7-auWDN0ahZJW3IX2ih5nk3AucvUHf6OAVIJmeUDygwjisltnhtdDs4DrjTMXw.woff2)
+    format("woff2");
+  unicode-range: 0020 — 007F;
+}
+
 /* Variables */
 @layer base {
   :root {
