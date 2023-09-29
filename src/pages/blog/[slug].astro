@@ -58,34 +58,32 @@ const { Content } = await post.render();
     keywords={post.data.tags}
   />
   <Body>
-    <article id="article">
+    <article
+      id="article"
+      class="[&>p:nth-of-type(2)::first-letter]:font-serif [&>p:nth-of-type(2)::first-letter]:text-primary ::first-letter]:font-serif"
+    >
       <PrimaryHeading class="mt-[60px]">
         {post.data.title}
       </PrimaryHeading>
       <Paragraph class="!text-disabled mb-[60px]">
         {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
-      <div
-        id="rendered-content"
-        class="[&>p:first-child::first-letter]:text-primary [&>p:first-child::first-letter]:initial-letter-2 [&>p]:font-serif"
-      >
-        <Content
-          components={{
-            blockquote: Blockquote,
-            code: Mono,
-            em: Italic,
-            h1: PrimaryHeading,
-            h2: SecondaryHeading,
-            img: Figure,
-            ol: NumberedList,
-            p: Paragraph,
-            pre: Snippet,
-            strong: Bold,
-            sup: SuperIndex,
-            ul: BulletedList,
-          }}
-        />
-      </div>
+      <Content
+        components={{
+          blockquote: Blockquote,
+          code: Mono,
+          em: Italic,
+          h1: PrimaryHeading,
+          h2: SecondaryHeading,
+          img: Figure,
+          ol: NumberedList,
+          p: Paragraph,
+          pre: Snippet,
+          strong: Bold,
+          sup: SuperIndex,
+          ul: BulletedList,
+        }}
+      />
       <SecondaryHeading>Continue reading</SecondaryHeading>
       {
         otherPosts.map((post: Post) => (

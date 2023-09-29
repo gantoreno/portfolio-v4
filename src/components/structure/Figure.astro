@@ -2,6 +2,9 @@
 import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
 
+import Italic from "../typography/Italic.astro";
+import Paragraph from "./Paragraph.astro";
+
 import { getDownscaledPlaceholder } from "../../utils/image";
 
 type Props = Omit<HTMLAttributes<"img">, "src"> & {
@@ -29,6 +32,8 @@ const blur = await getDownscaledPlaceholder(src);
     data-loaded="false"
   />
 </div>
-<p class="text-center !font-sans !text-disabled mb-[20px]">
-  {alt}
-</p>
+<Paragraph class="text-center">
+  <Italic>
+    {alt}
+  </Italic>
+</Paragraph>
