@@ -16,7 +16,6 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-
   src: url(/assets/fonts/source-serif-4-subset.woff2) format("woff2");
   unicode-range: 0041 — 005A;
 }
@@ -147,7 +146,7 @@ body {
 }
 
 /* Initial letter on articles */
-article > p:nth-of-type(2)::first-letter {
+article #rendered-content > p:first-child::first-letter {
   initial-letter: 2;
   -webkit-initial-letter: 2;
   margin-right: 1ch;
@@ -222,13 +221,13 @@ mjx-container {
   color: rgb(var(--color-primary));
 }
 
-article > mjx-container {
+article #rendered-content > mjx-container {
   display: flex !important;
   margin-top: 0px !important;
   margin-bottom: 20px !important;
   justify-content: center !important;
 }
 
-article p > mjx-container {
+article #rendered-content p > mjx-container {
   display: inline-flex;
 }
