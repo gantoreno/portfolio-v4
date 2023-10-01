@@ -60,14 +60,14 @@ const { Content } = await post.render();
   <Body>
     <article
       id="article"
-      class="[&>p:nth-of-type(2)::first-letter]:font-serif [&>p:nth-of-type(2)::first-letter]:text-primary ::first-letter]:font-serif"
+      class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif font-serif"
     >
       <PrimaryHeading class="mt-[60px]">
         {post.data.title}
       </PrimaryHeading>
-      <Paragraph class="!text-disabled mb-[60px]">
+      <span class="block !text-disabled mb-[60px] font-sans">
         {format(post.data.date, "MMM d, yyyy")}
-      </Paragraph>
+      </span>
       <Content
         components={{
           blockquote: Blockquote,
@@ -84,17 +84,17 @@ const { Content } = await post.render();
           ul: BulletedList,
         }}
       />
-      <SecondaryHeading>Continue reading</SecondaryHeading>
-      {
-        otherPosts.map((post: Post) => (
-          <Entry
-            title={post.data.title}
-            description={post.data.description}
-            link={"/blog/" + post.slug}
-          />
-        ))
-      }
-      <Signature />
     </article>
+    <SecondaryHeading>Continue reading</SecondaryHeading>
+    {
+      otherPosts.map((post: Post) => (
+        <Entry
+          title={post.data.title}
+          description={post.data.description}
+          link={"/blog/" + post.slug}
+        />
+      ))
+    }
+    <Signature />
   </Body>
 </Html>
