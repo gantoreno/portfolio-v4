@@ -3,13 +3,13 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"sup">;
 
-const { class: classNames, ...rest } = Astro.props;
+const { class: classes, ...rest } = Astro.props;
 ---
 
 <sup
   class:list={[
     "[&>a]:text-primary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:ml-px",
-    classNames,
+    classes,
   ]}
   {...rest}
 >

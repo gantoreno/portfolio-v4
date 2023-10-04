@@ -3,13 +3,13 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"div">;
 
-const { class: classNames, ...rest } = Astro.props;
+const { class: classes, ...rest } = Astro.props;
 ---
 
 <div
   class:list={[
     "grid grid-cols-4 gap-[20px] border-t border-soft pt-[20px]",
-    classNames,
+    classes,
   ]}
   {...rest}
 >

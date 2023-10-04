@@ -5,12 +5,12 @@ type Props = HTMLAttributes<"a"> & {
   active?: boolean;
 };
 
-const { active = true, class: classNames, ...rest } = Astro.props;
+const { active = true, class: classes, ...rest } = Astro.props;
 ---
 
 <a
   class:list={[
-    classNames,
+    classes,
     {
       ["text-disabled hover:text-secondary duration-[0.15s]"]: !active,
       ["decoration-disabled text-primary underline decoration-[1px] underline-offset-[2px]"]:

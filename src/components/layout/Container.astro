@@ -3,11 +3,11 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"div">;
 
-const { class: classNames, ...rest } = Astro.props;
+const { class: classes, ...rest } = Astro.props;
 ---
 
 <div
-  class:list={["max-w-[600px] mx-auto px-[20px] sm:px-0 relative", classNames]}
+  class:list={["max-w-[600px] mx-auto px-[20px] sm:px-0 relative", classes]}
   {...rest}
 >
   <slot />

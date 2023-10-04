@@ -3,12 +3,12 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"pre">;
 
-const { class: classNames, ...rest } = Astro.props;
+const { class: classes, ...rest } = Astro.props;
 ---
 
 <pre
   class:list={[
     "p-[20px] mb-[20px] rounded-md bg-[var(--astro-code-color-background)] [&>code]:bg-[var(--astro-code-color-background)] [&>code]:p-0 [&>code]:whitespace-break-spaces",
-    classNames,
+    classes,
   ]}
   {...rest}><slot /></pre>

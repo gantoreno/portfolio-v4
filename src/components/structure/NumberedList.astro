@@ -3,13 +3,13 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"ol">;
 
-const { class: classNames, ...rest } = Astro.props;
+const { class: classes, ...rest } = Astro.props;
 ---
 
 <ol
   class:list={[
     "list-decimal text-secondary mb-[20px] marker:text-primary pl-[34px] [&>li]:pl-[10px]",
-    classNames,
+    classes,
   ]}
   {...rest}
 >
