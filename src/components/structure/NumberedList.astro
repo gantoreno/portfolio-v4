@@ -1,4 +1,8 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"ol">;
+
 const { class: classNames, ...rest } = Astro.props;
 ---
 

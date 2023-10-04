@@ -1,4 +1,8 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"h1">;
+
 const { class: classNames, ...rest } = Astro.props;
 ---
 
