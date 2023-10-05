@@ -68,6 +68,7 @@ const {
     as="font"
     type="font/woff2"
     crossorigin="anonymous"
+    transition:persist
   />
   <link
     rel="preload"
@@ -75,6 +76,7 @@ const {
     as="font"
     type="font/woff2"
     crossorigin="anonymous"
+    transition:persist
   />
   <link
     rel="preload"
@@ -82,13 +84,14 @@ const {
     as="font"
     type="font/woff2"
     crossorigin="anonymous"
+    transition:persist
   />
 
   <ViewTransitions />
 
   <script>
-    document.addEventListener("astro:after-swap", () => {
-      document.getElementById("controller").classList.add("no-animate");
-    });
+    // document.addEventListener("astro:after-swap", () => {
+    //   document.getElementById("controller").classList.add("no-animate");
+    // });
   </script>
 </head>
