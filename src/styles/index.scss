@@ -99,7 +99,7 @@
 
 /* Scroll position */
 :target {
-  scroll-margin-top: 100px;
+  scroll-margin-top: calc(100px + 60px);
 }
 
 /* Selection */

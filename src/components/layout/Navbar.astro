@@ -1,6 +1,7 @@
 ---
 import Logo from "../extras/Logo.astro";
 import Link from "../navigation/Link.astro";
+import Container from "./Container.astro";
 
 type Route = {
   name: string;
@@ -17,39 +18,39 @@ const routes: Route[] = [
 ];
 ---
 
-<div
-  class="fixed top-0 w-full h-[100px] z-10 pointer-events-none"
-  style="background: linear-gradient(rgb(var(--background)), transparent)"
->
-</div>
+<div class="w-full h-[100px]"></div>
 <nav
   id="navbar"
-  class="h-[100px] w-full z-20 flex items-center relative gap-[20px]"
+  class="h-[100px] w-full fixed top-0 left-0 z-20 bg-inverse bg-opacity-80 backdrop-blur-md"
 >
-  <div class="mr-[40px]">
-    <Logo />
-  </div>
-  {
-    routes.map((route) => (
-      <Link
-        href={route.path}
-        active={
-          (route.path === "/"
-            ? route.path === currentPath
-            : currentPath.startsWith(route.path)) &&
-          Astro.response.status !== 404
-        }
-        target={route.target ?? ""}
-      >
-        {route.name}
-      </Link>
-    ))
-  }
-  {
-    Astro.response.status === 404 && (
-      <Link href={currentPath} active={true}>
-        What?
-      </Link>
-    )
-  }
+  <Container class="w-full h-full">
+    <div class="flex items-center gap-[20px] h-full border-b border-soft">
+      <div class="mr-[40px]">
+        <Logo />
+      </div>
+      {
+        routes.map((route) => (
+          <Link
+            href={route.path}
+            active={
+              (route.path === "/"
+                ? route.path === currentPath
+                : currentPath.startsWith(route.path)) &&
+              Astro.response.status !== 404
+            }
+            target={route.target ?? ""}
+          >
+            {route.name}
+          </Link>
+        ))
+      }
+      {
+        Astro.response.status === 404 && (
+          <Link href={currentPath} active={true}>
+            What?
+          </Link>
+        )
+      }
+    </div>
+  </Container>
 </nav>
