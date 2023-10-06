@@ -14,18 +14,25 @@ export default defineConfig({
   site: "https://gantoreno.com",
   output: "server",
   adapter: vercel({
-    edgeMiddleware: true
+    edgeMiddleware: true,
   }),
-  integrations: [mdx(), tailwind(), sitemap(), compress({ SVG: false })],
+  integrations: [
+    mdx(),
+    sitemap(),
+    compress({ SVG: false }),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+  ],
   markdown: {
     remarkRehype: {
-      footnoteLabel: "Reference"
+      footnoteLabel: "Reference",
     },
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathjax],
     shikiConfig: {
       theme: "css-variables",
-      wrap: true
-    }
-  }
+      wrap: true,
+    },
+  },
 });
