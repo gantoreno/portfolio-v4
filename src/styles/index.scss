@@ -7,7 +7,9 @@
   font-style: normal;
   font-weight: 400 600;
   font-display: swap;
-  src: url(/assets/fonts/figtree-variable-subset.woff2) format("woff2");
+  src:
+    local("Figtree"),
+    url(/assets/fonts/figtree-variable-subset.woff2) format("woff2");
   unicode-range: 0020 — 007F;
 }
 
@@ -16,8 +18,9 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-
-  src: url(/assets/fonts/source-serif-4-subset.woff2) format("woff2");
+  src:
+    local("Source Serif 4"),
+    url(/assets/fonts/source-serif-4-subset.woff2) format("woff2");
   unicode-range: 0041 — 005A;
 }
 
@@ -26,7 +29,9 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url(/assets/fonts/source-serif-4-italic-subset.woff2) format("woff2");
+  src:
+    local("Source Serif 4"),
+    url(/assets/fonts/source-serif-4-italic-subset.woff2) format("woff2");
   unicode-range: 0020 — 007F;
 }
 
