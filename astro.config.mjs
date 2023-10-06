@@ -16,7 +16,7 @@ export default defineConfig({
   adapter: vercel({
     edgeMiddleware: true
   }),
-  integrations: [mdx(), tailwind(), sitemap(), compress({svg: false})],
+  integrations: [mdx(), tailwind(), sitemap(), compress({ SVG: false })],
   markdown: {
     remarkRehype: {
       footnoteLabel: "Reference"
