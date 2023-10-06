@@ -138,11 +138,8 @@
 
 html,
 body {
-  scroll-padding-top: 200px;
   background: rgb(var(--background));
-
   touch-action: manipulation;
-
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
 }
@@ -208,14 +205,14 @@ body:has(#controller.no-animate) {
 /* Image optimization */
 img {
   transition: all 0.6s ease-in-out;
-}
 
-img[data-loaded="false"] {
-  filter: blur(30px);
-}
+  &[data-loaded="false"] {
+    filter: blur(30px);
+  }
 
-img[data-loaded="true"] {
-  filter: blur(0px);
+  &[data-loaded="true"] {
+    filter: blur(0px);
+  }
 }
 
 /* MJX & LaTeX */
