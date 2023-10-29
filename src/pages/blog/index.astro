@@ -53,24 +53,26 @@ const sg = new StaggerGenerator();
       </Header>
       <div class="mt-[60px]">
         {
-          Object.keys(postsGroupedByYear).map((year, i) => (
-            <SectionDivider style={sg.next()} data-animate>
-              <span slot="title" class="text-disabled">
-                {year}
-              </span>
-              <div slot="items">
-                {postsGroupedByYear[year].map((post) => (
-                  <Section>
-                    <EntryAlt
-                      title={post.data.shorthand}
-                      date={post.data.date}
-                      link={"/blog/" + post.slug}
-                    />
-                  </Section>
-                ))}
-              </div>
-            </SectionDivider>
-          ))
+          Object.keys(postsGroupedByYear)
+            .reverse()
+            .map((year, i) => (
+              <SectionDivider style={sg.next()} data-animate>
+                <span slot="title" class="text-disabled">
+                  {year}
+                </span>
+                <div slot="items">
+                  {postsGroupedByYear[year].map((post) => (
+                    <Section>
+                      <EntryAlt
+                        title={post.data.shorthand}
+                        date={post.data.date}
+                        link={"/blog/" + post.slug}
+                      />
+                    </Section>
+                  ))}
+                </div>
+              </SectionDivider>
+            ))
         }
       </div>
     </main>
