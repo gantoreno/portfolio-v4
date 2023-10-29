@@ -7,12 +7,14 @@ import {
   DEFAULT_TITLE,
   DEFAULT_DESCRIPTION,
   DEFAULT_KEYWORDS,
+  DEFAULT_THUMBNAIL,
 } from "../constants";
 
 type Props = {
   title?: string;
   description?: string;
   keywords?: string[];
+  thumbnail?: string;
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,6 +23,7 @@ const {
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   keywords = DEFAULT_KEYWORDS,
+  thumbnail = DEFAULT_THUMBNAIL,
 } = Astro.props;
 ---
 
@@ -36,17 +39,11 @@ const {
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content={Astro.url} />
-  <meta
-    property="og:image"
-    content={new URL("/assets/img/og.png", Astro.url)}
-  />
+  <meta property="og:image" content={new URL(thumbnail, Astro.url)} />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={Astro.url} />
-  <meta
-    property="twitter:image"
-    content={new URL("/assets/img/og.png", Astro.url)}
-  />
+  <meta property="twitter:image" content={new URL(thumbnail, Astro.url)} />
 
   <meta name="title" content={title} />
   <meta name="description" content={description} />
@@ -91,7 +88,7 @@ const {
 
   <script>
     document.addEventListener("astro:after-swap", () => {
-      document.getElementById("controller").classList.add("no-animate");
+      document.getElementById("controller")?.classList.add("no-animate");
     });
   </script>
 </head>
