@@ -62,7 +62,7 @@ const { Content } = await post.render();
     <meta
       name="publish_date"
       property="og:publish_date"
-      content={new Date(post.data.date).toISOString()}
+      content={new Date(post.data.date).toISOString().slice(0, 19) + "00:00"}
     />
   </Head>
   <Body>
