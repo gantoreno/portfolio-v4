@@ -74,7 +74,9 @@ const { Content } = await post.render();
         {post.data.title}
       </PrimaryHeading>
       <Paragraph class="!text-disabled mb-[60px]">
-        {format(post.data.date, "MMM d, yyyy")}
+        <time datetime={format(post.data.date, "yyyy-MM-dd")}
+          >{format(post.data.date, "MMM d, yyyy")}</time
+        >
       </Paragraph>
       <Content
         components={{
