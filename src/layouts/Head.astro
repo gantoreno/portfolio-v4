@@ -38,19 +38,20 @@ const {
   <link rel="canonical" href={canonicalURL} />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={Astro.url} />
-  <meta property="og:image" content={new URL(thumbnail, Astro.url)} />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={Astro.url} />
   <meta property="twitter:image" content={new URL(thumbnail, Astro.url)} />
 
-  <meta name="title" content={title} />
-  <meta name="description" content={description} />
+  <meta name="title" property="og:title" content={title} />
+  <meta name="description" property="og:description" content={description} />
   <meta name="keywords" content={keywords.join(", ").toLowerCase()} />
-
-  <meta name="og:title" content={title} />
-  <meta name="og:description" content={description} />
+  <meta name="url" property="og:url" content={Astro.url} />
+  <meta
+    name="image"
+    property="og:image"
+    content={new URL(thumbnail, Astro.url)}
+  />
 
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
