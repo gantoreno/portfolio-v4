@@ -58,10 +58,10 @@ const { Content } = await post.render();
     keywords={post.data.tags}
     thumbnail={post.data.thumbnail}
   >
-    <meta name="author" content={post.data.author} />
+    <meta name="author" property="article:author" content={post.data.author} />
     <meta
-      name="publish_date"
-      property="og:publish_date"
+      name="published_time"
+      property="article:published_time"
       content={new Date(post.data.date).toISOString().slice(0, 19) + "00:00"}
     />
   </Head>
