@@ -51,13 +51,20 @@ const { post, otherPosts } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Html>
+<>
   <Head
     title={post.data.title}
     description={post.data.description}
     keywords={post.data.tags}
     thumbnail={post.data.thumbnail}
-  />
+  >
+    <meta name="author" content={post.data.author} />
+    <meta
+      name="publish_date"
+      property="og:publish_date"
+      content={new Date(post.data.date).toISOString()}
+    />
+  </Head>
   <Body>
     <article
       id="article"
@@ -98,4 +105,4 @@ const { Content } = await post.render();
       <Signature />
     </article>
   </Body>
-</Html>
+</>
