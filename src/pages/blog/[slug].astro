@@ -60,9 +60,8 @@ const { Content } = await post.render();
   >
     <meta name="author" property="article:author" content={post.data.author} />
     <meta
-      name="published_time"
       property="article:published_time"
-      content={format(post.data.date, "yyyy-MM-dd")}
+      content={post.data.date.toISOString()}
     />
   </Head>
   <Body>
@@ -74,9 +73,7 @@ const { Content } = await post.render();
         {post.data.title}
       </PrimaryHeading>
       <Paragraph class="!text-disabled mb-[60px]">
-        <time datetime={format(post.data.date, "yyyy-MM-dd")}
-          >{format(post.data.date, "MMM d, yyyy")}</time
-        >
+        {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
       <Content
         components={{
