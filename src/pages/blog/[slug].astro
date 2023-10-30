@@ -58,6 +58,7 @@ const { Content } = await post.render();
     keywords={post.data.tags}
     thumbnail={post.data.thumbnail}
   >
+    <meta property="og:type" content="article" />
     <meta name="author" property="article:author" content={post.data.author} />
     <meta
       property="article:published_time"
