@@ -55,7 +55,7 @@ const sg = new StaggerGenerator();
         {
           Object.keys(postsGroupedByYear)
             .reverse()
-            .map((year, i) => (
+            .map((year) => (
               <SectionDivider style={sg.next()} data-animate>
                 <span slot="title" class="text-disabled">
                   {year}

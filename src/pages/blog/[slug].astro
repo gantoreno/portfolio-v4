@@ -51,7 +51,7 @@ const { post, otherPosts } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<>
+<Html>
   <Head
     title={post.data.title}
     description={post.data.description}
@@ -105,4 +105,4 @@ const { Content } = await post.render();
       <Signature />
     </article>
   </Body>
-</>
+</Html>
