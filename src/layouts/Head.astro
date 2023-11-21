@@ -94,4 +94,27 @@ const {
       document.getElementById("controller")?.classList.add("no-animate");
     });
   </script>
+  <script>
+    let isBlurred = false;
+
+    function toggleBlur() {
+      isBlurred = !isBlurred;
+
+      if (isBlurred) {
+        document
+          .getElementById("blur-container")
+          ?.setAttribute("data-blur", "true");
+      } else {
+        document.getElementById("blur-container")?.removeAttribute("data-blur");
+      }
+    }
+
+    document.addEventListener("click", (evt) => {
+      if (evt.altKey) {
+        evt.preventDefault();
+
+        toggleBlur();
+      }
+    });
+  </script>
 </head>

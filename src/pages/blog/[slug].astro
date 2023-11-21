@@ -77,23 +77,25 @@ const { Content } = await post.render();
       <Paragraph class="!text-disabled mb-[60px]">
         {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
-      <Content
-        components={{
-          abbr: Abbreviation,
-          blockquote: Blockquote,
-          code: Mono,
-          em: Italic,
-          h1: PrimaryHeading,
-          h2: SecondaryHeading,
-          img: Figure,
-          ol: NumberedList,
-          p: Paragraph,
-          pre: Snippet,
-          strong: Bold,
-          sup: SuperIndex,
-          ul: BulletedList,
-        }}
-      />
+      <div id="blur-container">
+        <Content
+          components={{
+            abbr: Abbreviation,
+            blockquote: Blockquote,
+            code: Mono,
+            em: Italic,
+            h1: PrimaryHeading,
+            h2: SecondaryHeading,
+            img: Figure,
+            ol: NumberedList,
+            p: Paragraph,
+            pre: Snippet,
+            strong: Bold,
+            sup: SuperIndex,
+            ul: BulletedList,
+          }}
+        />
+      </div>
       <SecondaryHeading id="continue-reading">
         Continue reading
       </SecondaryHeading>

@@ -242,15 +242,35 @@ mjx-container {
   color: rgb(var(--color-primary));
 }
 
-article > mjx-container {
+article div > mjx-container {
   display: flex !important;
   margin-top: 0px !important;
   margin-bottom: 20px !important;
   justify-content: center !important;
 }
 
-article p > mjx-container {
+article div p > mjx-container {
   display: inline-flex;
+}
+
+/* Blur filter */
+body:has([data-blur="true"]) {
+  cursor: crosshair;
+}
+
+[data-blurrable],
+mjx-container {
+  transition: all 0.1s ease-in;
+}
+
+[data-blur="true"] [data-blurrable],
+[data-blur="true"] mjx-container {
+  filter: blur(5px);
+}
+
+[data-blur="true"] [data-blurrable]:hover,
+[data-blur="true"] mjx-container:hover {
+  filter: none;
 }
 
 /* Prism - General */
