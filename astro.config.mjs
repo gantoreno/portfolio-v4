@@ -25,6 +25,8 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    syntaxHighlight: "prism",
+
     remarkRehype: {
       footnoteLabel: "Reference",
     },
@@ -32,6 +34,7 @@ export default defineConfig({
     rehypePlugins: [rehypeMathjax],
     shikiConfig: {
       theme: "css-variables",
+      langs: ["diff"],
       wrap: true,
     },
   },

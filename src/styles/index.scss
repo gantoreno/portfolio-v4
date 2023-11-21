@@ -54,15 +54,22 @@
 
     --astro-code-color-text: #3b3b3b;
     --astro-code-color-background: #f8f8f8;
-    --astro-code-token-constant: #001080;
-    --astro-code-token-string: #a31515;
+    --astro-code-color-added-background: #c9d9a8;
+    --astro-code-color-deleted-background: #ffcccc;
     --astro-code-token-comment: #008000;
-    --astro-code-token-keyword: #0000ff;
-    --astro-code-token-parameter: #a31515;
+    --astro-code-token-constant: #001080;
     --astro-code-token-function: #795e26;
-    --astro-code-token-string-expression: #a31515;
-    --astro-code-token-punctuation: #cccccc;
+    --astro-code-token-keyword: #0000ff;
     --astro-code-token-link: #0070c1;
+    --astro-code-token-namespace: #267f99;
+    --astro-code-token-number: #008000;
+    --astro-code-token-parameter: #a31515;
+    --astro-code-token-punctuation: #cccccc;
+    --astro-code-token-selector: #795e26;
+    --astro-code-token-string-expression: #a31515;
+    --astro-code-token-string: #a31515;
+    --astro-code-token-tag: #800000;
+    --astro-code-token-tag-punctuation: #800000;
   }
 }
 
@@ -83,17 +90,23 @@
     --scrollbar-thumb-hover: #444444;
     --scrollbar-thumb-focus: #555555;
 
-    --astro-code-color-text: #cccccc;
+    --astro-code-color-added-background: #383e2a;
     --astro-code-color-background: #1f1f1f;
-    --astro-code-token-constant: #9cdcfe;
-    --astro-code-token-string: #ce9178;
+    --astro-code-color-deleted-background: #4c1919;
+    --astro-code-color-text: #cccccc;
     --astro-code-token-comment: #6a9955;
-    --astro-code-token-keyword: #569cd6;
-    --astro-code-token-parameter: #ce9178;
+    --astro-code-token-constant: #9cdcfe;
     --astro-code-token-function: #dcdcaa;
-    --astro-code-token-string-expression: #ce9178;
-    --astro-code-token-punctuation: #cccccc;
+    --astro-code-token-keyword: #569cd6;
     --astro-code-token-link: #9cdcfe;
+    --astro-code-token-namespace: #4ec9b0;
+    --astro-code-token-number: #b5cea8;
+    --astro-code-token-parameter: #ce9178;
+    --astro-code-token-punctuation: #cccccc;
+    --astro-code-token-string-expression: #d16969;
+    --astro-code-token-string: #ce9178;
+    --astro-code-token-tag: #569cd6;
+    --astro-code-token-tag-punctuation: #808080;
   }
 }
 
@@ -238,4 +251,232 @@ article > mjx-container {
 
 article p > mjx-container {
   display: inline-flex;
+}
+
+/* Prism - General */
+pre > code {
+  color: var(--astro-code-color-text) !important;
+}
+
+.token.doctype .token.doctype-tag {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.doctype .token.name {
+  color: var(--astro-code-token-constant);
+}
+
+.token.comment,
+.token.prolog {
+  color: var(--astro-code-token-comment);
+}
+
+.token.punctuation,
+.language-html .language-css .token.punctuation,
+.language-html .language-javascript .token.punctuation {
+  color: var(--astro-code-color-text);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.inserted,
+.token.unit {
+  color: var(--astro-code-token-number);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: var(--astro-code-token-string);
+}
+
+code:has(.token.deleted) > .token {
+  display: block;
+  width: 100%;
+}
+
+.token.inserted {
+  color: var(--astro-code-token-comment);
+  background: var(--astro-code-color-added-background);
+}
+
+.token.deleted {
+  color: var(--astro-code-token-string-expression);
+  background: var(--astro-code-color-deleted-background);
+}
+
+.language-css .token.string.url {
+  text-decoration: underline;
+}
+
+.token.operator,
+.token.entity {
+  color: var(--astro-code-color-text);
+}
+
+.token.operator.arrow {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.atrule {
+  color: var(--astro-code-token-string);
+}
+
+.token.atrule .token.rule {
+  color: var(--astro-code-token-module);
+}
+
+.token.atrule .token.url {
+  color: var(--astro-code-token-constant);
+}
+
+.token.atrule .token.url .token.function {
+  color: var(--astro-code-token-function);
+}
+
+.token.atrule .token.url .token.punctuation {
+  color: var(--astro-code-token-punctuation);
+}
+
+.token.keyword {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.keyword.module,
+.token.keyword.control-flow {
+  color: var(--astro-code-token-module);
+}
+
+.token.function,
+.token.function .token.maybe-class-name {
+  color: var(--astro-code-token-function);
+}
+
+.token.regex {
+  color: var(--astro-code-token-string-expression);
+}
+
+.token.important {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.constant {
+  color: var(--astro-code-token-constant);
+}
+
+.token.class-name,
+.token.maybe-class-name {
+  color: var(--astro-code-token-namespace);
+}
+
+.token.console {
+  color: var(--astro-code-token-constant);
+}
+
+.token.parameter {
+  color: var(--astro-code-token-constant);
+}
+
+.token.interpolation {
+  color: var(--astro-code-token-constant);
+}
+
+.token.punctuation.interpolation-punctuation {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.boolean {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.property,
+.token.variable,
+.token.imports .token.maybe-class-name,
+.token.exports .token.maybe-class-name {
+  color: var(--astro-code-token-constant);
+}
+
+.token.selector {
+  color: var(--astro-code-token-selector);
+}
+
+.token.escape {
+  color: var(--astro-code-token-selector);
+}
+
+.token.tag {
+  color: var(--astro-code-token-tag) !important;
+}
+
+.token.tag > .token.punctuation {
+  color: var(--astro-code-token-tag-punctuation) !important;
+}
+
+.token.tag .token.punctuation {
+  color: var(--astro-code-color-text);
+}
+
+.token.cdata {
+  color: var(--astro-code-color-text);
+}
+
+.token.attr-name {
+  color: var(--astro-code-token-constant);
+}
+
+.token.attr-value,
+.token.attr-value .token.punctuation {
+  color: var(--astro-code-token-string);
+}
+
+.token.attr-value .token.punctuation.attr-equals {
+  color: var(--astro-code-color-text);
+}
+
+.token.entity {
+  color: var(--astro-code-token-keyword);
+}
+
+.token.namespace {
+  color: var(--astro-code-token-namespace);
+}
+
+/* Prism - Language Specific */
+pre[class*="language-javascript"],
+code[class*="language-javascript"],
+pre[class*="language-jsx"],
+code[class*="language-jsx"],
+pre[class*="language-typescript"],
+code[class*="language-typescript"],
+pre[class*="language-tsx"],
+code[class*="language-tsx"] {
+  color: var(--astro-code-token-constant);
+}
+
+pre[class*="language-css"],
+code[class*="language-css"] {
+  color: var(--astro-code-token-string);
+}
+
+pre[class*="language-html"],
+code[class*="language-html"] {
+  color: var(--astro-code-color-text);
+}
+
+.language-regex .token.anchor {
+  color: var(--astro-code-token-function);
+}
+
+.language-html .token.punctuation {
+  color: var(--astro-code-color-text);
 }
