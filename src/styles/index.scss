@@ -268,8 +268,13 @@ mjx-container {
   filter: blur(5px);
 }
 
+[data-blur="true"] ol li p[data-blurrable] {
+  filter: none !important;
+}
+
 [data-blur="true"] [data-blurrable]:hover,
-[data-blur="true"] mjx-container:hover {
+[data-blur="true"] mjx-container:hover,
+[data-blur="true"] [data-blurrable]:hover mjx-container {
   filter: none;
 }
 
