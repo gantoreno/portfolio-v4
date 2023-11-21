@@ -26,6 +26,7 @@ import Paragraph from "../../components/structure/Paragraph.astro";
 import Bold from "../../components/typography/Bold.astro";
 import Italic from "../../components/typography/Italic.astro";
 import Mono from "../../components/typography/Mono.astro";
+import Abbreviation from "../../components/typography/Abbreviation.astro";
 
 export const prerender = true;
 
@@ -78,6 +79,7 @@ const { Content } = await post.render();
       </Paragraph>
       <Content
         components={{
+          abbr: Abbreviation,
           blockquote: Blockquote,
           code: Mono,
           em: Italic,

@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"abbr">;
+
+const { class: classes, ...rest } = Astro.props;
+---
+
+<abbr
+  class:list={[
+    "dotted decoration-disabled decoration-[1px] underline-offset-[2px]",
+    classes,
+  ]}
+  {...rest}
+>
+  <slot />
+</abbr>
