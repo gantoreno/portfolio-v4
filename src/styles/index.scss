@@ -175,7 +175,9 @@ article > p:nth-of-type(2)::first-letter {
 
 /* Staggered animations */
 [data-animate],
-article > *:not(style, script) {
+article > h1,
+article > p,
+article #blur-container > *:not(style, script) {
   --start: 0ms;
   --stagger: 0;
   --delay: 64ms;
@@ -183,13 +185,13 @@ article > *:not(style, script) {
   animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
 }
 
-article > *:not(style, script) {
+article #blur-container > *:not(style, script) {
   --stagger: 10;
 }
 
-@for $i from 1 to 10 {
-  article > *:not(style, script):nth-child(#{$i}) {
-    --stagger: #{$i};
+@for $i from 0 to 7 {
+  article #blur-container > *:not(style, script):nth-child(#{$i + 1}) {
+    --stagger: #{$i + 3} !important;
   }
 }
 
