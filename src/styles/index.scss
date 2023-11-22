@@ -268,7 +268,8 @@ mjx-container {
   filter: blur(5px);
 }
 
-[data-blur="true"] ol li p[data-blurrable] {
+[data-blur="true"] ol li p[data-blurrable],
+[data-blur="true"] p:has(figure) {
   filter: none !important;
 }
 
