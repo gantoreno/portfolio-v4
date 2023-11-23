@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"li">;
+
+const { class: classes, ...rest } = Astro.props;
+---
+
+<li class:list={[classes]} {...rest} data-blurrable>
+  <slot />
+</li>

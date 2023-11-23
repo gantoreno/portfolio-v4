@@ -27,6 +27,7 @@ import Bold from "../../components/typography/Bold.astro";
 import Italic from "../../components/typography/Italic.astro";
 import Mono from "../../components/typography/Mono.astro";
 import Abbreviation from "../../components/typography/Abbreviation.astro";
+import ListItem from "../../components/structure/ListItem.astro";
 
 export const prerender = true;
 
@@ -104,6 +105,7 @@ const schema = JSON.stringify({
             h2: SecondaryHeading,
             img: Figure,
             ol: NumberedList,
+            li: ListItem,
             p: Paragraph,
             pre: Snippet,
             strong: Bold,
