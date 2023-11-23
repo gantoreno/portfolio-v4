@@ -84,17 +84,14 @@ const schema = JSON.stringify({
     </script>
   </Head>
   <Body>
-    <article
-      id="article"
-      class="[&>p:nth-of-type(2)::first-letter]:font-serif [&>p:nth-of-type(2)::first-letter]:text-primary ::first-letter]:font-serif"
-    >
+    <article id="article">
       <PrimaryHeading class="mt-[60px]" style="--stagger: 1">
         {post.data.title}
       </PrimaryHeading>
       <Paragraph class="!text-disabled mb-[60px]" style="--stagger: 2">
         {format(post.data.date, "MMM d, yyyy")}
       </Paragraph>
-      <div id="blur-container">
+      <div id="blur-container" class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif">
         <Content
           components={{
             abbr: Abbreviation,
