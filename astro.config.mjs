@@ -15,6 +15,9 @@ export default defineConfig({
   output: "server",
   adapter: vercel({
     edgeMiddleware: true,
+    webAnalytics: {
+      enabled: true,
+    },
   }),
   integrations: [
     mdx(),
