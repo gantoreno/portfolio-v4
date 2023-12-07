@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"u">;
+
+const { class: classes, ...rest } = Astro.props;
+---
+
+<u
+  class:list={[
+    "decoration-disabled underline decoration-[1px] underline-offset-[2px]",
+    classes,
+  ]}
+  {...rest}
+>
+  <slot />
+</u>
