@@ -1,5 +1,5 @@
-import { readFileSync } from "fs";
 import sharp from "sharp";
+import { readFileSync } from "fs";
 
 import type { ImageMetadata } from "astro";
 
