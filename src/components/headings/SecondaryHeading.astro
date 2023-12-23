@@ -16,7 +16,11 @@ const { linkable = true, ...rest } = Astro.props;
   <slot />
   {
     linkable && (
-      <a href={"#" + rest.id} class="inline-flex ml-1 align-middle mb-[2px]">
+      <a
+        href={"#" + rest.id}
+        class="inline-flex ml-1 align-middle mb-[2px]"
+        aria-label="Anchor"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-anchor text-disabled h-[1em] w-[1em] self-center opacity-0 group-hover:opacity-100 duration-[0.15s]"
