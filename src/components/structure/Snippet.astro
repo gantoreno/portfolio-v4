@@ -6,10 +6,4 @@ type Props = HTMLAttributes<"pre">;
 const { class: classes, ...rest } = Astro.props;
 ---
 
-<pre
-  data-blurrable
-  class:list={[
-    "p-[20px] mb-[20px] rounded-md bg-[var(--astro-code-color-background)] [&>code]:bg-[var(--astro-code-color-background)] [&>code]:p-0 [&>code]:whitespace-break-spaces",
-    classes,
-  ]}
-  {...rest}><slot /></pre>
+<pre data-blurrable class:list={["p-[20px] mb-[20px] rounded-md bg-[var(--astro-code-color-background)] [&>code]:bg-[var(--astro-code-color-background)] [&>code]:p-0 [&>code]:whitespace-break-spaces [&>code:before]:content-[''] [&>code:after]:content-['']", classes]} {...rest}><slot /></pre>
