@@ -2,10 +2,9 @@
 import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
 
-import Italic from "../typography/Italic.astro";
-import Paragraph from "./Paragraph.astro";
+import Italic from "@/components/typography/Italic.astro";
 
-import { getDownscaledPlaceholder } from "../../utils/image";
+import { getDownscaledPlaceholder } from "@/utils/image";
 
 type Props = Omit<HTMLAttributes<"img">, "src"> & {
   src: ImageMetadata;

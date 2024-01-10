@@ -3,32 +3,32 @@ import { type CollectionEntry, getCollection } from "astro:content";
 
 import { format } from "date-fns";
 
-import Html from "../../layouts/Html.astro";
-import Head from "../../layouts/Head.astro";
-import Body from "../../layouts/Body.astro";
+import Html from "@/layouts/Html.astro";
+import Head from "@/layouts/Head.astro";
+import Body from "@/layouts/Body.astro";
 
-import Entry from "../../components/custom/Entry.astro";
+import Entry from "@/components/custom/Entry.astro";
 
-import Signature from "../../components/extras/Signature.astro";
+import Signature from "@/components/extras/Signature.astro";
 
-import Blockquote from "../../components/structure/Blockquote.astro";
-import BulletedList from "../../components/structure/BulletedList.astro";
-import NumberedList from "../../components/structure/NumberedList.astro";
-import Snippet from "../../components/structure/Snippet.astro";
-import SuperIndex from "../../components/structure/SuperIndex.astro";
+import Blockquote from "@/components/structure/Blockquote.astro";
+import BulletedList from "@/components/structure/BulletedList.astro";
+import NumberedList from "@/components/structure/NumberedList.astro";
+import Snippet from "@/components/structure/Snippet.astro";
+import SuperIndex from "@/components/structure/SuperIndex.astro";
 
-import PrimaryHeading from "../../components/headings/PrimaryHeading.astro";
-import SecondaryHeading from "../../components/headings/SecondaryHeading.astro";
+import PrimaryHeading from "@/components/headings/PrimaryHeading.astro";
+import SecondaryHeading from "@/components/headings/SecondaryHeading.astro";
 
-import Figure from "../../components/structure/Figure.astro";
-import Paragraph from "../../components/structure/Paragraph.astro";
+import Figure from "@/components/structure/Figure.astro";
+import Paragraph from "@/components/structure/Paragraph.astro";
 
-import Bold from "../../components/typography/Bold.astro";
-import Italic from "../../components/typography/Italic.astro";
-import Mono from "../../components/typography/Mono.astro";
-import Abbreviation from "../../components/typography/Abbreviation.astro";
-import ListItem from "../../components/structure/ListItem.astro";
-import Underline from "../../components/typography/Underline.astro";
+import Bold from "@/components/typography/Bold.astro";
+import Italic from "@/components/typography/Italic.astro";
+import Mono from "@/components/typography/Mono.astro";
+import Abbreviation from "@/components/typography/Abbreviation.astro";
+import ListItem from "@/components/structure/ListItem.astro";
+import Underline from "@/components/typography/Underline.astro";
 
 export const prerender = true;
 
