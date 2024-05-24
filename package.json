@@ -16,7 +16,6 @@
     "@astrojs/vercel": "^6.1.0",
     "@fontsource-variable/figtree": "^5.0.13",
     "@fontsource-variable/source-serif-4": "^5.0.9",
-    "@img/sharp-darwin-arm64": "^0.33.1",
     "astro": "^4.0.7",
     "astro-compress": "^2.0.15",
     "date-fns": "^2.30.0",
