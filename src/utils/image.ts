@@ -1,4 +1,5 @@
 import sharp from "sharp";
+import { join } from "path";
 import { readFileSync } from "fs";
 
 import type { ImageMetadata } from "astro";
@@ -8,7 +9,7 @@ export async function getDownscaledPlaceholder(
   downscaleFactor = 0.1
 ) {
   const originalBuffer = import.meta.env.PROD
-    ? readFileSync("./dist/" + metadata.src)
+    ? readFileSync(join(".vercel", "output", "_functions", metadata.src))
     : await fetch(new URL(metadata.src, "http://localhost:4321"))
         .then((response) => response.arrayBuffer())
         .then((buffer) => Buffer.from(buffer));
