@@ -6,7 +6,5 @@ export function isNew(timestamp: Date) {
 
   const differenceInDays = (now - then) / SECONDS_PER_DAY;
 
-  console.log(differenceInDays);
-
   return differenceInDays >= 0 && differenceInDays < 7;
 }
