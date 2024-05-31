@@ -3,6 +3,8 @@ import { type CollectionEntry, getCollection } from "astro:content";
 
 import { format } from "date-fns";
 
+import { isNew } from "@/utils/article";
+
 import Html from "@/layouts/Html.astro";
 import Head from "@/layouts/Head.astro";
 import Body from "@/layouts/Body.astro";
@@ -122,6 +124,7 @@ const schema = JSON.stringify({
             title={post.data.title}
             description={post.data.description}
             link={"/blog/" + post.slug}
+            new={isNew(post.data.date)}
           />
         ))
       }

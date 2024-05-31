@@ -1,6 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 
+import { isNew } from "@/utils/article";
+
 import Html from "@/layouts/Html.astro";
 import Head from "@/layouts/Head.astro";
 import Body from "@/layouts/Body.astro";
@@ -67,6 +69,7 @@ const sg = new StaggerGenerator();
                         title={post.data.shorthand}
                         date={post.data.date}
                         link={"/blog/" + post.slug}
+                        new={isNew(post.data.date)}
                       />
                     </Section>
                   ))}

@@ -7,12 +7,13 @@ type Props = {
   title: string;
   link: string;
   date: Date;
+  new?: boolean;
 };
 
-const { title, link, date } = Astro.props;
+const { title, link, date, new: isNew = false } = Astro.props;
 ---
 
 <div class="flex justify-between mb-5">
-  <Link href={link}>{title}</Link>
+  <span>{isNew ? "✨ " : ""}<Link href={link}>{title}</Link></span>
   <span class="text-disabled">{format(date, "MM/dd")}</span>
 </div>

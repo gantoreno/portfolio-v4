@@ -7,13 +7,24 @@ type Props = {
   description: string;
   link: string;
   external?: boolean;
+  new?: boolean;
 };
 
-const { title, description, link, external = false } = Astro.props;
+const {
+  title,
+  description,
+  link,
+  external = false,
+  new: isNew = false,
+} = Astro.props;
 ---
 
 <div>
-  <Link href={link} class="mb-[5px]" target={external ? "_blank" : ""}>
+  {isNew ? "✨ " : ""}<Link
+    href={link}
+    class="mb-[5px]"
+    target={external ? "_blank" : ""}
+  >
     {title}
   </Link>
   <Paragraph>{description}</Paragraph>
