@@ -6,14 +6,14 @@ module.exports = {
       fontWeight: {
         bold: 600,
       },
-    },
-    colors: {
-      primary: "rgb(var(--color-primary) / <alpha-value>)",
-      secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-      disabled: "rgb(var(--color-disabled) / <alpha-value>)",
-      soft: "rgb(var(--color-soft) / <alpha-value>)",
-      minimal: "rgb(var(--color-minimal) / <alpha-value>)",
-      inverse: "rgb(var(--color-inverse) / <alpha-value>)",
+      colors: {
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+        disabled: "rgb(var(--color-disabled) / <alpha-value>)",
+        soft: "rgb(var(--color-soft) / <alpha-value>)",
+        minimal: "rgb(var(--color-minimal) / <alpha-value>)",
+        inverse: "rgb(var(--color-inverse) / <alpha-value>)",
+      },
     },
     fontFamily: {
       sans: ["Figtree", "Avenir", "Arial", "Helvetica", "sans-serif"],
