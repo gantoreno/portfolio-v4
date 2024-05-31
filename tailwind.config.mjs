@@ -12,6 +12,7 @@ module.exports = {
       secondary: "rgb(var(--color-secondary) / <alpha-value>)",
       disabled: "rgb(var(--color-disabled) / <alpha-value>)",
       soft: "rgb(var(--color-soft) / <alpha-value>)",
+      minimal: "rgb(var(--color-minimal) / <alpha-value>)",
       inverse: "rgb(var(--color-inverse) / <alpha-value>)",
     },
     fontFamily: {

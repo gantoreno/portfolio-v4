@@ -46,6 +46,7 @@
     --color-secondary: 85 85 85;
     --color-disabled: 136 136 136;
     --color-soft: 238 238 238;
+    --color-minimal: 252 252 252;
     --color-inverse: 255 255 255;
 
     --scrollbar-thumb-normal: #dddddd;
@@ -84,6 +85,7 @@
     --color-secondary: 170 170 170;
     --color-disabled: 119 119 119;
     --color-soft: 34 34 34;
+    --color-minimal: 23 23 23;
     --color-inverse: 17 17 17;
 
     --scrollbar-thumb-normal: #333333;
@@ -141,6 +143,10 @@
 
 ::-webkit-scrollbar-thumb:active {
   background: var(--scrollbar-thumb-focus);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* General configuration */
