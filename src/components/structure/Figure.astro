@@ -6,11 +6,13 @@ import Italic from "@/components/typography/Italic.astro";
 
 import { getDownscaledPlaceholder } from "@/utils/image";
 
-type Props = Omit<HTMLAttributes<"img">, "src"> & {
+type Props = Omit<HTMLAttributes<"img">, "src" | "alt"> & {
   src: ImageMetadata;
+  alt: any;
+  withCaption?: boolean;
 };
 
-const { src, alt, width, height } = Astro.props;
+const { src, alt, width, height, withCaption = true } = Astro.props;
 
 const blur = await getDownscaledPlaceholder(src);
 ---
@@ -32,9 +34,14 @@ const blur = await getDownscaledPlaceholder(src);
       data-loaded="false"
     />
   </div>
-  <figcaption class="text-center !text-disabled">
-    <Italic>
-      {alt}
-    </Italic>
-  </figcaption>
+  {
+    withCaption && (
+      <figcaption class="text-center !text-disabled">
+        <Italic>
+          {alt}
+          <slot />
+        </Italic>
+      </figcaption>
+    )
+  }
 </figure>

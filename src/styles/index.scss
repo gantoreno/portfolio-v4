@@ -66,6 +66,7 @@
     --astro-code-token-number: #008000;
     --astro-code-token-parameter: #a31515;
     --astro-code-token-punctuation: #cccccc;
+    --astro-code-token-property: #0451a5;
     --astro-code-token-selector: #795e26;
     --astro-code-token-string-expression: hsl(0, 77%, 36%);
     --astro-code-token-string: #a31515;
@@ -105,6 +106,7 @@
     --astro-code-token-number: #b5cea8;
     --astro-code-token-parameter: #ce9178;
     --astro-code-token-punctuation: #cccccc;
+    --astro-code-token-property: #9cdcfe;
     --astro-code-token-string-expression: #d16969;
     --astro-code-token-string: #ce9178;
     --astro-code-token-tag: #569cd6;
@@ -120,33 +122,6 @@
 /* Selection */
 ::selection {
   background: rgb(var(--selection));
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 16px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  border: 5px solid rgb(var(--background));
-  background: var(--scrollbar-thumb-normal);
-  border-radius: 16px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
-}
-
-::-webkit-scrollbar-thumb:active {
-  background: var(--scrollbar-thumb-focus);
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
 }
 
 /* General configuration */
@@ -260,6 +235,10 @@ article div p > mjx-container {
   display: inline-flex;
 }
 
+article div ul li > mjx-container {
+  display: inline-flex;
+}
+
 /* Blur filter */
 body:has([data-blur="true"]) {
   cursor: crosshair;
@@ -310,7 +289,10 @@ pre > code {
   color: var(--astro-code-color-text);
 }
 
-.token.property,
+.token.property {
+  color: var(--astro-code-token-property);
+}
+
 .token.tag,
 .token.boolean,
 .token.number,
@@ -432,7 +414,6 @@ code:has(.token.deleted) > .token {
   color: var(--astro-code-token-keyword);
 }
 
-.token.property,
 .token.variable,
 .token.imports .token.maybe-class-name,
 .token.exports .token.maybe-class-name {
