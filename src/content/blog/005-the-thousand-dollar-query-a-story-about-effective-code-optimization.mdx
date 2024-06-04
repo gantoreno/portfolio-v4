@@ -55,7 +55,7 @@ This is the story of how we **tamed** Google's [Geocoding API](https://developer
 
 ## The app
 
-First, some context &ndash; you (and by "you" I mean "me", about 3 years ago) are working on a **multi-tenant** <Abbreviation title={"Software as a Service"}>SaaS</Abbreviation> application, targeted towards companies that handles vehicles & drivers, productivity is measured based off of **driver activity**, meaning, the app has to collect driver metrics (think <Underline>GPS location</Underline>, <Underline>driving speed</Underline>, <Underline>idle time</Underline>, etc).
+First, some context &ndash; you (and by "you" I mean "me", about 3 years ago) are working on a multi-database <Abbreviation title={"Software as a Service"}>SaaS</Abbreviation> application, targeted towards companies that handles vehicles & drivers, productivity is measured based off of **driver activity**, meaning, the app has to collect driver metrics (think <Underline>GPS location</Underline>, <Underline>driving speed</Underline>, <Underline>idle time</Underline>, etc).
 
 ![Driving-based apps make heavy use of GPS data, much like Uber, Doordash, Amazon Flex, etc.](./assets/005/delivery.webp)
 
@@ -92,17 +92,17 @@ You might've noticed the feed has **pagination** controls &ndash; pagination is 
 
 _...right?_ <Meme name="padme" />
 
-Turns out, **it wasn't the case**. The request at load-time would bring **all data altogether**, effectively rendering the pagination **completely useless** (and merely a visual thing), _but it doesn't end there_ &ndash; remember I purposefully quoted the so-called "real-time" part? Well, one would imagine that, after the UI loads (along with the entire list entries), newer events would just slot a new entry into state, since past events have **already been loaded**.
+Turns out, **it wasn't the case**. The request at load-time would bring **all data altogether**, effectively rendering the pagination **completely useless** (and merely a visual thing), _but it doesn't end there_ &ndash; remember I purposefully quoted the so-called "real-time" part? One would _assume_ that, after the UI loads (along with the entire list entries), newer events would just slot a new entry into state, since past events have **already been loaded**.
 
 Wrong, again. As soon as a new event came in, the app would **blow out the entire list** and **fetch everything all over again**, meaning, if we had 100 events, and a new one came in, the list would be re-fetched and get 101 events back.
 
 _What?_
 
-Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have? Well, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just said this on the previous section?
+Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have? Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just said this on the previous section?
 
 > "...sending location data that the server would then save as **coordinates** in a table..."
 
-How did an **address** end up there if the mobile app sends only **coordinates**? Well... Remember I mentioned Google's **reverse Geocoding API**?
+How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned Google's **reverse Geocoding API**?
 
 I think you already see where this is going.
 
@@ -114,7 +114,7 @@ That's right, the database has only **coordinates**, but the app needs **address
 
 The app was using the **reverse geocoding API** to convert each of the alert's attached **coordinates** into **addresses**, and remember, each time we open up the dashboard the app loads **all alerts** at the same time! Which means, going back to the 100 alerts example, the act of a person simply **navigating into the page** would then trigger <Underline>100 API calls</Underline> and, if a new notification came in 5 seconds later (considering we're re-requesting the entire list again), those would be <Underline>101 calls</Underline> **apart** from the past 100, giving us a total of <Underline>201 API calls</Underline> in a span of just **5 seconds** &ndash; wasn't this page supposed to be **safely kept open** during the **entire 8 hours** of the shift?
 
-Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at a 10% of the intended usage! Just by how the system was built (remember, it's a **multi-tenant app**) we were able to run some numbers to try and predict how the billing would **scale** as the user-base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers I came up with at the time:
+Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at a 10% of the intended usage! Just by how the system was built (considering that each client would have their **own separate database**) we were able to run some numbers to try and predict how the billing would **scale** as the user-base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers I came up with at the time:
 
 $$
 R = C * M * \sum_{n = 0}^{t * a} n
@@ -149,7 +149,7 @@ Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can
 
 That same day, after more brainstorming with my tech-lead at that time, some light was shed into our idea pool &ndash; a **location cache table**. The idea was simple: what if we could store addresses and their corresponding **coordinate pairs** into a table that we'd lookup whenever we needed? Database reads'n'writes are **way cheaper** than **geocoding API calls**, and considering we had plans to overhaul & fix the frontend's inefficiencies, it _seemed_ plausible to simply create a dictionary that we could **fill over time** and then query just like we would with the geocoding API.
 
-Alright! Let's get to wor&ndash; wait... Have you seen how **coordinates look like?**
+Alright! Let's get to wor&ndash; wait... Have you seen how coordinates **look like**?
 
 ```json
 {
@@ -172,7 +172,7 @@ What would happen if one of the employees were walking around that area, and the
 
 <Figure src={PinDouble}>Figure B: Precision loss by decimal trimming.</Figure>
 
-See the problem? Suddenly the person is 100 meters **away** from its true location, and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes of the speed measurements the person would remain **still** (this is, 0m/s) for about **2 minutes** before &ndash;seemingly out of nowhere&ndash; you're 100 meters apart from your last position, making it _look like_ you moved at 100m/s before going back to **being still again**:
+See the problem? Suddenly the person is 100 meters **away** from its true location, and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes of the speed measurements the person would remain **still** (this is, 0m/s) for about **2 minutes** before &ndash;seemingly out of nowhere&ndash; spawning 100 meters apart from their last position, making it _look like_ they moved at 100m/s before going back to **being still again**:
 
 <Component>
   <WalkingMeter />
@@ -202,7 +202,7 @@ We could then safely follow the **cache table workflow**, which would go somethi
 2. If we **don't** get a match, call the **reverse geocoding API** and store both the `location` and the `address`, return that **result**.
 3. If we **do** get a match, just **return it**.
 
-We now just need a way to **measure distance** between two coordinate pairs on a <Underline>spherical surface</Underline> as our **filter predicate**, which &ndash;fortunately&ndash; we already have &ndash; the [Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance):
+We now just need a way to **measure distance** between two coordinate pairs on a <Underline>spherical surface</Underline> as our **filter predicate** which, fortunately, we already have &ndash; the [Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance):
 
 $$
 \Delta \sigma = \arccos \left( \sin \phi_1 \sin \phi_2 + \cos \phi_1 \cos \phi_2 \cos \Delta \lambda \right)
@@ -231,7 +231,7 @@ ORDER BY distance;
 
 We found **25 meters** to be the sweet spot for setting a threshold radius trough `:distance`, and we could also throw in a `LIMIT 1` since we only care about the **closest** match. That's it!
 
-I quickly drafted a PR, got it through all they way up to the preview environment, immediately started testing with the ongoing shifts, and waited patiently &ndash; this was the initial **cold run**, the database was <Underline>completely empty</Underline>, but right away started filling up with locations and their corresponding addresses from all the current drivers, so I was expecting some kind of similar usage. To better evaluate the performance, I created a **log stream** that would keep track of **database & API hits** by day, just so I could **measure the progress** afterwards.
+I quickly drafted a PR, got it through all they way up to the **staging environment**, immediately started testing with the **ongoing shifts**, and waited patiently &ndash; this was the initial **cold run**, the database was <Underline>completely empty</Underline>, but right away started filling up with locations and their corresponding addresses from all the current drivers, so I was expecting _some sort_ of high usage for that day. To better evaluate the performance, I created a **log stream** that would keep track of **database & API hits** by day, just so I could **measure the progress** afterwards.
 
 Needless to say, I went all-in on this approach &ndash; I had run all the calculations in my head, it **should** work but, still, I was **pretty damn nervous**.
 
@@ -243,7 +243,7 @@ No amount of **overthinking** prepared me for what I'd find &ndash; we were alre
 - They'd also had a set of company-wide **common places** to drive by.
 - The company's scope was limited to only **their city** & small amounts of **surrounding places**, there would be no randomly driving to the **other side of the state**.
 
-And these facts hold true for the companies that this system targets as well. Two weeks later, we were at **30% of the usage**, and it kept consistently decreasing even more and more around consistently at that level &ndash; by the end of the month, we were charged with **only $183** or so, meaning, we had successfully saved **~86% of past month's bill**.
+And these facts hold true for the companies that this system targets as well. Two weeks later, we were at **30% of the usage**, and it kept consistently decreasing even more and more &ndash; by the end of the month, we were charged with **only $183** or so, meaning, we had successfully saved **~86% of past month's bill**.
 
 <Component>
   <SavingsChart client:load />
@@ -253,13 +253,13 @@ And these facts hold true for the companies that this system targets as well. Tw
 
 This trend continued and settled at around **10%** of that awful bill's pricing for the next month's usage, effectively saving the company **90%** in **Google's API cost**. It's worth mentioning that the cost _will still increase_ as new companies **join** the system & start **tracking drivers**, but in a **very** reduced fashion thanks of to improvements in that page, as the component was **eventually fixed**, completely <Underline>detaching</Underline> the API usage from that page's **activity**.
 
-Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire application** &ndash; _at least_ during the next 5 months I worked there before **leaving the company**. I _could_ talk about how I took that same page's load time from **two minutes** (yes, you read that right) to just **7 seconds**, though...
+Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire application** &ndash; _at least_ during the next 5 months I worked there before **leaving the company**. I _could_ talk about how I took that same page's load time from **two minutes** to just **7 seconds**, though...
 
 _But that's another story._
 
 ## Above and beyond
 
-Granted, the web ecosystem moves at giant steps every day that passes, and this solution &ndash;although useful at that time&ndash; **still** may not be the best, we were **very time constrained** and had to act _quickly_. API refactors like this should be carefully studied and definitely planned-out.
+Granted, the web ecosystem moves at giant steps every day that passes, and this solution &ndash;although useful at that time&ndash; _may_ not have been the best, we were **very time constrained** and had to act _quickly_. API refactors like this should be carefully studied and definitely **planned-out** ahead of time.
 
 ![Always make sure to carefully review API pricing & usage best practices.](./assets/005/plan.webp)
 
