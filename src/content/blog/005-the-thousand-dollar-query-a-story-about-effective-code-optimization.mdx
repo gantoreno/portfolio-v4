@@ -49,7 +49,9 @@ Imagine you're a startup founder &ndash; you have this app which you're trying t
 
 If you're not careful with the services you're using, they **will backfire**. This, as _obvious_ as it might sound, happens **all the time**, and &ndash;in fact&ndash; it happened to **me as well** or, to be clear, a project where I **used to work** a few years ago, one of our services billed us **way more** than we anticipated, and we _had_ to do something about it.
 
-This is the story of how we **tamed** Google's [Geocoding API](https://developers.google.com/maps/documentation/geolocation/overview) and significantly reduced costs by thinking, testing, iterating, and using the power of, guess what? **Maths**. Let's get **technical**.
+This is the story of how we **tamed** Google's [Geocoding API](https://developers.google.com/maps/documentation/geolocation/overview) and significantly reduced costs by thinking, testing, iterating, and using the power of, guess what? **Math**.
+
+Let's get technical.
 
 > Note that, for obvious privacy reasons, the story details will be kept as generic as possible in order to avoid revealing any critical/private company information.
 
@@ -100,7 +102,7 @@ _What?_
 
 Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have? Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just said this on the previous section?
 
-> "...sending location data that the server would then save as **coordinates** in a table..."
+> "...sending location data that the server would then save as <Underline>coordinates</Underline> in a table..."
 
 How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned Google's **reverse Geocoding API**?
 
@@ -229,21 +231,21 @@ HAVING distance < :distance
 ORDER BY distance;
 ```
 
-We found **25 meters** to be the sweet spot for setting a threshold radius trough `:distance`, and we could also throw in a `LIMIT 1` since we only care about the **closest** match. That's it!
+We found **25 meters** to be the sweet spot for setting a threshold radius trough `:distance`, and we could also throw in a `LIMIT 1` since we only care about the **closest** match and, worst case scenario, we would only be **25 meters off** from the **address calculation** (not the <Underline>speed</Underline> or <Underline>geographical position</Underline>, like with the <Underline>decimal trimming approach</Underline>). That's it!
 
 I quickly drafted a PR, got it through all they way up to the **staging environment**, immediately started testing with the **ongoing shifts**, and waited patiently &ndash; this was the initial **cold run**, the database was <Underline>completely empty</Underline>, but right away started filling up with locations and their corresponding addresses from all the current drivers, so I was expecting _some sort_ of high usage for that day. To better evaluate the performance, I created a **log stream** that would keep track of **database & API hits** by day, just so I could **measure the progress** afterwards.
 
-Needless to say, I went all-in on this approach &ndash; I had run all the calculations in my head, it **should** work but, still, I was **pretty damn nervous**.
+Needless to say, I went all-in on this approach &ndash; I had run all the calculations in my head, it _should_ work but, still, I was **pretty nervous**.
 
-After that _really painful_ night, next day came in.
+After that _really painful_ night, next day came in...
 
 No amount of **overthinking** prepared me for what I'd find &ndash; we were already **down** to about **65% of past day's usage**. This was **huge**, and the best part is, **it would only keep decreasing**:
 
-- Most drivers had had **recurrent routes** as each one had a designated area, sites they'd go over by **routine**.
-- They'd also had a set of company-wide **common places** to drive by.
+- Most drivers had **recurrent routes** as each one had a designated area, sites they'd go over by **routine**.
+- They would also had a set of company-wide **common places** to drive by.
 - The company's scope was limited to only **their city** & small amounts of **surrounding places**, there would be no randomly driving to the **other side of the state**.
 
-And these facts hold true for the companies that this system targets as well. Two weeks later, we were at **30% of the usage**, and it kept consistently decreasing even more and more &ndash; by the end of the month, we were charged with **only $183** or so, meaning, we had successfully saved **~86% of past month's bill**.
+And these facts hold true for the companies that this system targets as well. Two weeks later, we were at just below **15% of the usage**, and it kept consistently decreasing even more and more &ndash; by the end of the month, we were charged with **only $183** or so, meaning, we had successfully saved **~86% of past month's bill**.
 
 <Component>
   <SavingsChart client:load />
@@ -253,7 +255,7 @@ And these facts hold true for the companies that this system targets as well. Tw
 
 This trend continued and settled at around **10%** of that awful bill's pricing for the next month's usage, effectively saving the company **90%** in **Google's API cost**. It's worth mentioning that the cost _will still increase_ as new companies **join** the system & start **tracking drivers**, but in a **very** reduced fashion thanks of to improvements in that page, as the component was **eventually fixed**, completely <Underline>detaching</Underline> the API usage from that page's **activity**.
 
-Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire application** &ndash; _at least_ during the next 5 months I worked there before **leaving the company**. I _could_ talk about how I took that same page's load time from **two minutes** to just **7 seconds**, though...
+Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire application** &ndash; _at least_ during the next 5 months I worked there before leaving the company. I _could_ talk about how I took that same page's load time from **two minutes** to just **7 seconds**, though...
 
 _But that's another story._
 
