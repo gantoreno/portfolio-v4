@@ -23,9 +23,10 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    // compress({
-    //   SVG: false,
-    // }),
+    compress({
+      SVG: false,
+      HTML: false,
+    }),
     tailwind({
       applyBaseStyles: false,
     }),
