@@ -11,6 +11,7 @@
     "create:article": "bun run src/scripts/create-article.ts"
   },
   "dependencies": {
+    "@astrojs/db": "^0.11.4",
     "@astrojs/mdx": "^3.0.1",
     "@astrojs/react": "^3.4.0",
     "@astrojs/sitemap": "^3.1.5",

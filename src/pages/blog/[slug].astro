@@ -1,4 +1,5 @@
 ---
+import { db, Analytics, eq } from 'astro:db';
 import { type CollectionEntry, getCollection } from "astro:content";
 
 import { format } from "date-fns";
@@ -68,6 +69,12 @@ const schema = JSON.stringify({
   image: Astro.site.origin + post.data.thumbnail,
   url: Astro.url
 });
+
+const analytics = (await db.select().from(Analytics).where(eq(Analytics.slug, post.slug)).limit(1))?.[0]
+
+if (import.meta.env.PROD) {
+  await db.update(Analytics).set({views: analytics.views + 1 }).where(eq(Analytics.slug, post.slug));
+}
 ---
 
 <Html>
@@ -92,7 +99,7 @@ const schema = JSON.stringify({
         {post.data.title}
       </PrimaryHeading>
       <Paragraph class="!text-disabled mb-[60px]" style="--stagger: 2">
-        {format(post.data.date, "MMM d, yyyy")}
+        On {format(post.data.date, "MMM d, yyyy")} &centerdot; {analytics.views} views
       </Paragraph>
       <div id="blur-container" class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif">
         <Content
