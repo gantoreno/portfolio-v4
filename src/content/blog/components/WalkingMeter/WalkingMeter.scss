@@ -1,0 +1,45 @@
+.subject {
+  position: absolute;
+  top: -12px;
+  left: -8px;
+}
+
+#subject-1 {
+  animation: walking 4s linear infinite;
+}
+
+#subject-2 {
+  animation: teleporting 4s linear infinite;
+}
+
+@keyframes walking {
+  0% {
+    left: -8px;
+  }
+
+  75% {
+    left: calc(100% - 8px);
+  }
+
+  100% {
+    left: calc(100% - 8px);
+  }
+}
+
+@keyframes teleporting {
+  0% {
+    left: -8px;
+  }
+
+  74% {
+    left: -8px;
+  }
+
+  75% {
+    left: calc(100% - 8px);
+  }
+
+  100% {
+    left: calc(100% - 8px);
+  }
+}
