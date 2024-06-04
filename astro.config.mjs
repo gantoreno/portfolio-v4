@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 
-import db from "@astrojs/db";
 import vercel from "@astrojs/vercel/serverless";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
@@ -33,7 +32,6 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     react(),
-    db(),
   ],
   markdown: {
     syntaxHighlight: "prism",
