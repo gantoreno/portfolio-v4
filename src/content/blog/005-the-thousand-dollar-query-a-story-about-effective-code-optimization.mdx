@@ -90,7 +90,7 @@ Going back to the dashboard, there's a special page which &ndash;in the CEO's ow
 
 Pretty simple, right? Just a list of the most recent **system alerts**, which were **very important** for management, as it was one of the main selling points of the app &ndash; a straight eye into **what's going on company-wide** during the current shifts. The point of the widget is to receive <Underline>updates & events</Underline> from the server, and immediately reflect those updates in the client, such that a manager wouldn't have to **exit** or **refresh** the page to continuously monitor how the drivers were doing. So far so good, _however_... There's a **catch**.
 
-You might've noticed the feed has **pagination** controls &ndash; pagination is **great**, as it's purpose &ndash;more than just organizing data visually&ndash; is to help alleviate load times by **only requesting** the data for the current page you're in, and load everything else as the user moves between pages. That's how basic pagination should be implemented, right?
+You might've noticed the feed has **pagination** controls &ndash; pagination is **great**, as its purpose &ndash;more than just organizing data visually&ndash; is to help alleviate load times by **only requesting** the data for the current page you're in, and load everything else as the user moves between pages. That's how basic pagination should be implemented, right?
 
 _...right?_ <Meme name="padme" />
 
@@ -100,7 +100,7 @@ Wrong, again. As soon as a new event came in, the app would **blow out the entir
 
 _What?_
 
-Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have? Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just said this on the previous section?
+Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have? Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just say this in the previous section?
 
 > "...sending location data that the server would then save as <Underline>coordinates</Underline> in a table..."
 
@@ -116,7 +116,7 @@ That's right, the database has only **coordinates**, but the app needs **address
 
 The app was using the **reverse geocoding API** to convert each of the alert's attached **coordinates** into **addresses**, and remember, each time we open up the dashboard the app loads **all alerts** at the same time! Which means, going back to the 100 alerts example, the act of a person simply **navigating into the page** would then trigger <Underline>100 API calls</Underline> and, if a new notification came in 5 seconds later (considering we're re-requesting the entire list again), those would be <Underline>101 calls</Underline> **apart** from the past 100, giving us a total of <Underline>201 API calls</Underline> in a span of just **5 seconds** &ndash; wasn't this page supposed to be **safely kept open** during the **entire 8 hours** of the shift?
 
-Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at a 10% of the intended usage! Just by how the system was built (considering that each client would have their **own separate database**) we were able to run some numbers to try and predict how the billing would **scale** as the user-base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers I came up with at the time:
+Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at 10% of the intended usage! Just by how the system was built (considering that each client would have their **own separate database**) we were able to run some numbers to try and predict how the billing would **scale** as the user base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers I came up with at the time:
 
 $$
 R = C * M * \sum_{n = 0}^{t * a} n
@@ -129,9 +129,9 @@ Breaking down the equation, we have:
 - $M$ as the **amount of managers** that would be signed into the app monitoring the feed (our CEO was the **only one** constantly checking the page).
 - $t$ as the **total hours spent** watching the dashboard per day, he would spend about **4 hours at most**.
 - $a$ as the **average alerts per hour** (usually **45 or so**).
-- $n$ (which is within a **sum** from 0 up to $t * a$) is the **number of reverse geocoding requests** accumulation as the alerts come in, which is the calculation <Underline>we ran before</Underline>: a manager starts their shift with 0 alerts, then 1, then 2, then 3, and so on.
+- $n$ (which is within a **sum** from 0 up to $t * a$) is the **number of reverse geocoding requests** accumulated as the alerts come in, which is the calculation <Underline>we ran before</Underline>: a manager starts their shift with 0 alerts, then 1, then 2, then 3, and so on.
 
-Plugging those numbers into the equation yields about **16,290 requests per day**, convert that to a monthly basis (about 20 working days) and it's **325,800 requests per month** &ndash; Google charges about **\$0,004 per API call**, so that gives a grand total of **\$1,303.2** usage, which is roughly around what we were being charged with, and remember &ndash; it was **just us**! If we assumed a more broad user-base of <Underline>4 companies</Underline>, with <Underline>3 managers each</Underline>, and full 8-hour monitoring, we'd be charged approximately **\$31,190.4** (if we didn't have to **contact sales already** for [volume pricing](https://developers.google.com/maps/documentation/geocoding/usage-and-billing)), which is just **ridiculous**.
+Plugging those numbers into the equation yields about **16,290 requests per day**, convert that to a monthly basis (about 20 working days) and it's **325,800 requests per month** &ndash; Google charges about **\$0,004 per API call**, so that gives a grand total of **\$1,303.2** usage, which is roughly around what we were being charged with, and remember &ndash; it was **just us**! If we assumed a more broad user base of <Underline>4 companies</Underline>, with <Underline>3 managers each</Underline>, and full 8-hour monitoring, we'd be charged approximately **\$31,190.4** (if we didn't have to **contact sales already** for [volume pricing](https://developers.google.com/maps/documentation/geocoding/usage-and-billing)), which is just **ridiculous**.
 
 With no time to waste, we started **brainstorming right away**.
 
@@ -140,18 +140,18 @@ With no time to waste, we started **brainstorming right away**.
 Alright, we had to come up with something, what are our options? The first solution that came to mind was the most obvious &ndash; **fix the pagination** and the **notification system**. There's no discussion, this was a **must**, and looking into other options without considering this would've been pure negligence, however, there were some problems:
 
 - The frontend guy gave a **very broad estimate**, as he needed to **rewire** that component's **inner workings**, and he would have to spend some time syncing up with the backend developer to **refactor** the endpoint in order to support **paginated requests**.
-- The notification system worked through [web sockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), and this implementation was soon-to-be **deprecated**, as the backend would transition from an [EC2 instance](https://aws.amazon.com/ec2/) to an auto-scalable [EBS configuration](https://aws.amazon.com/elasticbeanstalk/), which in turn made us look into another push notification alternatives and not assume that the current state of notifications would stay around **much longer**.
+- The notification system worked through [web sockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), and this implementation was soon to be **deprecated**, as the backend would transition from an [EC2 instance](https://aws.amazon.com/ec2/) to an auto-scalable [EBS configuration](https://aws.amazon.com/elasticbeanstalk/), which in turn made us look into another push notification alternatives and not assume that the current state of notifications would stay around **much longer**.
 - There were some **future features** that would work very similarly to this **Activity feed**, but those **wouldn't have pagination** &ndash; there were more data-heavy UI parts coming soon, and we had to be **prepared** for that.
 
-This, although didn't necessarily _block_ the so-needed refactor, it definitely made us know that we needed to look for additional **short-term measures** that helped us at least **alleviate** the billing while also thinking forward on how to create a consistent way of **handling locations** that was also <Underline>budget-friendly</Underline>.
+This, although didn't necessarily _block_ the so-needed refactor, it definitely made us know that we needed to look for additional **short-term measures** that helped us at least **alleviate** the billing while also thinking forward on how to create a consistent way of **handling locations** that are also <Underline>budget-friendly</Underline>.
 
 ![Although GPS data may be somewhat free, insights over that data aren't.](./assets/005/gps.webp)
 
-Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can't we pull the address along with the coordinates from the **device's GPS itself**? We _thought_ there may be a chance, but that was quickly shot down, as we found out the only way is to, guess what, call the **Geocoding API** from the device, and this would be **even worse**, as the app reports locations every **5 seconds**, for an 8 hour shift that would be **5760 requests per shift**, but remember, there's **way more** <Underline>drivers active on the road</Underline> than <Underline>managers checking</Underline> the activity feed! About **10-15 were active** by that time, if each one of them produces **~5k requests per day**, well... I won't even try to run those numbers.
+Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can't we pull the address along with the coordinates from the **device's GPS itself**? We _thought_ there may be a chance, but that was quickly shot down, as we found out the only way is to, guess what, call the **Geocoding API** from the device, and this would be **even worse**, as the app reports locations every **5 seconds**, for an 8-hour shift that would be **5760 requests per shift**, but remember, there's **way more** <Underline>drivers active on the road</Underline> than <Underline>managers checking</Underline> the activity feed! About **10-15 were active** by that time, if each one of them produces **~5k requests per day**, well... I won't even try to run those numbers.
 
-That same day, after more brainstorming with my tech-lead at that time, some light was shed into our idea pool &ndash; a **location cache table**. The idea was simple: what if we could store addresses and their corresponding **coordinate pairs** into a table that we'd lookup whenever we needed? Database reads'n'writes are **way cheaper** than **geocoding API calls**, and considering we had plans to overhaul & fix the frontend's inefficiencies, it _seemed_ plausible to simply create a dictionary that we could **fill over time** and then query just like we would with the geocoding API.
+That same day, after more brainstorming with my tech-lead at that time, some light was shed on our idea pool &ndash; a **location cache table**. The idea was simple: what if we could store addresses and their corresponding **coordinate pairs** into a table that we'd lookup whenever we needed? Database reads'n'writes are **way cheaper** than **geocoding API calls**, and considering we had plans to overhaul & fix the frontend's inefficiencies, it _seemed_ plausible to simply create a dictionary that we could **fill over time** and then query just like we would with the geocoding API.
 
-Alright! Let's get to wor&ndash; wait... Have you seen how coordinates **look like**?
+Alright! Let's get to wor&ndash; wait... Have you seen what coordinates **look like**?
 
 ```json
 {
@@ -174,7 +174,7 @@ What would happen if one of the employees were walking around that area, and the
 
 <Figure src={PinDouble}>Figure B: Precision loss by decimal trimming.</Figure>
 
-See the problem? Suddenly the person is 100 meters **away** from its true location, and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes of the speed measurements the person would remain **still** (this is, 0m/s) for about **2 minutes** before &ndash;seemingly out of nowhere&ndash; spawning 100 meters apart from their last position, making it _look like_ they moved at 100m/s before going back to **being still again**:
+See the problem? Suddenly the person is 100 meters **away** from their true location, and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes of the speed measurements the person would remain **still** (this is, 0m/s) for about **2 minutes** before &ndash;seemingly out of nowhere&ndash; spawning 100 meters apart from their last position, making it _look like_ they moved at 100m/s before going back to **being still again**:
 
 <Component>
   <WalkingMeter />
