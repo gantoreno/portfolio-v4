@@ -146,6 +146,13 @@ u {
   text-decoration-thickness: 1px;
 }
 
+/* Navbar */
+#navbar {
+  -webkit-backdrop-filter: blur(12px);
+  -moz-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
 /* Initial letter on articles */
 article #blur-container > p:nth-of-type(1)::first-letter {
   initial-letter: 2;
