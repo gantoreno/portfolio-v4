@@ -26,6 +26,7 @@ export default defineConfig({
     sitemap(),
     compress({
       SVG: false,
+      CSS: false,
       HTML: false,
     }),
     tailwind({
