@@ -53,12 +53,13 @@
     --scrollbar-thumb-hover: #cccccc;
     --scrollbar-thumb-focus: #bbbbbb;
 
+    --astro-code-color-added-background: 0, 128, 0;
+    --astro-code-color-deleted-background: 128, 0, 0;
+    --astro-code-color-highlighted-background: 0, 188, 242;
+
     --astro-code-color-text: #3b3b3b;
     --astro-code-color-background: #f8f8f8;
-    --astro-code-color-added-background: #c9d9a8;
-    --astro-code-color-deleted-background: #ffcccc;
-    --astro-code-color-line-highlight-background: #00bcf233;
-    --astro-code-color-line-highlight-border: #00bcf2;
+
     --astro-code-token-comment: #008000;
     --astro-code-token-constant: #001080;
     --astro-code-token-function: #795e26;
@@ -95,12 +96,13 @@
     --scrollbar-thumb-hover: #444444;
     --scrollbar-thumb-focus: #555555;
 
-    --astro-code-color-added-background: #383e2a;
+    --astro-code-color-added-background: 107, 155, 85;
+    --astro-code-color-deleted-background: 209, 105, 105;
+    --astro-code-color-highlighted-background: 0, 188, 242;
+
     --astro-code-color-background: #1f1f1f;
-    --astro-code-color-deleted-background: #4c1919;
     --astro-code-color-text: #cccccc;
-    --astro-code-color-line-highlight-background: #00bcf233;
-    --astro-code-color-line-highlight-border: #00bcf2;
+
     --astro-code-token-comment: #6a9955;
     --astro-code-token-constant: #9cdcfe;
     --astro-code-token-function: #dcdcaa;
@@ -280,6 +282,8 @@ mjx-container {
 pre > code {
   color: var(--astro-code-color-text) !important;
   display: block;
+  width: fit-content;
+  min-width: 100%;
 }
 
 pre > code::before,
@@ -287,30 +291,54 @@ pre > code::after {
   display: none;
 }
 
-pre > code .line {
-  padding: 0 20px;
-  margin: 0 -20px;
-  display: inline-block;
-  line-height: 24px;
-}
-
 pre > code .line:last-child:empty {
   display: none;
 }
 
-pre > code .line.highlighted {
-  background-color: var(--astro-code-color-line-highlight-background);
+pre > code .line.highlighted,
+pre > code .line.add,
+pre > code .line.remove {
+  display: inline-block;
   position: relative;
+  width: calc(100% + 40px);
+  margin: 0px -20px;
+  padding: 0px 20px;
+  line-height: 24px;
 }
 
-pre > code .line.highlighted::before {
+pre > code .line.highlighted::before,
+pre > code .line.add::before,
+pre > code .line.remove::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0px;
   width: 2.5px;
   height: 100%;
-  background-color: var(--astro-code-color-line-highlight-border);
+}
+
+pre > code .line.highlighted {
+  background-color: rgba(var(--astro-code-color-highlighted-background), 20%);
+}
+
+pre > code .line.highlighted::before {
+  background-color: rgb(var(--astro-code-color-highlighted-background));
+}
+
+pre > code .line.add {
+  background-color: rgba(var(--astro-code-color-added-background), 20%);
+}
+
+pre > code .line.add::before {
+  background-color: rgb(var(--astro-code-color-added-background));
+}
+
+pre > code .line.remove {
+  background-color: rgba(var(--astro-code-color-deleted-background), 20%);
+}
+
+pre > code .line.remove::before {
+  background-color: rgb(var(--astro-code-color-deleted-background));
 }
 
 .token.doctype .token.doctype-tag {
