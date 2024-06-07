@@ -11,6 +11,8 @@ import remarkMath from "remark-math";
 
 import rehypeMathjax from "rehype-mathjax";
 
+import { transformerNotationHighlight } from "@shikijs/transformers";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://gantoreno.com",
@@ -35,16 +37,16 @@ export default defineConfig({
     react(),
   ],
   markdown: {
-    syntaxHighlight: "prism",
+    syntaxHighlight: "shiki",
+    shikiConfig: {
+      wrap: false,
+      theme: "css-variables",
+      transformers: [transformerNotationHighlight()],
+    },
     remarkRehype: {
       footnoteLabel: "Reference",
     },
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathjax],
-    shikiConfig: {
-      theme: "css-variables",
-      langs: ["diff"],
-      wrap: false,
-    },
   },
 });

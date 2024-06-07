@@ -225,7 +225,7 @@ And the best part? **It's just a query change**! This filter can be shoved insid
 ```sql
 SELECT latitude,
        longitude,
-       ACOS(SIN(latitude) * SIN(:lat) + COS(latitude) * COS(:lat) * COS(ABS(longitude - :lng))) * 6378160 AS distance
+       ACOS(SIN(latitude) * SIN(:lat) + COS(latitude) * COS(:lat) * COS(ABS(longitude - :lng))) * 6378160 AS distance -- [!code highlight]
 FROM stored_locations
 HAVING distance < :distance
 ORDER BY distance;

@@ -57,6 +57,8 @@
     --astro-code-color-background: #f8f8f8;
     --astro-code-color-added-background: #c9d9a8;
     --astro-code-color-deleted-background: #ffcccc;
+    --astro-code-color-line-highlight-background: #00bcf233;
+    --astro-code-color-line-highlight-border: #00bcf2;
     --astro-code-token-comment: #008000;
     --astro-code-token-constant: #001080;
     --astro-code-token-function: #795e26;
@@ -97,6 +99,8 @@
     --astro-code-color-background: #1f1f1f;
     --astro-code-color-deleted-background: #4c1919;
     --astro-code-color-text: #cccccc;
+    --astro-code-color-line-highlight-background: #00bcf233;
+    --astro-code-color-line-highlight-border: #00bcf2;
     --astro-code-token-comment: #6a9955;
     --astro-code-token-constant: #9cdcfe;
     --astro-code-token-function: #dcdcaa;
@@ -275,6 +279,38 @@ mjx-container {
 /* Prism - General */
 pre > code {
   color: var(--astro-code-color-text) !important;
+  display: block;
+}
+
+pre > code::before,
+pre > code::after {
+  display: none;
+}
+
+pre > code .line {
+  padding: 0 20px;
+  margin: 0 -20px;
+  display: inline-block;
+  line-height: 24px;
+}
+
+pre > code .line:last-child:empty {
+  display: none;
+}
+
+pre > code .line.highlighted {
+  background-color: var(--astro-code-color-line-highlight-background);
+  position: relative;
+}
+
+pre > code .line.highlighted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 2.5px;
+  height: 100%;
+  background-color: var(--astro-code-color-line-highlight-border);
 }
 
 .token.doctype .token.doctype-tag {
