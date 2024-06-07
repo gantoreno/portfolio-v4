@@ -43,7 +43,10 @@ export default defineConfig({
     syntaxHighlight: "shiki",
     shikiConfig: {
       wrap: false,
-      theme: "css-variables",
+      themes: {
+        dark: "dark-plus",
+        light: "light-plus",
+      },
       transformers: [transformerNotationHighlight(), transformerNotationDiff()],
     },
     remarkRehype: {
