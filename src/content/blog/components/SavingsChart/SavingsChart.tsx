@@ -184,8 +184,8 @@ const CustomTooltip = ({
 
 export default function SavingsChart() {
   return (
-    <div className="aspect-video w-full">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="aspect-video w-full mb-[20px]">
+      <ResponsiveContainer width="100%" height="100%" className="mb-[20px]">
         <LineChart data={data}>
           <CartesianGrid
             stroke="rgb(var(--color-soft))"
@@ -213,6 +213,9 @@ export default function SavingsChart() {
           />
         </LineChart>
       </ResponsiveContainer>
+      <figcaption className="text-center text-disabled font-serif italic">
+        Figure D: API usage decrease over time.
+      </figcaption>
     </div>
   );
 }
