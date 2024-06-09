@@ -60,6 +60,14 @@
     --astro-code-color-text: #3b3b3b;
     --astro-code-color-background: #f8f8f8;
   }
+
+  .light-mode-only {
+    display: block;
+  }
+
+  .dark-mode-only {
+    display: none;
+  }
 }
 
 /* Dark mode */
@@ -86,6 +94,14 @@
 
     --astro-code-color-background: #1f1f1f;
     --astro-code-color-text: #cccccc;
+  }
+
+  .light-mode-only {
+    display: none;
+  }
+
+  .dark-mode-only {
+    display: block;
   }
 
   .shiki,
@@ -192,7 +208,8 @@ body:has(#controller.no-animate) {
 
 /* Image optimization */
 img {
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity display 0.6s ease-in-out;
+  transition-behavior: allow-discrete;
 
   &[data-loaded="false"] {
     filter: blur(30px);
