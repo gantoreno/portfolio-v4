@@ -13,6 +13,12 @@ tags:
   - Experiences
 ---
 
+import {
+  SingleMarkerMap,
+  DoubleMarkerMap,
+  ClusterMap,
+} from "@/content/blog/components/Map/Map";
+
 import Abbreviation from "@/components/typography/Abbreviation.astro";
 import Underline from "@/components/typography/Underline.astro";
 
@@ -29,9 +35,6 @@ import WalkingMeter from "@/content/blog/components/WalkingMeter/WalkingMeter";
 import SavingsChart from "@/content/blog/components/SavingsChart/SavingsChart";
 
 import Billing from "./assets/005/billing.webp";
-import PinSingle from "./assets/005/pin-single.webp";
-import PinDouble from "./assets/005/pin-double.webp";
-import Clusters from "./assets/005/clusters.webp";
 
 APIs are **great**, especially if they're from a **third party** that has already solved a **complex problem** that we might be facing at some point &ndash; who doesn't _love_ a good ol' `npm install @{company_name}/sdk`? Just a **few steps** and you're up and running, it feels pretty much **just like magic**.
 
@@ -166,13 +169,11 @@ _"Let's just <Underline>trim some decimals</Underline> then"_, my tech-lead said
 
 Let's take above's coordinates as an example, those locate to this place in particular:
 
-<Figure src={PinSingle}>
-  Figure A: example location in the middle of the street.
-</Figure>
+<SingleMarkerMap client:load client:only />
 
 What would happen if one of the employees were walking around that area, and the app wanted to process their location **but** trimming the last 3 decimals? This is _approximately_ what it would look like:
 
-<Figure src={PinDouble}>Figure B: Precision loss by decimal trimming.</Figure>
+<DoubleMarkerMap client:load client:only />
 
 See the problem? Suddenly the person is 100 meters **away** from their true location, and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes of the speed measurements the person would remain **still** (this is, 0m/s) for about **2 minutes** before &ndash;seemingly out of nowhere&ndash; spawning 100 meters apart from their last position, making it _look like_ they moved at 100m/s before going back to **being still again**:
 
@@ -218,7 +219,7 @@ $$
 
 Where $r$ is the **radius** of the sphere which, in our case is the **earth** (sitting around **6,371 km**). What this would end up doing is basically creating a **boundary map** of **known regions** within our database, which would **self-feed** and **increase accuracy** while **decreasing API usage** very quickly over time. If we take the street from the previous example, after a simple navigation, the map would be filled with regions like this:
 
-<Figure src={Clusters}>Figure C: Address clusters on the map.</Figure>
+<ClusterMap client:load client:only />
 
 And the best part? **It's just a query change**! This filter can be shoved inside our SQL statement by adding the third term `distance` as the equation result, paired with a `HAVING` clause that sets a **clear threshold** for the search radius we're going after &ndash; this would en up looking something like this:
 
