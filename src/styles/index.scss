@@ -314,12 +314,3 @@ pre > code .line.remove {
 pre > code .line.remove::before {
   background-color: rgb(var(--astro-code-color-deleted-background));
 }
-
-/* Mapbox */
-.mapboxgl-control-container {
-  display: none !important;
-}
-
-.mapboxgl-canvas-container {
-  cursor: initial !important;
-}
