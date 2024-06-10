@@ -110,7 +110,6 @@
     background-color: none !important;
   }
 }
-
 /* Scroll position */
 :target {
   scroll-margin-top: calc(100px + 60px);
@@ -124,6 +123,8 @@
 /* General configuration */
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-normal) transparent;
 }
 
 html,
