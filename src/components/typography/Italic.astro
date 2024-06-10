@@ -1,5 +1,9 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 
+type Props = HTMLAttributes<"em">;
+
+const { class: classes, ...rest } = Astro.props;
 ---
 
-<em class="font-serif italic"><slot /></em>
+<em class:list={["font-serif italic", classes]} {...rest}><slot /></em>
