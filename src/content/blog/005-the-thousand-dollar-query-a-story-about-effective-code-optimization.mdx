@@ -232,7 +232,7 @@ Where $r$ is the **radius** of the sphere which, in our case is the **earth** (s
   Figure C: Address clusters on the map.
 </DynamicFigure>
 
-And the best part? **It's just a query change**! This filter can be shoved inside our SQL statement by adding the third term `distance` as the equation result, paired with a `HAVING` clause that sets a **clear threshold** for the search radius we're going after &ndash; this would en up looking something like this:
+And the best part? **It's just a query change**! This filter can be shoved inside our SQL statement by adding the third term `distance` as the equation result, paired with a `HAVING` clause that sets a **clear threshold** for the search radius we're going after &ndash; this would end up looking something like this:
 
 ```sql
 SELECT latitude,
