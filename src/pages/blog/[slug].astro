@@ -31,6 +31,7 @@ import Mono from "@/components/typography/Mono.astro";
 import Abbreviation from "@/components/typography/Abbreviation.astro";
 import ListItem from "@/components/structure/ListItem.astro";
 import Underline from "@/components/typography/Underline.astro";
+import Avatar from "@/components/extras/Avatar.astro";
 
 export const prerender = true;
 
@@ -91,8 +92,8 @@ const schema = JSON.stringify({
       <PrimaryHeading class="mt-[60px]" style="--stagger: 1">
         {post.data.title}
       </PrimaryHeading>
-      <Paragraph class="!text-disabled mb-[60px]" style="--stagger: 2">
-        {format(post.data.date, "MMM d, yyyy")}
+      <Paragraph class="!text-disabled mb-[60px] align-middle" style="--stagger: 2">
+        <Avatar /> <span class="align-middle">By <Bold>Gabriel Moreno</Bold> <span class="mx-[5px] opacity-50">·</span> on {format(post.data.date, "MMM d, yyyy")}</span>
       </Paragraph>
       <div id="blur-container" class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif">
         <Content
