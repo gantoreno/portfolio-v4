@@ -8,76 +8,57 @@ import { getDownscaledPlaceholder } from "@/utils/image";
 
 type Props = Omit<HTMLAttributes<"img">, "src" | "alt"> & {
   src: ImageMetadata;
-  darkSrc: ImageMetadata;
   alt: any;
   withCaption?: boolean;
 };
 
-const { src, darkSrc, alt, width, height, withCaption = true } = Astro.props;
+const {
+  src,
+  alt,
+  width,
+  height,
+  title: themeDirective,
+  withCaption = true,
+} = Astro.props;
 
-let blur;
-let darkBlur;
-
-blur = await getDownscaledPlaceholder(src);
-
-if (darkSrc) {
-  darkBlur = await getDownscaledPlaceholder(darkSrc);
+if (themeDirective) {
+  console.log(Astro.props);
 }
+
+const blur = await getDownscaledPlaceholder(src);
 ---
 
-<figure class="mb-[20px]" data-blurrable>
-  <div
-    style={`background-image: url(${blur}); background-size: cover;`}
-    class:list={[
-      "mb-[26px] mx-auto mt-[26px] rounded-md overflow-hidden relative",
-      { "light-mode-only": darkSrc },
-    ]}
+<div>
+  <figure
+    class="mb-[20px]"
+    data-blurrable
+    data-theme-directive={themeDirective}
   >
-    <Image
-      class="backdrop-blur-md"
-      src={src ?? ""}
-      alt={alt ?? ""}
-      loading="lazy"
-      decoding="async"
-      width={width as number}
-      height={height as number}
-      onload="this.dataset.loaded = true"
-      data-loaded="false"
-      client:media="(prefers-color-scheme: light)"
-    />
-  </div>
-  {
-    darkSrc && (
-      <div
-        style={`background-image: url(${darkBlur}); background-size: cover;`}
-        class:list={[
-          "mb-[26px] mx-auto mt-[26px] rounded-md overflow-hidden relative",
-          { "dark-mode-only": darkSrc },
-        ]}
-      >
-        <Image
-          class="backdrop-blur-md"
-          src={darkSrc ?? ""}
-          alt={alt ?? ""}
-          loading="lazy"
-          decoding="async"
-          width={width as number}
-          height={height as number}
-          onload="this.dataset.loaded = true"
-          data-loaded="false"
-          client:media="(prefers-color-scheme: dark)"
-        />
-      </div>
-    )
-  }
-  {
-    withCaption && (
-      <figcaption class="text-center !text-disabled">
-        <Italic>
-          {alt}
-          <slot />
-        </Italic>
-      </figcaption>
-    )
-  }
-</figure>
+    <div
+      style={`background-image: url(${blur}); background-size: cover;`}
+      class="mb-[26px] mx-auto mt-[26px] rounded-md overflow-hidden relative"
+    >
+      <Image
+        class="backdrop-blur-md"
+        src={src ?? ""}
+        alt={alt ?? ""}
+        loading="lazy"
+        decoding="async"
+        width={width as number}
+        height={height as number}
+        onload="this.dataset.loaded = true"
+        data-loaded="false"
+      />
+    </div>
+    {
+      withCaption && (
+        <figcaption class="text-center !text-disabled">
+          <Italic>
+            {alt}
+            <slot />
+          </Italic>
+        </figcaption>
+      )
+    }
+  </figure>
+</div>

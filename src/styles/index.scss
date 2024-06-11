@@ -61,11 +61,11 @@
     --astro-code-color-background: #f8f8f8;
   }
 
-  .light-mode-only {
+  [data-theme-directive="light-mode-only"] {
     display: block;
   }
 
-  .dark-mode-only {
+  [data-theme-directive="dark-mode-only"] {
     display: none;
   }
 }
@@ -96,11 +96,11 @@
     --astro-code-color-text: #cccccc;
   }
 
-  .light-mode-only {
+  [data-theme-directive="light-mode-only"] {
     display: none;
   }
 
-  .dark-mode-only {
+  [data-theme-directive="dark-mode-only"] {
     display: block;
   }
 

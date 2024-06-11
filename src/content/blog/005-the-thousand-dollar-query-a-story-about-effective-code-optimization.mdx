@@ -173,23 +173,16 @@ _"Let's just <Underline>trim some decimals</Underline> then"_, my tech-lead said
 
 Let's take above's coordinates as an example, those locate to this place in particular:
 
-<Figure
-  src={MapALight}
-  darkSrc={MapADark}
-  alt="Figure A: example location in the middle of the street."
-/>
+![Figure A: Example location in the middle of the street.](./assets/005/map-a-light.webp "light-mode-only")
+![Figure A: Example location in the middle of the street.](./assets/005/map-a-dark.webp "dark-mode-only")
 
 What would happen if one of the employees were walking around that area, and the app wanted to process their location **but** trimming the last 3 decimals? This is _approximately_ what it would look like:
 
-<Figure
-  src={MapBLight}
-  darkSrc={MapBDark}
-  alt="Figure B: Precision loss by decimal trimming."
-/>
+![Figure B: Precision loss by decimal trimming.](./assets/005/map-b-light.webp "light-mode-only")
+![Figure B: Precision loss by decimal trimming.](./assets/005/map-b-dark.webp "dark-mode-only")
+
 See the problem? Suddenly the person is 100 meters **away** from their true location,
-and speed detection would start miscalculating everything &ndash; if it took <Underline>
-  3 decimal places
-</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes
+and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes
 of the speed measurements the person would remain **still** (this is, 0m/s) for
 about **2 minutes** before &ndash;seemingly out of nowhere&ndash; spawning 100
 meters apart from their last position, making it _look like_ they moved at
@@ -237,11 +230,8 @@ $$
 
 Where $r$ is the **radius** of the sphere which, in our case is the **earth** (sitting around **6,371 km**). What this would end up doing is basically creating a **boundary map** of **known regions** within our database, which would **self-feed** and **increase accuracy** while **decreasing API usage** very quickly over time. If we take the street from the previous example, after a simple navigation, the map would be filled with regions like this:
 
-<Figure
-  src={MapCLight}
-  darkSrc={MapCDark}
-  alt="Figure C: Address clusters on the map."
-/>
+![Figure C: Address clusters on the map](./assets/005/map-c-light.webp "light-mode-only")
+![Figure C: Address clusters on the map](./assets/005/map-c-dark.webp "dark-mode-only")
 
 And the best part? **It's just a query change**! This filter can be shoved inside our SQL statement by adding the third term `distance` as the equation result, paired with a `HAVING` clause that sets a **clear threshold** for the search radius we're going after &ndash; this would end up looking something like this:
 
