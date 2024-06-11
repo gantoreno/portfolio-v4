@@ -209,7 +209,7 @@ body:has(#controller.no-animate) {
 
 /* Image optimization */
 img {
-  transition: opacity display 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
   transition-behavior: allow-discrete;
 
   &[data-loaded="false"] {
