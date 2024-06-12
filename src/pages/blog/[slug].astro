@@ -68,7 +68,7 @@ const schema = JSON.stringify({
   datePublished: post.data.date,
   // @ts-expect-error
   image: Astro.site.origin + post.data.thumbnail,
-  url: Astro.url
+  url: Astro.url,
 });
 ---
 
@@ -85,8 +85,7 @@ const schema = JSON.stringify({
       property="article:published_time"
       content={post.data.date.toISOString()}
     />
-    <script type="application/ld+json" set:html={schema}>
-    </script>
+    <script type="application/ld+json" set:html={schema} />
   </Head>
   <Body>
     <article id="article">
@@ -96,10 +95,64 @@ const schema = JSON.stringify({
       <Paragraph class="!mt-[20px]" style="--stagger: 2">
         {post.data.description}
       </Paragraph>
-      <Paragraph class="!text-disabled mb-[60px] align-middle" style="--stagger: 3">
-        <Avatar /> <span class="align-middle">By <Link href="https://x.com/intent/follow?screen_name=gantoreno" target="_blank">{post.data.author}</Link> <span class="mx-[2.5px]">·</span> {remarkPluginFrontmatter.minutesRead} <span class="mx-[2.5px]">·</span> {format(post.data.date, "MMM d, yyyy")}</span>
-      </Paragraph>
-      <div id="blur-container" class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif">
+      <div
+        class="!text-disabled mt-0 mb-[60px] flex align-center gap-[10px]"
+        style="--stagger: 3"
+        data-blurrable
+      >
+        <Avatar />
+        <div class="inline-flex flex-col">
+          <div class="top">
+            <Link
+              class="decoration-transparent hover:decoration-disabled duration-[0.15s]"
+              href="https://x.com/gantoreno"
+              target="_blank"
+            >
+              {post.data.author}
+            </Link>
+            <span class="mx-[2.5px]">·</span>
+            <Link
+              class="decoration-transparent hover:decoration-disabled duration-[0.15s]"
+              href="https://x.com/intent/follow?screen_name=gantoreno"
+              target="_blank"
+            >
+              Follow
+            </Link>
+          </div>
+          <div class="bottom">
+            {remarkPluginFrontmatter.minutesRead}
+            <span class="mx-[2.5px]">·</span>
+            {format(post.data.date, "MMM d, yyyy")}
+          </div>
+        </div>
+        <a
+          class="ml-auto self-center"
+          href={"https://x.com/intent/post?text=" +
+            encodeURI(post.data.title + " by @gantoreno " + Astro.request.url)}
+          target="_blank"
+        >
+          <svg
+            class="stroke-disabled hover:stroke-primary duration-[0.15s]"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-share-2"
+            ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+              d="M8 9h-1a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-8a2 2 0 0 0 -2 -2h-1"
+            ></path><path d="M12 14v-11"></path><path d="M9 6l3 -3l3 3"
+            ></path></svg
+          >
+        </a>
+      </div>
+      <div
+        id="blur-container"
+        class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif"
+      >
         <Content
           components={{
             abbr: Abbreviation,
@@ -116,7 +169,7 @@ const schema = JSON.stringify({
             strong: Bold,
             sup: SuperIndex,
             ul: BulletedList,
-            u: Underline
+            u: Underline,
           }}
         />
       </div>

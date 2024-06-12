@@ -144,6 +144,10 @@ u {
   text-decoration-thickness: 1px;
 }
 
+a {
+  transition-behavior: allow-discrete;
+}
+
 /* Navbar */
 #navbar {
   -webkit-backdrop-filter: blur(12px);
@@ -162,6 +166,7 @@ article #blur-container > p:nth-of-type(1)::first-letter {
 [data-animate],
 article > h1,
 article > p,
+article > div,
 article #blur-container > *:not(style, script) {
   --start: 0ms;
   --stagger: 0;
@@ -175,8 +180,10 @@ article #blur-container > *:not(style, script) {
 }
 
 @for $i from 0 to 7 {
-  article #blur-container > *:not(style, script):nth-child(#{$i + 1}) {
-    --stagger: #{$i + 3} !important;
+  article
+    #blur-container
+    > *:not(style, script):not(:empty):nth-child(#{$i + 1}) {
+    --stagger: #{$i + 4} !important;
   }
 }
 
