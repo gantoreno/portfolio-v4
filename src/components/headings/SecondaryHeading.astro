@@ -5,11 +5,14 @@ type Props = HTMLAttributes<"div"> & {
   linkable?: boolean;
 };
 
-const { linkable = true, ...rest } = Astro.props;
+const { linkable = true, class: classes, ...rest } = Astro.props;
 ---
 
 <h2
-  class="font-bold text-primary mt-[60px] mb-[20px] ml-auto gap-1 group"
+  class:list={[
+    "font-bold text-primary mt-[60px] mb-[20px] ml-auto gap-1 group",
+    classes,
+  ]}
   {...rest}
   data-blurrable
 >

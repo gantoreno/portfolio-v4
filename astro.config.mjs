@@ -11,6 +11,8 @@ import remarkMath from "remark-math";
 
 import rehypeMathjax from "rehype-mathjax";
 
+import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
+
 import {
   transformerNotationHighlight,
   transformerNotationDiff,
@@ -52,7 +54,7 @@ export default defineConfig({
     remarkRehype: {
       footnoteLabel: "Reference",
     },
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [rehypeMathjax],
   },
 });

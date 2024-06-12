@@ -15,15 +15,16 @@ import Signature from "@/components/extras/Signature.astro";
 
 import Blockquote from "@/components/structure/Blockquote.astro";
 import BulletedList from "@/components/structure/BulletedList.astro";
+import Figure from "@/components/structure/Figure.astro";
 import NumberedList from "@/components/structure/NumberedList.astro";
+import Paragraph from "@/components/structure/Paragraph.astro";
 import Snippet from "@/components/structure/Snippet.astro";
 import SuperIndex from "@/components/structure/SuperIndex.astro";
 
 import PrimaryHeading from "@/components/headings/PrimaryHeading.astro";
 import SecondaryHeading from "@/components/headings/SecondaryHeading.astro";
 
-import Figure from "@/components/structure/Figure.astro";
-import Paragraph from "@/components/structure/Paragraph.astro";
+import Link from "@/components/navigation/Link.astro";
 
 import Bold from "@/components/typography/Bold.astro";
 import Italic from "@/components/typography/Italic.astro";
@@ -54,7 +55,7 @@ export async function getStaticPaths() {
 
 const { post, otherPosts } = Astro.props;
 
-const { Content } = await post.render();
+const { Content, remarkPluginFrontmatter } = await post.render();
 
 const schema = JSON.stringify({
   "@context": "http://schema.org",
@@ -92,8 +93,11 @@ const schema = JSON.stringify({
       <PrimaryHeading class="mt-[60px]" style="--stagger: 1">
         {post.data.title}
       </PrimaryHeading>
-      <Paragraph class="!text-disabled mb-[60px] align-middle" style="--stagger: 2">
-        <Avatar /> <span class="align-middle">By <Bold>Gabriel Moreno</Bold> <span class="mx-[2.5px]">·</span> on {format(post.data.date, "MMM d, yyyy")}</span>
+      <Paragraph class="!mt-[20px]" style="--stagger: 2">
+        {post.data.description}
+      </Paragraph>
+      <Paragraph class="!text-disabled mb-[60px] align-middle" style="--stagger: 3">
+        <Avatar /> <span class="align-middle">By <Link href="https://x.com/intent/follow?screen_name=gantoreno" target="_blank">{post.data.author}</Link> <span class="mx-[2.5px]">·</span> {remarkPluginFrontmatter.minutesRead} <span class="mx-[2.5px]">·</span> {format(post.data.date, "MMM d, yyyy")}</span>
       </Paragraph>
       <div id="blur-container" class="[&>p:nth-of-type(1)::first-letter]:font-serif [&>p:nth-of-type(1)::first-letter]:text-primary ::first-letter]:font-serif">
         <Content
