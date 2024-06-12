@@ -67,6 +67,7 @@ const sg = new StaggerGenerator();
                     <Section>
                       <EntryAlt
                         title={post.data.shorthand}
+                        description={post.data.description}
                         date={post.data.date}
                         link={"/blog/" + post.slug}
                         new={isNew(post.data.date)}
