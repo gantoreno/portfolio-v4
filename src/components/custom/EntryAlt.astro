@@ -20,7 +20,7 @@ const { title, link, date, description, new: isNew = false } = Astro.props;
     <span class="mb-[5px] block"
       >{isNew ? "✨ " : ""}<Link href={link}>{title}</Link></span
     >
-    <Paragraph class="mb-0">{description}</Paragraph>
+    <Paragraph class="!mb-0">{description}</Paragraph>
   </div>
   <span class="text-disabled">{format(date, "MM/dd")}</span>
 </div>
