@@ -52,7 +52,11 @@ export default defineConfig({
       transformers: [transformerNotationHighlight(), transformerNotationDiff()],
     },
     remarkRehype: {
-      footnoteLabel: "Reference",
+      footnoteLabel: " ",
+      footnoteLabelProperties: {
+        className: "mb-[20px] mt-[60px] border-soft",
+      },
+      footnoteLabelTagName: "hr",
     },
     remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [rehypeMathjax],
