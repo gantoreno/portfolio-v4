@@ -30,11 +30,9 @@ const blur = await getDownscaledPlaceholder(src);
     data-blurrable
     data-theme-directive={themeDirective}
   >
-    <div
-      style={`background-image: url(${blur}); background-size: cover;`}
-      class="mb-[26px] mx-auto mt-[26px] rounded-md overflow-hidden relative"
-    >
+    <div class="rounded-md overflow-hidden mb-[20px]">
       <Image
+        style={`background-image: url(${blur}); background-size: cover;`}
         class="backdrop-blur-md"
         src={src ?? ""}
         alt={alt ?? ""}
