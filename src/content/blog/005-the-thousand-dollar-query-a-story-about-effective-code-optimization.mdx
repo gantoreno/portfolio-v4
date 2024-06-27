@@ -103,17 +103,17 @@ Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? D
 
 > "...sending location data that the server would then save as <Underline>coordinates</Underline> in a table..."
 
-How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned something about the **geocoding API**?
+How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned something about the **Geocoding API**?
 
 I think you already see where this is going.
 
-That's right, the database has only **coordinates**, but the app needs **addresses**, and GCP's geocoding suite _just so happens_ to have a service called **reverse geocoding API**, which [the documentation](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding) describes as the following:
+That's right, the database has only **coordinates**, but the app needs **addresses**, and GCP's Geocoding suite _just so happens_ to have a service called **Reverse Geocoding API**, which [the documentation](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding) describes as the following:
 
 > The term geocoding generally refers to translating a human-readable address into a location on a map. The process of doing the converse, translating a location on the map into a human-readable address, is known as <Underline>reverse geocoding</Underline>.
 >
 > Instead of supplying a textual `address`, supply a comma-separated latitude/longitude pair in the `location` parameter.
 
-The app was using the **reverse geocoding API** to convert each of the alert's attached **coordinates** into **addresses**, and remember, each time we open up the dashboard the app loads **all alerts** at the same time! Which means, going back to the 100 alerts example, the act of a person simply **navigating into the page** would then trigger <Underline>100 API calls</Underline> and, if a new notification came in 5 seconds later (considering we're re-requesting the entire list again), those would be <Underline>101 calls</Underline> **apart** from the past 100, giving us a total of <Underline>201 API calls</Underline> in a span of just **5 seconds** &ndash; wasn't this page supposed to be **safely kept open** during the **entire 8 hours** of the shift?
+The app was using the **Reverse Geocoding API** to convert each of the alert's attached **coordinates** into **addresses**, and remember, each time we open up the dashboard the app loads **all alerts** at the same time! Which means, going back to the 100 alerts example, the act of a person simply **navigating into the page** would then trigger <Underline>100 API calls</Underline> and, if a new notification came in 5 seconds later (considering we're re-requesting the entire list again), those would be <Underline>101 calls</Underline> **apart** from the past 100, giving us a total of <Underline>201 API calls</Underline> in a span of just **5 seconds** &ndash; wasn't this page supposed to be **safely kept open** during the **entire 8 hours** of the shift?
 
 Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at 10% of the intended usage! Just by how the system was built (considering that each client would have their **own separate database**) we were able to run some numbers to try and predict how the billing would **scale** as the user base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers **I came up with** at the time:
 
@@ -128,7 +128,7 @@ I know, _what the hell?_ Breaking down the equation we have:
 - $M$ as the **amount of managers** that would be signed into the app monitoring the feed (our CEO was the **only one** constantly checking the page).
 - $t$ as the **total hours spent** watching the dashboard per day, he would spend about **4 hours at most**.
 - $a$ as the **average alerts per hour** (usually **45 or so**).
-- $n$ (which is within a **sum** from 0 up to $t * a$) is the **number of reverse geocoding requests** accumulated as the alerts come in, which is the calculation <Underline>we ran before</Underline>: a manager starts their shift with 0 alerts, then 1, then 2, then 3, and so on.
+- $n$ (which is within a **sum** from 0 up to $t * a$) is the **number of Reverse Geocoding requests** accumulated as the alerts come in, which is the calculation <Underline>we ran before</Underline>: a manager starts their shift with 0 alerts, then 1, then 2, then 3, and so on.
 
 Plugging those numbers into the equation yields about **16,290 requests per day**, convert that to a monthly basis (about 20 working days) and it's **325,800 requests per month** &ndash; Google charges about **\$0,004 per API call**, so that gives a grand total of **\$1,303.2** usage, which is roughly around what we were being charged with, and remember &ndash; it was **just us**! If we assumed a more broad user base of <Underline>4 companies</Underline>, with <Underline>3 managers each</Underline>, and full 8-hour monitoring, we'd be charged approximately **\$31,190.4** (if we didn't have to **contact sales already** for [volume pricing](https://developers.google.com/maps/documentation/geocoding/usage-and-billing)), which is just **ridiculous**.
 
@@ -148,7 +148,7 @@ This, although didn't necessarily _block_ the so-needed refactor, it definitely 
 
 Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can't we pull the address along with the coordinates from the **device's GPS itself**? We _thought_ there may be a chance, but that was quickly shot down, as we found out the only way is to, guess what, call the **Geocoding API** from the device, and this would be **even worse**, as the app reports locations every **5 seconds**, for an 8-hour shift that would be **5760 requests per shift**, but remember, there's **way more** <Underline>drivers active on the road</Underline> than <Underline>managers checking</Underline> the activity feed! About **10-15 were active** by that time, if each one of them produces **~5k requests per day**, well... I won't even try to run those numbers.
 
-That same day, after more brainstorming with my tech-lead at that time, some light was shed on our idea pool &ndash; a **location cache table**. The idea was simple: what if we could store addresses and their corresponding **coordinate pairs** into a table that we'd lookup whenever we needed? Database reads'n'writes are **way cheaper** than **geocoding API calls**, and considering we had plans to overhaul & fix the frontend's inefficiencies, it _seemed_ plausible to simply create a dictionary that we could **fill over time** and then query just like we would with the geocoding API.
+That same day, after more brainstorming with my tech-lead at that time, some light was shed on our idea pool &ndash; a **location cache table**. The idea was simple: what if we could store addresses and their corresponding **coordinate pairs** into a table that we'd lookup whenever we needed? Database reads'n'writes are **way cheaper** than **Geocoding API calls**, and considering we had plans to overhaul & fix the frontend's inefficiencies, it _seemed_ plausible to simply create a dictionary that we could **fill over time** and then query just like we would with the Geocoding API.
 
 Alright! Let's get to wor&ndash; wait... Have you seen what coordinates **look like**?
 
@@ -159,7 +159,7 @@ Alright! Let's get to wor&ndash; wait... Have you seen what coordinates **look l
 }
 ```
 
-You _might_ already see what the problem is &ndash; How on **earth** would one simply **query** for a pair of numbers like that? Coordinates require **floating-point precision**, and GPS data is **extremely granular**, even if you stored all of the coordinates a driver sends during a shift, the odds of hitting the **exact same pair** again are _extremely low_. If we were to translate all of those coordinates, we would end up with _almost_ the same usage as if we called the **geocoding API** with **every GPS ping**.
+You _might_ already see what the problem is &ndash; How on **earth** would one simply **query** for a pair of numbers like that? Coordinates require **floating-point precision**, and GPS data is **extremely granular**, even if you stored all of the coordinates a driver sends during a shift, the odds of hitting the **exact same pair** again are _extremely low_. If we were to translate all of those coordinates, we would end up with _almost_ the same usage as if we called the **Geocoding API** with **every GPS ping**.
 
 _"Let's just <Underline>trim some decimals</Underline> then"_, my tech-lead said, but that wasn't an option either &ndash; for an app like this, decimal precision was an **invaluable asset**, as it was the key to the movement insights used to measure performance and, therefore, derive bonuses & other payroll metrics; the system needed to not only measure **driving speeds**, but also **walking pace** as well. Even if we removed <Underline>3 decimal places</Underline>, we would still be in a place of highly unlikeness to have a record that matched our queries, and we'd be **messing up** the detection &ndash; let me illustrate.
 
@@ -174,7 +174,7 @@ What would happen if one of the employees were walking around that area, and the
 ![Figure B: Precision loss by decimal trimming.](./assets/005/map-b-dark.webp "dark-mode-only")
 
 See the problem? Suddenly the person is 100 meters **away** from their true location,
-and speed detection would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes
+and the speed detection service would start miscalculating everything &ndash; if it took <Underline>3 decimal places</Underline> to make a <Underline>100 meter difference</Underline>, in the eyes
 of the speed measurements the person would remain **still** (this is, 0m/s) for
 about **2 minutes** before &ndash;seemingly out of nowhere&ndash; spawning 100
 meters apart from their last position, making it _look like_ they moved at
@@ -205,7 +205,7 @@ What if we could **fuzz-out** the search and _expand it_ to get the **nearest** 
 We could then safely follow the **cache table workflow**, which would go something like this:
 
 1. Receive a `location`, **search** it inside `stored_locations`.
-2. If we **don't** get a match, call the **reverse geocoding API** and store both the `location` and the `address`, return that **result**.
+2. If we **don't** get a match, call the **Reverse Geocoding API** and store both the `location` and the `address`, return that **result**.
 3. If we **do** get a match, just **return it**.
 
 _Sit tight, I'm going full Wikipedia now._
