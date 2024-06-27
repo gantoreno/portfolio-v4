@@ -79,7 +79,7 @@ Past invoices were **nowhere near** that price we received, clearly something wa
 
 After carefully looking at the Google Cloud dashboard, we **immediately** found the major source of usage &ndash; the [Geocoding API](https://developers.google.com/maps/documentation/geolocation/overview). We knew that, although we had various maps on the site, there were only a **few** places where we were using that part of the SDK, so that was our **starting point**.
 
-Going back to the dashboard, there's a special page which &ndash;in the CEO's own words&ndash; was _"specifically designed for management to keep open all day"_, as it contained "real-time" updates from the ongoing shifts (you'll see why I'm quoting it <Underline>pretty soon</Underline>) and, most importantly, contained a _very specific_ widget &ndash; the **Activity feed**, which looked something like this:
+However, let's go back to the dashboard for a moment &ndash; there's a special page which &ndash;in the CEO's own words&ndash; was _"specifically designed for management to keep open all day"_, as it contained "real-time" updates from the ongoing shifts (you'll see why I'm quoting it <Underline>pretty soon</Underline>) and, most importantly, contained a _very specific_ widget &ndash; the **Activity feed**, which looked something like this:
 
 <Component>
   <ActivityFeed />
@@ -91,21 +91,23 @@ You might've noticed the feed has **pagination** controls &ndash; pagination is 
 
 _...right?_ <Meme name="padme" />
 
-Turns out, **it wasn't the case**. The request at load-time would bring **all data altogether**, effectively rendering the pagination **completely useless** (and merely a visual thing), _but it doesn't end there_ &ndash; remember I purposefully quoted the so-called "real-time" part? One would _assume_ that, after the UI loads (along with the entire list entries), newer events would just slot a new entry into state, since past events have **already been loaded**.
+Turns out, **it wasn't the case**. The request at load-time would bring **all data altogether**, rendering the pagination **completely useless** (and merely a visual thing), _but it doesn't end there_ &ndash; remember I purposefully quoted the so-called "real-time" part? One would _assume_ that, after the UI loads (along with the entire list entries), newer events would just slot a new entry into state, since past events have **already been loaded**.
 
 Wrong, again. As soon as a new event came in, the app would **blow out the entire list** and **fetch everything all over again**, meaning, if we had 100 events, and a new one came in, the list would be re-fetched and get 101 events back.
 
 _What?_
 
-Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have? Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just say this in the previous section?
+Alright, alright, let's step back for a moment, we have a _very bad_ UI implementation and, arguably, a really poor update strategy, but how is this related to the **billing problem**? Here's the thing &ndash; take a look again at the Activity feed, what information does each location have?
+
+Let's see, it has a _name_, a _type_, an _address_... Hold on, an **address**? Didn't you just say this in the previous section?
 
 > "...sending location data that the server would then save as <Underline>coordinates</Underline> in a table..."
 
-How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned **Google Cloud Platform**?
+How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned something about the **geocoding API**?
 
 I think you already see where this is going.
 
-That's right, the database has only **coordinates**, but the app needs **addresses**, and GCP _just so happens_ to have a service called **reverse geocoding API**, which [Google's documentation](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding) describes as the following:
+That's right, the database has only **coordinates**, but the app needs **addresses**, and GCP's geocoding suite _just so happens_ to have a service called **reverse geocoding API**, which [the documentation](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding) describes as the following:
 
 > The term geocoding generally refers to translating a human-readable address into a location on a map. The process of doing the converse, translating a location on the map into a human-readable address, is known as <Underline>reverse geocoding</Underline>.
 >
@@ -113,16 +115,16 @@ That's right, the database has only **coordinates**, but the app needs **address
 
 The app was using the **reverse geocoding API** to convert each of the alert's attached **coordinates** into **addresses**, and remember, each time we open up the dashboard the app loads **all alerts** at the same time! Which means, going back to the 100 alerts example, the act of a person simply **navigating into the page** would then trigger <Underline>100 API calls</Underline> and, if a new notification came in 5 seconds later (considering we're re-requesting the entire list again), those would be <Underline>101 calls</Underline> **apart** from the past 100, giving us a total of <Underline>201 API calls</Underline> in a span of just **5 seconds** &ndash; wasn't this page supposed to be **safely kept open** during the **entire 8 hours** of the shift?
 
-Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at 10% of the intended usage! Just by how the system was built (considering that each client would have their **own separate database**) we were able to run some numbers to try and predict how the billing would **scale** as the user base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers I came up with at the time:
+Clearly, this is **bad**, and things get **way darker** once you realize the full extent of the problem &ndash; we weren't even at 10% of the intended usage! Just by how the system was built (considering that each client would have their **own separate database**) we were able to run some numbers to try and predict how the billing would **scale** as the user base grows, and let me tell you, _it's way worse than you could imagine_. Just to give you an idea, here's a _very_ high-level approximation of these numbers **I came up with** at the time:
 
 $$
 R = C * M * \sum_{n = 0}^{t * a} n
 $$
 
-Breaking down the equation, we have:
+I know, _what the hell?_ Breaking down the equation we have:
 
 - $R$ as the **total amount of requests** made in a day.
-- $C$ as the **number of companies actively using the system**, by that time, it was **just us**.
+- $C$ as the **number of companies actively using the system**, by that time, it was **just us** (1).
 - $M$ as the **amount of managers** that would be signed into the app monitoring the feed (our CEO was the **only one** constantly checking the page).
 - $t$ as the **total hours spent** watching the dashboard per day, he would spend about **4 hours at most**.
 - $a$ as the **average alerts per hour** (usually **45 or so**).
