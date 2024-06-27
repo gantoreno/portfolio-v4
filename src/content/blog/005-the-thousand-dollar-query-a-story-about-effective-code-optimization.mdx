@@ -91,7 +91,7 @@ You might've noticed the feed has **pagination** controls &ndash; pagination is 
 
 _...right?_ <Meme name="padme" />
 
-Turns out, **it wasn't the case**. The request at load-time would bring **all data altogether**, rendering the pagination **completely useless** (and merely a visual thing), _but it doesn't end there_ &ndash; remember I purposefully quoted the so-called "real-time" part? One would _assume_ that, after the UI loads (along with the entire list entries), newer events would just slot a new entry into state, since past events have **already been loaded**.
+Turns out, **it wasn't the case**. The request at load-time would bring **all data altogether**, rendering the pagination **completely useless** (making it merely a visual thing), _but it doesn't end there_ &ndash; remember I purposefully quoted the so-called "real-time" part? One would _assume_ that, after the UI loads (along with the entire list entries), newer events would just slot a new entry into state, since past events have **already been loaded**.
 
 Wrong, again. As soon as a new event came in, the app would **blow out the entire list** and **fetch everything all over again**, meaning, if we had 100 events, and a new one came in, the list would be re-fetched and get 101 events back.
 
