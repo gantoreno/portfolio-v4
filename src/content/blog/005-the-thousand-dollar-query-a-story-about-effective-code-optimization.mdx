@@ -134,9 +134,9 @@ With no time to waste, we started **brainstorming right away**.
 
 ## Initial thoughts
 
-Alright, we had to come up with something, what are our options? The first solution that came to mind was the most obvious &ndash; **fix the pagination** and the **notification system**. There's no discussion, this was a **must**, and looking into other options without considering this would've been pure negligence, however, there were some problems:
+Alright, we had to come up with something, what are our options? The first solution that came to mind was the most obvious &ndash; **fix the pagination** and the **notification system**. There's no discussion, this was a **must**, and looking into other options without considering this would've been pure negligence, however, there were some _slight_ problems:
 
-- The frontend guy gave a **very broad estimate**, as he needed to **rewire** that component's **inner workings**, and he would have to spend some time syncing up with the backend developer to **refactor** the endpoint in order to support **paginated requests**.
+- The frontend guy gave a **very broad estimate**, he said he needed to _"rewire"_ that component's **inner workings**, and he would have to spend some time syncing up with the backend developer to **refactor** the endpoint in order to support **paginated requests** (I know, you're probably <Underline>screaming</Underline> at this. I was too).
 - The notification system worked through [web sockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), and this implementation was soon to be **deprecated**, as the backend would transition from an [EC2 instance](https://aws.amazon.com/ec2/) to an auto-scalable [EBS configuration](https://aws.amazon.com/elasticbeanstalk/), which in turn made us look into another push notification alternatives and not assume that the current state of notifications would stay around **much longer**.
 - There were some **future features** that would work very similarly to this **Activity feed**, but those **wouldn't have pagination** &ndash; there were more data-heavy UI parts coming soon, and we had to be **prepared** for that.
 
@@ -256,7 +256,7 @@ And these facts hold true for the companies that this system targets as well. Tw
 
 This trend continued and settled at around **10%** of that awful bill's pricing for the next month's usage, effectively saving the company **90%** in **Google's API cost**. It's worth mentioning that the cost _will still increase_ as new companies **join** the system & start **tracking drivers**, but in a **very** reduced fashion thanks of to improvements in that page, as the component was **eventually fixed**, completely <Underline>detaching</Underline> the API usage from that page's **activity**.
 
-Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire application** &ndash; _at least_ during the next 5 months I worked there before leaving the company. I _could_ talk about how I took that same page's load time from **two minutes** to just **7 seconds**, though...
+Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire application** &ndash; _at least_ during the next 5 months I worked there before leaving the company. I could talk about how I took that same page's load time from **two minutes** to just **7 seconds**, though...
 
 _But that's another story._
 
@@ -266,8 +266,10 @@ Granted, the web ecosystem moves at giant steps every day that passes, and this 
 
 ![Always make sure to carefully review API pricing & usage best practices.](./assets/005/plan.webp)
 
-_Maybe_ there's a library that **already does this**, _perhaps_ there's another way in which we could have <Underline>stored the data</Underline> & queried for it that was **more efficient**. To this day I _still_ think about ways we could've approached this problem differently &ndash; what if we used **another service**? What if there was a way to call the API **even less**? How could we **reduce** the strain of **adding new companies** and avoid having to let them **fill-in their locations manually**? As with everything in programming, the possibilities are <Underline>endless</Underline>, and there's no single way to solve a problem.
+_Maybe_ there's a library that **already does this**, _perhaps_ there's another way in which we could have <Underline>stored the data</Underline> & queried for it that was **more efficient**. Knowing & using those equations wasn't any kind of **breakthrough** to be honest. If anything, the only thing I _sort of_ did was figuring out how _"places near me"_ recommendations work.
 
-One thing is certain, though &ndash; had we not acted **quickly** and tried our best to **craft** a **reasonable solution**, this issue would've caused **pretty serious damage** the project, in a **way deeper** level than anyone would've anticipated. Thankfully, <Underline>some equations</Underline> and a _bit_ of <Underline>abstract</Underline> thinking were the last nails in the coffin of this _awful_ situation.
+Still, to this day I keep thinking about other ways we could've approached this problem differently &ndash; what if we used **another service**? What if there was a way to call the API **even less**? How could we **reduce** the strain of **adding new companies** and avoid having to let them **fill-in their locations manually**? As with everything in programming, the possibilities are <Underline>endless</Underline>, and there's no single way to solve a problem.
+
+One thing is certain, though &ndash; had we not acted **quickly** and tried our best to **craft** a **reasonable solution**, this issue would've caused **pretty serious damage** the project, in a **way deeper** level than anyone would've anticipated. Thankfully, <Underline>some equations</Underline> and a _bit_ of <Underline>abstract thinking</Underline> thinking were the nails in the coffin of this _awful_ situation.
 
 _Who said you don't need math for software engineering?_
