@@ -46,7 +46,7 @@ Imagine you're a startup founder &ndash; you have this app which you're trying t
 
 If you're not careful with the services you're using, they **will backfire**. This, as _obvious_ as it might sound, happens **all the time**, and &ndash;in fact&ndash; it happened to **me as well** or, to be clear, a project where I **used to work** a few years ago, one of our services billed us **way more** than we anticipated, and we _had_ to do something about it.
 
-This is the story of how we **tamed** Google's [Geocoding API](https://developers.google.com/maps/documentation/geolocation/overview) and significantly reduced costs by thinking, testing, iterating, and using the power of, guess what? **Math**.
+This is the story of how we **tamed** Google Cloud Platform and significantly reduced costs by thinking, testing, iterating, and using the power of, guess what? **Math**.
 
 Let's get technical.
 
@@ -101,11 +101,11 @@ Alright, alright, let's step back for a moment, we have a _very bad_ UI implemen
 
 > "...sending location data that the server would then save as <Underline>coordinates</Underline> in a table..."
 
-How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned Google's **reverse Geocoding API**?
+How did an **address** end up there if the mobile app sends only **coordinates**? Well, remember I mentioned **Google Cloud Platform**?
 
 I think you already see where this is going.
 
-That's right, the database has only **coordinates**, but the app needs **addresses**, and according to [Google's documentation](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding):
+That's right, the database has only **coordinates**, but the app needs **addresses**, and GCP _just so happens_ to have a service called **reverse geocoding API**, which [Google's documentation](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding) describes as the following:
 
 > The term geocoding generally refers to translating a human-readable address into a location on a map. The process of doing the converse, translating a location on the map into a human-readable address, is known as <Underline>reverse geocoding</Underline>.
 >
