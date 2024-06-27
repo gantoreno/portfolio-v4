@@ -206,6 +206,8 @@ We could then safely follow the **cache table workflow**, which would go somethi
 2. If we **don't** get a match, call the **reverse geocoding API** and store both the `location` and the `address`, return that **result**.
 3. If we **do** get a match, just **return it**.
 
+_Sit tight, I'm going full Wikipedia now._
+
 We now just need a way to **measure distance** between two coordinate pairs on a <Underline>spherical surface</Underline> as our **filter predicate** which, fortunately, we already have &ndash; the [Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance):
 
 $$
