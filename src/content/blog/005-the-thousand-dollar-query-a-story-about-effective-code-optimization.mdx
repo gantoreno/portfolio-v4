@@ -142,7 +142,7 @@ Alright, we had to come up with something, what are our options? The first solut
 - The notification system worked through [web sockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), and this implementation was soon to be **deprecated**, as the backend would transition from an [EC2 instance](https://aws.amazon.com/ec2/) to an auto-scalable [EBS configuration](https://aws.amazon.com/elasticbeanstalk/), which in turn made us look into another push notification alternatives and not assume that the current state of notifications would stay around **much longer**.
 - There were some **future features** that would work very similarly to this **Activity feed**, but those **wouldn't have pagination** &ndash; there were more data-heavy UI parts coming soon, and we had to be **prepared** for that.
 
-This, although didn't necessarily _block_ the so-needed refactor, it definitely made us know that we needed to look for additional **short-term measures** that helped us at least **alleviate** the billing while also thinking forward on how to create a consistent way of **handling locations** that are also <Underline>budget-friendly</Underline>.
+This, although didn't necessarily _block_ the so-needed refactor, it definitely made us know that we needed to look for additional **short-term measures** that helped us at least **alleviate** the billing while also thinking forward on how to create a consistent way of **handling locations** that's also <Underline>budget-friendly</Underline>.
 
 ![Although GPS data may be somewhat free, insights over that data aren't.](./assets/005/gps.webp)
 
