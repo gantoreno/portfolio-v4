@@ -30,7 +30,7 @@ import Meme from "@/components/extras/Meme.astro";
 
 import Billing from "./assets/005/billing.webp";
 
-APIs are **great**, especially if they're from a third party that has already solved a complex problem that we might be facing at some point &ndash; who doesn't _love_ a good old `npm install @{company_name}/sdk`? Just a few steps and you're up and running, it feels pretty much <Underline>just like magic</Underline>.
+APIs are **great**, especially if they're from a third party that has already solved a complex problem that we might be facing at some point &ndash; who doesn't _love_ a good old `npm install @{company_name}/sdk`? Just a few steps and you're up and running, it feels pretty much like magic.
 
 There's no need to reinvent the wheel... [Right](https://dayssincelastjavascriptframework.com/)?
 
@@ -46,7 +46,7 @@ Which holds true in the case of <Underline>leveraging paid third party services<
 
 Imagine you're a startup founder &ndash; you have this app which you're trying to build, hoping it's the next **breakthrough** into a specific market, _but_ you're still <Underline>not making any money off of it</Underline>, hopefully investing **just the necessary** to get your <Abbreviation title={"Minimum Viable Product"}>MVP</Abbreviation> up and running. It's in your best interest to ensure your service bills don't skyrocket in a way that makes it impossible to even finish a product that still isn't <Underline>profitable</Underline>.
 
-If you're not careful with the services you're using, they will **backfire**. This, as _obvious_ as it might sound, happens more often than you'd think and, in fact, it happened to me as well &ndash;or, to be clear, a project where I **used to work** a few years ago&ndash; when one of our services billed us **way more** than we anticipated, and we _had_ to do something about it.
+If you're not careful with the services you're using, they will **backfire**. This, as _obvious_ as it might sound, happens more often than you'd think and, in fact, it happened to me as well &ndash;or, to be clear, a project where I _used_ to work a few years ago&ndash; when one of our services billed us **way more** than we anticipated, and we _had_ to do something about it.
 
 This is the story of how we tamed [Google Cloud Platform](https://cloud.google.com/) and significantly reduced service usage costs by **thinking**, **testing**, **iterating** and using the power of, guess what? **Math**.
 
@@ -150,7 +150,7 @@ This, although didn't necessarily block the so-needed refactor, it definitely ma
 
 ![Although GPS data may be somewhat free, insights over that data aren't.](./assets/005/gps.webp)
 
-Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can't we pull the address along with the coordinates from the **device's GPS itself**? We _thought_ there may be a chance, but that was quickly shot down, as we found out the only way is to, guess what, call the Geocoding API from the device, and this would be even **worse**, as the app reports locations every **5 seconds**, for an 8-hour shift that would be **5760 requests per shift**, but remember, there's way more <Underline>drivers active on the road</Underline> than <Underline>managers checking</Underline> the activity feed! About 10-15 were active by that time, if each one of them produces ~5k requests per day... I won't even try to run those numbers.
+Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can't we pull the address along with the coordinates from the **device's GPS itself**? We _thought_ there may be a chance, but that was quickly shot down, as we found out the only way is to, guess what, call the Geocoding API from the device, and this would be even **worse**, as the app reports locations every **5 seconds**, for an 8-hour shift that would be **5760 requests per shift**, but remember, there's way more drivers active on the road than managers checking the activity feed! About 10-15 were active by that time, if each one of them produces ~5k requests per day... I won't even try to run those numbers.
 
 That same day, after more brainstorming with my tech-lead at that time, some light was shed on our idea pool &ndash; a <Underline>location cache table</Underline>. The idea was simple: what if we could store addresses and their corresponding coordinate pairs into a table that we'd lookup whenever we needed? Database reads & writes are _way_ cheaper than Geocoding API calls, and considering we had plans to overhaul & fix the frontend's inefficiencies, it _seemed_ plausible to simply create a dictionary that we could **fill over time** and then query just like we would with the Geocoding API.
 
@@ -165,7 +165,7 @@ Alright! Let's get to wor&ndash; wait... Have you seen what coordinates **look l
 
 You _might_ already see what the problem is &ndash; How on earth would one simply query for a pair of numbers like that? Coordinates require <Underline>floating-point precision</Underline>, and GPS data is extremely **granular**, even if you stored all of the coordinates a driver sends during a shift, the odds of hitting the **exact same pair** again are extremely low. If we were to translate all of those coordinates, we would end up with almost the same usage as if we called the Geocoding API with **every GPS ping**.
 
-_"Let's just <Underline>trim some decimals</Underline> then"_, my tech-lead said, but that wasn't an option either &ndash; for an app like this, decimal precision was an **invaluable** asset, as it was the key to the movement insights used to measure performance and, therefore, derive bonuses & other payroll metrics; the system needed to not only measure **driving speeds**, but also **walking pace** as well. Even if we removed <Underline>3 decimal places</Underline>, we would still be in a place of highly unlikeness to have a record that matched our queries, and we'd be **messing up** the detection &ndash; let me illustrate.
+_"Let's just <Underline>trim some decimals</Underline> then"_, my tech-lead said, but that wasn't an option either &ndash; for an app like this, decimal precision was an **invaluable** asset, as it was the key to the movement insights used to measure performance and, therefore, derive bonuses & other payroll metrics; the system needed to not only measure **driving speeds**, but also **walking pace** as well. Even if we removed <Underline>3 decimal places</Underline>, we would still be in a place of highly unlikeness to have a record that matched our queries, and we'd be messing up the detection &ndash; let me illustrate.
 
 Let's take above's coordinates as an example, those locate to this place in particular:
 
@@ -198,7 +198,7 @@ I had an idea.
 
 ## Geometry to the rescue
 
-My mind was speeding at 1000mph, blood pumping through my veins like engine oil, thoughts insanely revolving this _idea_ that hit my head like a bullet train &ndash; everything was **clear** now.
+My mind was speeding at 1000mph, blood pumping through my veins like engine oil, thoughts insanely revolving this _idea_ that hit my head like a bullet train &ndash; everything was clear now.
 
 _It doesn't «have» to be <Underline>exact</Underline>_.
 
@@ -226,7 +226,7 @@ $$
 d = r \Delta \sigma
 $$
 
-Where $r$ is the **radius** of the sphere (in our case, the Earth, sitting at around **6,371 km**). What this would end up doing is basically creating a <Underline>boundary map</Underline> of <Underline>known regions</Underline> within our database, which would self-feed and increase accuracy while decreasing API usage very quickly over time. If we take the street from the previous example, after a simple navigation, the map would be filled with regions like this:
+Where $r$ is the **radius** of the sphere (in our case, the Earth, sitting at around **6,371 km**). What this would end up doing is basically creating a sort of <Underline>boundary map</Underline> of known regions within our database, which would self-feed and increase accuracy while decreasing API usage very quickly over time. If we take the street from the previous example, after a simple navigation, the map would be filled with regions like this:
 
 ![Figure C: Address clusters on the map](./assets/005/map-c-light.webp "light-mode-only")
 ![Figure C: Address clusters on the map](./assets/005/map-c-dark.webp "dark-mode-only")
@@ -276,10 +276,10 @@ Granted, the web ecosystem moves at giant steps every day that passes, and this 
 
 ![Always make sure to carefully review API pricing & usage best practices.](./assets/005/plan.webp)
 
-_Maybe_ there's a library that already **does this**, _perhaps_ there's another way in which we could have <Underline>stored the data</Underline> & queried for it that was more **efficient**. Knowing & using those equations wasn't any kind of **breakthrough** to be honest. If anything, the only thing I _sort of_ did was figuring out how _"places near me"_ recommendations work.
+_Maybe_ there's a library that already **does this**, _perhaps_ there's another way in which we could have stored the data & queried for it that was more **efficient**. Knowing & using those equations wasn't any kind of _"breakthrough"_ to be honest. If anything, the only thing I _sort of_ did was figuring out how _"places near me"_ recommendations work.
 
 Still, to this day I keep thinking about other ways we could've approached this problem differently &ndash; what if we used another service? What if there was a way to call the API even less? How can we reduce the strain of adding new companies and avoid having to let them fill-in their locations manually? As with everything in programming, the possibilities are <Underline>endless</Underline>, and there's no single way to solve a problem.
 
-One thing is certain, though &ndash; had we not acted **quickly** and tried our best to craft a reasonable solution, this issue would've caused pretty serious **damage** the project. Thankfully, <Underline>some equations</Underline> and a _bit_ of <Underline>abstract thinking</Underline> thinking were the nails in the coffin of this _awful_ situation.
+One thing is certain, though &ndash; had we not acted **quickly** and tried our best to craft a reasonable solution, this issue would've caused pretty serious **damage** the project. Thankfully, some equations and a _bit_ of abstract thinking were the nails in the coffin of this awful situation.
 
 _Who said you don't need math for software engineering?_
