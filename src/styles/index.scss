@@ -339,3 +339,16 @@ pre > code .line.remove {
 pre > code .line.remove::before {
   background-color: rgb(var(--astro-code-color-deleted-background));
 }
+
+/* Meme */
+.meme {
+  .meme-popover {
+    display: none;
+    transition-property: display;
+    transition-behavior: allow-discrete;
+  }
+
+  &:has(.meme-image:hover) .meme-popover {
+    display: block;
+  }
+}

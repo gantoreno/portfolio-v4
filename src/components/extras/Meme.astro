@@ -6,9 +6,22 @@ type Props = {
 const { name } = Astro.props;
 ---
 
-<img
-  class="inline-block self-center rounded-sm ml-[0.5ch]"
-  src={`/assets/img/memes/${name}.webp`}
-  width="20"
-  height="20"
-/>
+<span class="relative inline-block self-center meme">
+  <span
+    class="absolute bottom-[calc(100%+10px)] left-[calc(-100%-10px)] bg-minimal border border-soft rounded-md w-[100px] text-center p-[10px] meme-popover"
+  >
+    <img
+      class="mb-[5px] rounded-md inline-block"
+      src={`/assets/img/memes/${name}.webp`}
+      width="48"
+      height="48"
+    />
+    <strong class="text-primary">:{name}:</strong>
+  </span>
+  <img
+    class="rounded-sm inline-block ml-[0.5ch] meme-image"
+    src={`/assets/img/memes/${name}.webp`}
+    width="20"
+    height="20"
+  />
+</span>
