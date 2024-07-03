@@ -30,7 +30,7 @@ import Meme from "@/components/extras/Meme.astro";
 
 import Billing from "./assets/005/billing.webp";
 
-APIs are **great**, especially if they're from a third party that has already solved a complex problem that we might be facing at some point &ndash; who doesn't _love_ a good old `npm install @{company_name}/sdk`? Just a few steps and you're up and running, it feels pretty much like magic.
+APIs are **great**, especially if they're from a third party that has already solved a complex problem that we might be facing at some point &ndash; who doesn't love a good old `npm install @{company_name}/sdk`? Just a few steps and you're up and running, it feels pretty much like magic.
 
 There's no need to reinvent the wheel... [Right](https://dayssincelastjavascriptframework.com/)?
 
@@ -46,7 +46,7 @@ Which holds true in the case of <Underline>leveraging paid third party services<
 
 Imagine you're a startup founder &ndash; you have this app which you're trying to build, hoping it's the next **breakthrough** into a specific market, _but_ you're still <Underline>not making any money off of it</Underline>, hopefully investing **just the necessary** to get your <Abbreviation title={"Minimum Viable Product"}>MVP</Abbreviation> up and running. It's in your best interest to ensure your service bills don't skyrocket in a way that makes it impossible to even finish a product that still isn't <Underline>profitable</Underline>.
 
-If you're not careful with the services you're using, they will **backfire**. This, as _obvious_ as it might sound, happens more often than you'd think and, in fact, it happened to me as well &ndash;or, to be clear, a project where I _used_ to work a few years ago&ndash; when one of our services billed us **way more** than we anticipated, and we _had_ to do something about it.
+If you're not careful with the services you're using, they will **backfire**. This, as _obvious_ as it might sound, happens more often than you'd think and, in fact, it happened to me as well &ndash;or, to be clear, a project where I used to work a few years ago&ndash; when one of our services billed us **way more** than we anticipated, and we had to do something about it.
 
 This is the story of how we tamed [Google Cloud Platform](https://cloud.google.com/) and significantly reduced service usage costs by **thinking**, **testing**, **iterating** and using the power of, guess what? **Math**.
 
@@ -56,7 +56,7 @@ Let's get technical.
 
 ## The app
 
-First, some context &ndash; you (and by "you" I mean "me", at about 2 years of experience) are working on a multi-database <Abbreviation title={"Software as a Service"}>SaaS</Abbreviation> application, targeted towards companies that handles vehicles & drivers, productivity is measured based off of **driver activity**, meaning, the app has to collect driver metrics (think <Underline>GPS location</Underline>, <Underline>driving speed</Underline>, <Underline>idle time</Underline>, etc).
+First, some context &ndash; you (and by _"you"_ I mean _"me"_, at about 2 years of experience) are working on a multi-database <Abbreviation title={"Software as a Service"}>SaaS</Abbreviation> application, targeted towards companies that handles vehicles & drivers, productivity is measured based off of **driver activity**, meaning, the app has to collect driver metrics (think <Underline>GPS location</Underline>, <Underline>driving speed</Underline>, <Underline>idle time</Underline>, etc).
 
 ![Driving-based apps make heavy use of GPS data, much like Uber, Doordash, Amazon Flex, etc.](./assets/005/delivery.webp)
 
@@ -256,13 +256,13 @@ No amount of overthinking prepared me for what I'd find &ndash; we were already 
 - They would also had a set of company-wide **common places** to drive by.
 - The company's scope was **limited** to only their city & small amounts of surrounding places, there would be no randomly driving to the other side of the state.
 
-And these facts hold true for the companies that this system targets as well. Two weeks later, we were at just **below** 15% of the usage, and it kept consistently decreasing even more and more &ndash; by the end of the month, we were charged with only $183 or so, meaning, we had successfully **saved** ~86% of past month's bill:
+And these facts hold true for the companies that this system targets as well. Two weeks later, we were at **just below** 15% of the usage, and it kept consistently decreasing even more and more &ndash; by the end of the month, we were charged with only $183 or so, meaning, we had successfully **saved** ~86% of past month's bill:
 
 <SavingsChart client:load />
 
 > Note that these graphs are just an approximation to the call history from back then, as I don't have access to that project and/or its resources anymore.
 
-This trend continued and settled at around 10% of that _awful_ bill's pricing for the next month's usage, effectively saving the company 90% in Google's API cost. It's worth mentioning that the bill _will still increase_ as new companies join the system & start tracking drivers, but in a **very** reduced fashion thanks of to improvements in that page, as the component was eventually fixed, completely <Underline>detaching</Underline> the API usage from that page's **activity**. Hooray! 🎉
+This trend continued and settled at around 10% of that _awful_ bill's pricing for the next month's usage, effectively saving the company 90% in Google's API cost. It's worth mentioning that the bill _will still increase_ as new companies join the system & start tracking drivers, but in a **very reduced** fashion thanks of to improvements in that page, as the component was eventually fixed, completely <Underline>detaching</Underline> the API usage from that page's activity. Hooray! 🎉
 
 Management was happy, the CEO was grateful, and we continued pushing performance further and further around the **entire** application &ndash; _at least_ during the next 5 months I worked there before leaving the company.
 
@@ -276,10 +276,10 @@ Granted, the web ecosystem moves at giant steps every day that passes, and this 
 
 ![Always make sure to carefully review API pricing & usage best practices.](./assets/005/plan.webp)
 
-_Maybe_ there's a library that already **does this**, _perhaps_ there's another way in which we could have stored the data & queried for it that was more **efficient**. Knowing & using those equations wasn't any kind of _"breakthrough"_ to be honest. If anything, the only thing I _sort of_ did was figuring out how _"places near me"_ recommendations work.
+_Maybe_ there's a library that already does this, _perhaps_ there's another way in which we could have stored the data & queried for it that was more **efficient**. Knowing & using those equations wasn't any kind of _"breakthrough"_ to be honest. If anything, the only thing I _sort of_ did was figuring out how _"places near me"_ recommendations work.
 
-Still, to this day I keep thinking about other ways we could've approached this problem differently &ndash; what if we used another service? What if there was a way to call the API even less? How can we reduce the strain of adding new companies and avoid having to let them fill-in their locations manually? As with everything in programming, the possibilities are <Underline>endless</Underline>, and there's no single way to solve a problem.
+Still, to this day I keep thinking about other ways we could've approached this problem differently &ndash; what if we used another service? What if there was a way to call the API even less? How can we reduce the strain of adding new companies and avoid having to let them fill-in their locations manually? As with everything in programming, the possibilities are **endless**, and there's no single way to solve a problem.
 
-One thing is certain, though &ndash; had we not acted **quickly** and tried our best to craft a reasonable solution, this issue would've caused pretty serious **damage** the project. Thankfully, some equations and a _bit_ of abstract thinking were the nails in the coffin of this awful situation.
+One thing is certain, though &ndash; had we not acted **quickly** and tried our best to craft a reasonable solution, this issue would've caused **pretty serious damage** the project. Thankfully, some equations and a _bit_ of abstract thinking were the nails in the coffin of this awful situation.
 
 _Who said you don't need math for software engineering?_
