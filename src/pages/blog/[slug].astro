@@ -33,6 +33,7 @@ import Abbreviation from "@/components/typography/Abbreviation.astro";
 import ListItem from "@/components/structure/ListItem.astro";
 import Underline from "@/components/typography/Underline.astro";
 import Avatar from "@/components/extras/Avatar.astro";
+import Separator from "@/components/structure/Separator.astro";
 
 export const prerender = true;
 
@@ -138,6 +139,7 @@ const schema = JSON.stringify({
             em: Italic,
             h1: PrimaryHeading,
             h2: SecondaryHeading,
+            hr: Separator,
             img: Figure,
             ol: NumberedList,
             li: ListItem,
