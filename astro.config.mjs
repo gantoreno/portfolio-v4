@@ -6,9 +6,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 
-import compress from "astro-compress";
 import remarkMath from "remark-math";
-
 import rehypeMathjax from "rehype-mathjax";
 
 import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
@@ -31,11 +29,6 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    compress({
-      SVG: false,
-      CSS: false,
-      HTML: false,
-    }),
     tailwind({
       applyBaseStyles: false,
     }),
