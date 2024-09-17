@@ -7,7 +7,7 @@ const work = defineCollection({
     description: z.string(),
     date: z.date(),
     link: z.string(),
-    thumbnail: z.string(),
+    thumbnail: z.string().optional(),
   }),
 });
 
