@@ -7,12 +7,12 @@ export default function WalkingMeter() {
       <div className="w-[128px]">
         <div className="relative py-[2.5px] bg-soft bg-opacity-10 rounded-lg border border-soft mb-[20px]">
           <span className="subject" id="subject-1">
-            {"🚶🏻‍♂️‍➡️"}
+            {"️🚶‍♂️"}
           </span>
         </div>
         <div className="relative py-[2.5px] bg-soft bg-opacity-10 rounded-lg border border-soft">
           <span className="subject" id="subject-2">
-            {"🧍🏻‍♂️"}
+            {"🧍‍♂️"}
           </span>
         </div>
       </div>

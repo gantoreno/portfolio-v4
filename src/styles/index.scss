@@ -197,7 +197,8 @@ body:has(#controller.no-animate) {
 
 @media (prefers-reduced-motion: reduce) {
   [data-animate],
-  article > * {
+  article > *,
+  article > #blur-container > * {
     animation: none !important;
   }
 }
