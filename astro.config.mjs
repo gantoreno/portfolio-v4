@@ -50,4 +50,5 @@ export default defineConfig({
     remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [rehypeMathjax],
   },
+  prefetch: true,
 });
