@@ -11,8 +11,8 @@
     "create:article": "bun run src/scripts/create-article.ts"
   },
   "dependencies": {
-    "@astrojs/db": "0.14.2",
-    "@astrojs/mdx": "3.1.8",
+    "@astrojs/db": "0.14.3",
+    "@astrojs/mdx": "3.1.9",
     "@astrojs/react": "3.6.2",
     "@astrojs/sitemap": "3.2.1",
     "@astrojs/tailwind": "5.1.2",
@@ -21,7 +21,7 @@
     "@fontsource-variable/source-serif-4": "^5.0.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "astro": "4.16.6",
+    "astro": "4.16.10",
     "date-fns": "^2.30.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
