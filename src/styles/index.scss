@@ -229,6 +229,12 @@ img {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  img {
+    transition: none;
+  }
+}
+
 /* MJX & LaTeX */
 mjx-container {
   user-select: none;
