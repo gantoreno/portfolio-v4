@@ -9,7 +9,7 @@ export async function getDownscaledPlaceholder(
   downscaleFactor = 0.1
 ) {
   const originalBuffer = import.meta.env.PROD
-    ? readFileSync(join(".vercel", "output", "_functions", metadata.src))
+    ? readFileSync(join("dist", "server", metadata.src))
     : await fetch(new URL(metadata.src, "http://localhost:4321"))
         .then((response) => response.arrayBuffer())
         .then((buffer) => Buffer.from(buffer));
