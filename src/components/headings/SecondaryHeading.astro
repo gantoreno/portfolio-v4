@@ -21,12 +21,12 @@ const { linkable = true, class: classes, ...rest } = Astro.props;
     linkable && (
       <a
         href={"#" + rest.id}
-        class="inline-flex ml-1 align-middle mb-[2px]"
+        class="inline-flex mb-[2px] ml-1 align-middle"
         aria-label="Anchor"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-anchor text-disabled h-[1em] w-[1em] self-center opacity-0 group-hover:opacity-100 duration-[0.15s] hover:text-secondary"
+          class="icon-tabler icon-tabler-anchor self-center opacity-0 group-hover:opacity-100 w-[1em] h-[1em] text-disabled hover:text-secondary duration-[0.15s] icon"
           width="24"
           height="24"
           viewBox="0 0 24 24"

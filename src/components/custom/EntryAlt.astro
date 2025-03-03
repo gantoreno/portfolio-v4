@@ -15,9 +15,9 @@ type Props = {
 const { title, link, date, description, new: isNew = false } = Astro.props;
 ---
 
-<div class="flex justify-between mb-5 gap-[20px]">
+<div class="flex justify-between gap-[20px] mb-5">
   <div>
-    <span class="mb-[5px] block"
+    <span class="block mb-[5px]"
       >{isNew ? "✨ " : ""}<Link href={link}>{title}</Link></span
     >
     <Paragraph class="!mb-0">{description}</Paragraph>

@@ -30,7 +30,7 @@ const blur = await getDownscaledPlaceholder(src);
     data-blurrable
     data-theme-directive={themeDirective}
   >
-    <div class="rounded-md overflow-hidden mb-[20px]">
+    <div class="mb-[20px] rounded-md overflow-hidden">
       <Image
         style={`background-image: url(${blur}); background-size: cover;`}
         class="backdrop-blur-md"
@@ -46,7 +46,7 @@ const blur = await getDownscaledPlaceholder(src);
     </div>
     {
       withCaption && (
-        <figcaption class="text-center !text-disabled">
+        <figcaption class="!text-disabled text-center">
           <Italic>
             {alt}
             <slot />
