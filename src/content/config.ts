@@ -8,6 +8,7 @@ const work = defineCollection({
     date: z.date(),
     link: z.string(),
     thumbnail: z.string().optional(),
+    enabled: z.boolean().optional().default(true),
   }),
 });
 

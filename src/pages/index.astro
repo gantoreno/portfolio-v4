@@ -29,6 +29,7 @@ import StaggerGenerator from "@/utils/stagger";
 export const prerender = true;
 
 const work = (await getCollection("work"))
+  .filter((project) => project.data.enabled)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
@@ -66,12 +67,11 @@ const sg = new StaggerGenerator();
               <Link
                 href="https://goempirical.com"
                 target="_blank"
-                class="inline-flex gap-1"
+                class="inline-flex items-center gap-1 !mx-0 align-text-bottom leading-[19.5px]"
               >
-                <span class="self-center translate-y-[-1.5px]"
-                  ><CompanyLogo /></span
-                ><span>Empirical</span>
-              </Link>, helping tech companies build products that people love.
+                <CompanyLogo /> Metabase
+              </Link>, the open source Business Intelligence and Embedded
+              Analytics tool that lets everyone work with data.
             </Paragraph>
           </Section>
         </div>
