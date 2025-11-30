@@ -8,7 +8,7 @@ const { class: classes, ...rest } = Astro.props;
 
 <p
   class:list={[
-    "mb-[20px] text-secondary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:mx-px [&>a]:decoration-[1px] [&>a]:underline-offset-[2px] [&>[data-footnote-backref]]:text-disabled [&>[data-footnote-backref]]:no-underline [&>[data-footnote-backref]]:duration-[0.15s] [&>[data-footnote-backref]:hover]:text-secondary [&>[data-footnote-backref]]:align-middle",
+    "mb-[20px] text-secondary [&>a]:decoration-disabled [&>a]:text-primary [&>a]:underline [&>a]:mx-px [&>a]:decoration-1 [&>a]:underline-offset-2 *:data-footnote-backref:text-disabled *:data-footnote-backref:no-underline *:data-footnote-backref:duration-150 [&>[data-footnote-backref]:hover]:text-secondary *:data-footnote-backref:align-middle",
     classes,
   ]}
   data-blurrable

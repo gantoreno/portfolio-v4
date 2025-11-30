@@ -77,7 +77,7 @@ function AlertsFeedItemStatus({ status }: { status: Status }) {
 
 function AlertsFeedItem({ name, address, timestamp, type }: Alert) {
   return (
-    <li className="border-b border-b-soft p-[20px] text-secondary flex gap-[20px] hover:bg-soft/15 cursor-pointer transition-all duration-[0.1s]">
+    <li className="border-b border-b-soft p-[20px] text-secondary flex gap-[20px] hover:bg-soft/15 cursor-pointer transition-all duration-100">
       <span>{"📍"}</span>
       <div>
         <h5 className="text-primary font-bold">
@@ -96,7 +96,7 @@ export default function ActivityFeed() {
       <div className="p-[20px] border-b border-b-soft">
         <h4 className="text-primary font-bold">Activity feed</h4>
       </div>
-      <ol className="[&>:last-child]:border-none max-h-[350px] overflow-y-scroll scroll-m-0 no-scrollbar with-shades">
+      <ol className="*:last:border-none max-h-[350px] overflow-y-scroll scroll-m-0 no-scrollbar with-shades">
         {alerts.map((alert) => (
           <AlertsFeedItem key={alert.timestamp} {...alert} />
         ))}
@@ -118,10 +118,10 @@ export default function ActivityFeed() {
           <path d="M15 6l-6 6l6 6" />
         </svg>
         <span className="cursor-pointer text-primary">1</span>
-        <span className="transition-colors duration-[0.1s] hover:text-secondary cursor-pointer text-disabled">
+        <span className="transition-colors duration-100 hover:text-secondary cursor-pointer text-disabled">
           2
         </span>
-        <span className="transition-colors duration-[0.1s] hover:text-secondary cursor-pointer text-disabled">
+        <span className="transition-colors duration-100 hover:text-secondary cursor-pointer text-disabled">
           3
         </span>
         <span className="cursor-pointer text-primary">{"⋯"}</span>
