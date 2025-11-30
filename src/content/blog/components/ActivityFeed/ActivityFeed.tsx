@@ -55,9 +55,9 @@ const alerts: Alert[] = [
 ];
 
 const colorMapping: StatusMapping = {
-  new: "text-teal-400 bg-teal-400",
-  slow: "text-orange-400 bg-orange-400",
-  idle: "text-red-400 bg-red-400",
+  new: "text-teal-400 bg-teal-400/10",
+  slow: "text-orange-400 bg-orange-400/10",
+  idle: "text-red-400 bg-red-400/10",
 };
 
 const textMapping: StatusMapping = {
@@ -70,14 +70,14 @@ function AlertsFeedItemStatus({ status }: { status: Status }) {
   const color = colorMapping[status];
   const text = textMapping[status];
 
-  const className = `${color} bg-opacity-10 rounded-sm px-1 text-sm`;
+  const className = `${color} rounded-sm px-1 text-sm`;
 
   return <span className={className}>{text}</span>;
 }
 
 function AlertsFeedItem({ name, address, timestamp, type }: Alert) {
   return (
-    <li className="border-b border-b-soft p-[20px] text-secondary flex gap-[20px] hover:bg-soft hover:bg-opacity-15 cursor-pointer transition-all duration-[0.1s]">
+    <li className="border-b border-b-soft p-[20px] text-secondary flex gap-[20px] hover:bg-soft/15 cursor-pointer transition-all duration-[0.1s]">
       <span>{"📍"}</span>
       <div>
         <h5 className="text-primary font-bold">
@@ -92,7 +92,7 @@ function AlertsFeedItem({ name, address, timestamp, type }: Alert) {
 
 export default function ActivityFeed() {
   return (
-    <div className="w-full max-w-sm bg-soft bg-opacity-10 border border-soft rounded-md mx-auto">
+    <div className="w-full max-w-sm bg-soft/10 border border-soft rounded-md mx-auto">
       <div className="p-[20px] border-b border-b-soft">
         <h4 className="text-primary font-bold">Activity feed</h4>
       </div>

@@ -187,29 +187,22 @@ export default function SavingsChart() {
     <div className="aspect-video w-full mb-[20px]">
       <ResponsiveContainer width="100%" height="100%" className="mb-[20px]">
         <LineChart data={data}>
-          <CartesianGrid
-            stroke="rgb(var(--color-soft))"
-            strokeDasharray="3 3"
-          />
+          <CartesianGrid stroke="var(--color-soft)" strokeDasharray="3 3" />
 
           <Tooltip
-            cursor={{ stroke: "rgb(var(--color-disabled))" }}
+            cursor={{ stroke: "var(--color-disabled)" }}
             // @ts-ignore
             content={<CustomTooltip />}
           />
 
-          <XAxis name="Day" dataKey="day" stroke="rgb(var(--color-disabled))" />
-          <YAxis
-            name="Calls"
-            dataKey="calls"
-            stroke="rgb(var(--color-disabled))"
-          />
+          <XAxis name="Day" dataKey="day" stroke="var(--color-disabled)" />
+          <YAxis name="Calls" dataKey="calls" stroke="var(--color-disabled)" />
 
           <Line
             name="API Calls"
             type="monotone"
             dataKey="calls"
-            stroke="rgb(var(--color-primary))"
+            stroke="var(--color-primary)"
           />
         </LineChart>
       </ResponsiveContainer>

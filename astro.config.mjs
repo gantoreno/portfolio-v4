@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 
 import vercel from "@astrojs/vercel";
-import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
@@ -29,9 +28,6 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
     react(),
   ],
   markdown: {
