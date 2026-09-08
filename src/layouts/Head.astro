@@ -1,7 +1,7 @@
 ---
 import "@/styles/index.scss";
 
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 import {
   DEFAULT_TITLE,
@@ -87,7 +87,7 @@ const {
     transition:persist
   />
 
-  <ViewTransitions />
+  <ClientRouter />
 
   <script>
     document.addEventListener("astro:after-swap", () => {

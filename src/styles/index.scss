@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@use "tailwindcss/index.css";
 
 @theme {
   --font-sans: Figtree, Avenir, Arial, Helvetica, sans-serif;

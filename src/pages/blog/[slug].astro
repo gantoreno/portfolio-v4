@@ -1,5 +1,6 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 
 import { format } from "date-fns";
 
@@ -11,7 +12,7 @@ import Body from "@/layouts/Body.astro";
 
 import Entry from "@/components/custom/Entry.astro";
 
-import Signature from "@/components/extras/Signature.astro";
+import signature from "@/images/signature.svg";
 
 import Blockquote from "@/components/structure/Blockquote.astro";
 import BulletedList from "@/components/structure/BulletedList.astro";
@@ -43,11 +44,11 @@ export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: {
       post,
       otherPosts: posts
-        .filter((p) => p.slug !== post.slug)
+        .filter((p) => p.id !== post.id)
         .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
         .slice(0, 3),
     },
@@ -56,7 +57,7 @@ export async function getStaticPaths() {
 
 const { post, otherPosts } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 const schema = JSON.stringify({
   "@context": "http://schema.org",
@@ -160,12 +161,16 @@ const schema = JSON.stringify({
           <Entry
             title={post.data.title}
             description={post.data.description}
-            link={"/blog/" + post.slug}
+            link={"/blog/" + post.id}
             new={isNew(post.data.date)}
           />
         ))
       }
-      <Signature />
+      <Image
+        class="dark:invert mt-[60px] w-[200px]"
+        src={signature}
+        alt="Gabriel Moreno's signature"
+      />
     </article>
   </Body>
 </Html>

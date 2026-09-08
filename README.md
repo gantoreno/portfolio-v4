@@ -8,18 +8,24 @@ Files for the fourth version of my my personal portfolio, built with [Astro](htt
 
 ## Scripts
 
+Install dependencies with [Bun](https://bun.com/):
+
+```sh
+bun install
+```
+
 To start the development server:
 
 ```sh
-$ npm run dev
+bun run dev
 ```
 
 ```sh
-$ npm run build
+bun run build
 ```
 
 To serve a production build:
 
 ```sh
-$ npm run preview
+bun run preview
 ```

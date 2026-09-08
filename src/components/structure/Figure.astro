@@ -1,10 +1,8 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 
 import Italic from "@/components/typography/Italic.astro";
-
-import { getDownscaledPlaceholder } from "@/utils/image";
 
 type Props = Omit<HTMLAttributes<"img">, "src" | "alt"> & {
   src: ImageMetadata;
@@ -12,16 +10,16 @@ type Props = Omit<HTMLAttributes<"img">, "src" | "alt"> & {
   withCaption?: boolean;
 };
 
-const {
-  src,
-  alt,
-  width,
-  height,
-  title: themeDirective,
-  withCaption = true,
-} = Astro.props;
+const { src, alt, title: themeDirective, withCaption = true } = Astro.props;
 
-const blur = await getDownscaledPlaceholder(src);
+const preview = await getImage({
+  src,
+  width: Math.min(src.width, 24),
+  quality: 10,
+  format: "webp",
+});
+
+const width = Math.min(src.width, 1200);
 ---
 
 <div>
@@ -32,14 +30,13 @@ const blur = await getDownscaledPlaceholder(src);
   >
     <div class="mb-[20px] rounded-md overflow-hidden">
       <Image
-        style={`background-image: url(${blur}); background-size: cover;`}
+        style={`background-image: url(${preview.src}); background-size: cover;`}
         class="backdrop-blur-md"
         src={src ?? ""}
         alt={alt ?? ""}
-        loading="lazy"
-        decoding="async"
-        width={width as number}
-        height={height as number}
+        layout="constrained"
+        width={width}
+        sizes="(max-width: 640px) calc(100vw - 40px), 600px"
         onload="this.dataset.loaded = true"
         data-loaded="false"
       />
