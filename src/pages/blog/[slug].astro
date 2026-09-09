@@ -91,15 +91,14 @@ const schema = JSON.stringify({
   </Head>
   <Body>
     <article id="article">
-      <PrimaryHeading class="mt-[60px]" style="--stagger: 1">
+      <PrimaryHeading class="mt-[60px]">
         {post.data.title}
       </PrimaryHeading>
-      <Paragraph class="mt-5" style="--stagger: 2">
+      <Paragraph class="mt-5">
         {post.data.description}
       </Paragraph>
       <div
         class="flex gap-2.5 mt-0 mb-[60px] text-disabled! align-center"
-        style="--stagger: 3"
         data-blurrable
       >
         <Avatar />

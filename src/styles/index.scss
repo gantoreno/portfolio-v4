@@ -172,59 +172,6 @@ article #blur-container > p:nth-of-type(1)::first-letter {
   margin-right: 1ch;
 }
 
-/* Staggered animations */
-[data-animate],
-article > h1,
-article > p,
-article > div,
-article #blur-container > *:not(style, script) {
-  --start: 0ms;
-  --stagger: 0;
-  --delay: 64ms;
-  animation: enter 0.6s both;
-  animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
-}
-
-article #blur-container > *:not(style, script) {
-  --stagger: 10;
-}
-
-@for $i from 0 to 7 {
-  article
-    #blur-container
-    > *:not(style, script):not(:empty):nth-child(#{$i + 1}) {
-    --stagger: #{$i + 4} !important;
-  }
-}
-
-body:has(#controller.no-animate) {
-  & nav[data-animate],
-  & footer[data-animate],
-  & main [data-animate] {
-    animation: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-animate],
-  article > *,
-  article > #blur-container > * {
-    animation: none !important;
-  }
-}
-
-@keyframes enter {
-  from {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-}
-
 /* Image optimization */
 img {
   transition: all 0.3s ease-in-out;

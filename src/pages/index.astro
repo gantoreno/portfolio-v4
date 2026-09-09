@@ -24,8 +24,6 @@ import Link from "@/components/navigation/Link.astro";
 
 import Paragraph from "@/components/structure/Paragraph.astro";
 
-import StaggerGenerator from "@/utils/stagger";
-
 export const prerender = true;
 
 const work = (await getCollection("work"))
@@ -36,8 +34,6 @@ const work = (await getCollection("work"))
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
-
-const sg = new StaggerGenerator();
 ---
 
 <Html>
@@ -45,21 +41,19 @@ const sg = new StaggerGenerator();
   <Body>
     <main>
       <Header>
-        <PrimaryHeading style={sg.next()} data-animate>
-          Hey there! Gabriel here {"👋🏻"}
-        </PrimaryHeading>
+        <PrimaryHeading>Hey there! Gabriel here {"👋🏻"}</PrimaryHeading>
       </Header>
-      <Paragraph style={sg.next()} data-animate>
+      <Paragraph>
         Software engineer delivering exceptional digital experiences, creating
         scalable, secure &amp; performant solutions, exploring emerging
         technologies, and continuously striving to deliver excellence.
       </Paragraph>
-      <Paragraph style={sg.next()} data-animate>
+      <Paragraph>
         Always evolving, learning and improving &ndash; <Italic>
           one day at a time{/* */}
         </Italic>.
       </Paragraph>
-      <SectionDivider class="mt-[60px]" style={sg.next()} data-animate>
+      <SectionDivider class="mt-[60px]">
         <strong slot="title" class="text-primary">Working at</strong>
         <div slot="items">
           <Section>
@@ -76,7 +70,7 @@ const sg = new StaggerGenerator();
           </Section>
         </div>
       </SectionDivider>
-      <SectionDivider style={sg.next()} data-animate>
+      <SectionDivider>
         <strong slot="title" class="text-primary">Recently built</strong>
         <div slot="items">
           {
@@ -93,7 +87,7 @@ const sg = new StaggerGenerator();
           }
         </div>
       </SectionDivider>
-      <SectionDivider style={sg.next()} data-animate>
+      <SectionDivider>
         <strong slot="title" class="text-primary">Writing about</strong>
         <div slot="items">
           {
@@ -110,16 +104,14 @@ const sg = new StaggerGenerator();
           }
         </div>
       </SectionDivider>
-      <SecondaryHeading style={sg.next()} data-animate linkable={false}>
-        More about me
-      </SecondaryHeading>
-      <Paragraph style={sg.next()} data-animate>
+      <SecondaryHeading linkable={false}> More about me </SecondaryHeading>
+      <Paragraph>
         Apart from my work, I'm all about sharing knowledge, fostering growth,
         and building strong developer communities &ndash; <Italic>
           especially through mentoring{/* */}
         </Italic>.
       </Paragraph>
-      <Paragraph style={sg.next()} data-animate>
+      <Paragraph>
         If you're interested in my work and/or skillsets, you can always get in
         touch at <Link href="https://twitter.com/gantoreno">@gantoreno</Link> or
         <Link href="mailto:gantoreno@gmail.com">gantoreno@gmail.com</Link>.

@@ -15,8 +15,6 @@ import PrimaryHeading from "@/components/headings/PrimaryHeading.astro";
 
 import Header from "@/components/layout/Header.astro";
 
-import StaggerGenerator from "@/utils/stagger";
-
 export const prerender = true;
 
 const posts = (await getCollection("blog")).sort(
@@ -36,8 +34,6 @@ const postsGroupedByYear = posts.reduce<PostsByYear>((posts, post) => {
 
   return posts;
 }, {});
-
-const sg = new StaggerGenerator();
 ---
 
 <Html>
@@ -49,16 +45,14 @@ const sg = new StaggerGenerator();
   <Body>
     <main>
       <Header>
-        <PrimaryHeading style={sg.next()} data-animate>
-          Experiences, lessons & more {"📖"}
-        </PrimaryHeading>
+        <PrimaryHeading>Experiences, lessons & more {"📖"}</PrimaryHeading>
       </Header>
       <div class="mt-[60px]">
         {
           Object.keys(postsGroupedByYear)
             .reverse()
             .map((year) => (
-              <SectionDivider style={sg.next()} data-animate>
+              <SectionDivider>
                 <span slot="title" class="text-disabled">
                   {year}
                 </span>
