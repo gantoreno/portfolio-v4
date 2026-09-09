@@ -3,7 +3,6 @@ import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import react from "@astrojs/react";
 import { unified } from "@astrojs/markdown-remark";
 
 import remarkMath from "remark-math";
@@ -29,7 +28,7 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
   },
-  integrations: [mdx(), sitemap(), react()],
+  integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
       remarkPlugins: [remarkMath, remarkReadingTime],

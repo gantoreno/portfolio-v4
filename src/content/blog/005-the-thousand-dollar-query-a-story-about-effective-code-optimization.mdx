@@ -21,10 +21,10 @@ import Paragraph from "@/components/structure/Paragraph.astro";
 
 import Link from "@/components/navigation/Link.astro";
 
-import Component from "@/content/blog/components/Component";
-import ActivityFeed from "@/content/blog/components/ActivityFeed/ActivityFeed";
-import WalkingMeter from "@/content/blog/components/WalkingMeter/WalkingMeter";
-import SavingsChart from "@/content/blog/components/SavingsChart/SavingsChart";
+import Component from "@/content/blog/components/Component.astro";
+import ActivityFeed from "@/content/blog/components/ActivityFeed/ActivityFeed.astro";
+import WalkingMeter from "@/content/blog/components/WalkingMeter/WalkingMeter.astro";
+import SavingsChart from "@/content/blog/components/SavingsChart/SavingsChart.astro";
 
 import Meme from "@/components/extras/Meme.astro";
 
@@ -258,7 +258,7 @@ No amount of overthinking prepared me for what I'd find &ndash; we were already 
 
 And these facts hold true for the companies that this system targets as well. Two weeks later, we were at just below 15% of the usage, and it kept consistently decreasing even more and more &ndash; by the end of the month, we were charged with only $183 or so, meaning, we had successfully saved ~86% of past month's bill:
 
-<SavingsChart client:load />
+<SavingsChart />
 
 > Note that these graphs are just an approximation to the call history from back then, as I don't have access to that project and/or its resources anymore.
 
