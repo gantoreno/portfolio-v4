@@ -1,16 +1,19 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<"div"> & {
+type Props = HTMLAttributes<"h1"> & {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
   linkable?: boolean;
 };
 
-const { linkable = true, class: classes, ...rest } = Astro.props;
+const { level = 2, linkable = true, class: classes, ...rest } = Astro.props;
+const Tag = `h${level}`;
 ---
 
-<h2
+<Tag
   class:list={[
-    "font-bold text-primary mt-[60px] mb-[20px] ml-auto gap-1 group",
+    "font-bold text-primary mb-[20px]",
+    level === 1 ? "text-2xl" : "mt-[60px] ml-auto gap-1 group",
     classes,
   ]}
   {...rest}
@@ -18,7 +21,7 @@ const { linkable = true, class: classes, ...rest } = Astro.props;
 >
   <slot />
   {
-    linkable && (
+    level > 1 && linkable && rest.id && (
       <a
         href={"#" + rest.id}
         class="inline-flex mb-[2px] ml-1 align-middle"
@@ -43,4 +46,4 @@ const { linkable = true, class: classes, ...rest } = Astro.props;
       </a>
     )
   }
-</h2>
+</Tag>

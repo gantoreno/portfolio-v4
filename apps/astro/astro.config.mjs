@@ -6,6 +6,8 @@ import sitemap from "@astrojs/sitemap";
 import { unified } from "@astrojs/markdown-remark";
 
 import remarkMath from "remark-math";
+import rehypeSlug from "rehype-slug";
+import { rehypeArticle } from "./plugins/rehype-article.mjs";
 import rehypeMathjax from "rehype-mathjax";
 
 import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
@@ -39,7 +41,7 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [remarkMath, remarkReadingTime],
-      rehypePlugins: [rehypeMathjax],
+      rehypePlugins: [rehypeSlug, rehypeMathjax, rehypeArticle],
       remarkRehype: {
         footnoteLabel: "Reference",
       },

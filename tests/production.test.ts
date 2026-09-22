@@ -45,6 +45,20 @@ describe("production content parity (run bun run build first)", () => {
       expect(await elements(next, "mjx-container")).toHaveLength(
         (await elements(astro, "mjx-container")).length,
       );
+      expect(astro).not.toContain("data-loaded=");
+      expect(astro).not.toMatch(/<p\b[^>]*>\s*<figure/);
+      expect(astro).not.toContain("#undefined");
+      const astroHeadingIds = await elements(
+        astro,
+        ".article-content h2:not(.sr-only)",
+        "id",
+      );
+      const astroAnchors = await elements(
+        astro,
+        ".article-content h2:not(.sr-only) .heading-anchor",
+        "href",
+      );
+      expect(astroAnchors).toEqual(astroHeadingIds.map((id) => `#${id}`));
       expect(next).not.toMatch(/<p\b[^>]*>\s*<figure/);
       expect(next).not.toContain("#undefined");
       expect(

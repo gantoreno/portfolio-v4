@@ -1,8 +1,8 @@
 ---
-import Logo from "@/components/extras/Logo.astro";
-import Link from "@/components/navigation/Link.astro";
+import Logo from "@/components/Logo/Logo.astro";
+import Link from "@/components/Link/Link.astro";
 
-import Container from "./Container.astro";
+import Container from "@/components/Container/Container.astro";
 
 type Route = {
   name: string;
@@ -20,10 +20,7 @@ const routes: Route[] = [
 ---
 
 <div class="w-full h-[100px]"></div>
-<nav
-  id="navbar"
-  class="top-0 left-0 z-20 fixed bg-inverse/80 w-full h-[100px]"
->
+<nav id="navbar" class="top-0 left-0 z-20 fixed bg-inverse/80 w-full h-[100px]">
   <Container class="w-full h-full">
     <div class="flex items-center gap-[20px] border-soft border-b h-full">
       <div class="mr-[14px]">

@@ -1,0 +1,137 @@
+/* Exclude embedded demos so their own typography and spacing stay intact. */
+.article-content {
+  &
+    :where(
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      blockquote,
+      ul,
+      ol,
+      li,
+      pre,
+      hr,
+      strong,
+      em,
+      code,
+      a,
+      abbr,
+      u,
+      sup
+    ):not(:where([data-prose-exclude] *)) {
+    &:where(p) {
+      margin-bottom: 20px;
+      color: var(--color-secondary);
+    }
+    &:where(h1, h2, h3, h4, h5, h6) {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-block: 60px 20px;
+    }
+    &:where(h1) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin-top: 0;
+    }
+    &:where(strong) {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    &:where(em, blockquote) {
+      font-family: var(--font-serif);
+      font-style: italic;
+    }
+    &:where(blockquote) {
+      margin-bottom: 20px;
+      padding-left: 20px;
+      border-left: 2px solid var(--color-primary);
+      color: var(--color-secondary);
+    }
+    &:where(ul, ol) {
+      margin-bottom: 20px;
+      padding-left: 34px;
+      color: var(--color-secondary);
+    }
+    &:where(ul) {
+      list-style: disc;
+    }
+    &:where(ol) {
+      list-style: decimal;
+    }
+    &:where(li) {
+      margin-bottom: 5px;
+      padding-left: 10px;
+    }
+    &:where(li)::marker {
+      color: var(--color-primary);
+    }
+    &:where(a) {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-decoration-color: var(--color-disabled);
+      text-underline-offset: 2px;
+      margin-inline: 1px;
+    }
+    &:where(u, abbr) {
+      text-decoration-color: var(--color-disabled);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    &:where(code) {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--color-primary);
+    }
+    &:where(code)::before,
+    &:where(code)::after {
+      content: "`";
+    }
+    &:where(pre) {
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    &:where(hr) {
+      border: 0;
+      height: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--color-disabled);
+      font-family: var(--font-serif);
+    }
+    &:where(hr)::after {
+      content: "* * *";
+    }
+    &:where([data-footnote-backref]) {
+      color: var(--color-disabled);
+      text-decoration: none;
+      vertical-align: middle;
+    }
+  }
+  & pre > code {
+    line-height: 22px;
+  }
+  & > p:first-of-type::first-letter {
+    font-family: var(--font-serif);
+    color: var(--color-primary);
+    initial-letter: 2;
+    -webkit-initial-letter: 2;
+    margin-right: 1ch;
+  }
+  & .heading-anchor {
+    display: inline-flex;
+    margin-left: 4px;
+    vertical-align: middle;
+    color: var(--color-disabled);
+    opacity: 0;
+  }
+  & :is(h2, h3, h4, h5, h6):hover .heading-anchor,
+  & .heading-anchor:focus {
+    opacity: 1;
+  }
+}

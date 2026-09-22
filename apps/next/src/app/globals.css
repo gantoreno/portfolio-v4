@@ -309,3 +309,10 @@ pre > code .line.remove::before {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Native inline HTML in shared MDX. */
+#blur-container :is(u, abbr) {
+  text-decoration-color: var(--color-disabled);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}

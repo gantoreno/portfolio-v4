@@ -1,8 +1,7 @@
 ---
 import { format } from "date-fns";
 
-import Link from "@/components/navigation/Link.astro";
-import Paragraph from "../structure/Paragraph.astro";
+import Link from "@/components/Link/Link.astro";
 
 type Props = {
   title: string;
@@ -20,7 +19,7 @@ const { title, link, date, description, new: isNew = false } = Astro.props;
     <span class="block mb-[5px]"
       >{isNew ? "✨ " : ""}<Link href={link}>{title}</Link></span
     >
-    <Paragraph class="mb-0!">{description}</Paragraph>
+    <p class="prose-paragraph mb-0!">{description}</p>
   </div>
   <span class="text-disabled">{format(date, "MM/dd")}</span>
 </div>

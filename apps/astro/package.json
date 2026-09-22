@@ -28,7 +28,8 @@
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.3.3",
     "@portfolio/content": "workspace:*",
-    "@portfolio/assets": "workspace:*"
+    "@portfolio/assets": "workspace:*",
+    "rehype-slug": "^6.0.0"
   },
   "devDependencies": {
     "@inquirer/checkbox": "^5.2.5",

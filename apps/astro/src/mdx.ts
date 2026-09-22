@@ -1,10 +1,7 @@
-export { default as Link } from "./components/navigation/Link.astro";
-export { default as Underline } from "./components/typography/Underline.astro";
-export { default as Abbreviation } from "./components/typography/Abbreviation.astro";
-export { default as Paragraph } from "./components/structure/Paragraph.astro";
-export { default as Figure } from "./components/structure/Figure.astro";
-export { default as Meme } from "./components/extras/Meme.astro";
-export { default as Component } from "./content/blog/components/Component.astro";
-export { default as WalkingMeter } from "./content/blog/components/WalkingMeter/WalkingMeter.astro";
-export { default as ActivityFeed } from "./content/blog/components/ActivityFeed/ActivityFeed.astro";
-export { default as SavingsChart } from "./content/blog/components/SavingsChart/SavingsChart.astro";
+export { default as Link } from "@/components/Link/Link.astro";
+export { default as Figure } from "@/components/Figure/Figure.astro";
+export { default as Meme } from "@/components/Meme/Meme.astro";
+export { default as Component } from "@/components/Component/Component.astro";
+export { default as WalkingMeter } from "@/components/WalkingMeter/WalkingMeter.astro";
+export { default as ActivityFeed } from "@/components/ActivityFeed/ActivityFeed.astro";
+export { default as SavingsChart } from "@/components/SavingsChart/SavingsChart.astro";

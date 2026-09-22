@@ -42,6 +42,14 @@ Next.js components follow `src/components/ComponentName/ComponentName.tsx`, with
 
 Next.js uses one `Heading` component with a `level` prop, and inline callbacks in the MDX map. Simple formatting tags no longer need separate wrapper files. The article demos remain server-rendered SVG/CSS; the chart does not load a charting library. Standalone Markdown images are lifted out of paragraph tags before rendering figures to keep the HTML valid.
 
+## Astro components and prose
+
+Astro components follow `src/components/ComponentName/ComponentName.astro`. `Heading` accepts a `level` prop; ordinary page copy uses native paragraphs and emphasis.
+
+`ArticleContent/ArticleContent.css` styles semantic Markdown tags, while `rehype-article.mjs` adds heading anchors and reading-focus attributes at build time. The MDX mapping only replaces images with `Figure`. Embedded demos opt out of prose styling through `data-prose-exclude`. Shared articles use native `<u>` and `<abbr>` tags instead of framework-specific typography imports.
+
+Figures keep a small image background placeholder beneath the responsive image. They no longer depend on an `onload` handler or a JavaScript-controlled blur state, so images remain clear with JavaScript disabled.
+
 ## Next.js performance
 
 - Home, blog index, all article routes, and sitemaps are generated at build time. Unknown article slugs return 404. Publishing content requires a rebuild; dates such as the “new” badge and footer year reflect build time.

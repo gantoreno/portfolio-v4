@@ -1,34 +1,31 @@
 ---
+import Heading from "@/components/Heading/Heading.astro";
 import Html from "@/layouts/Html.astro";
 import Head from "@/layouts/Head.astro";
 import Body from "@/layouts/Body.astro";
 
-import PrimaryHeading from "@/components/headings/PrimaryHeading.astro";
+import Header from "@/components/Header/Header.astro";
 
-import Header from "@/components/layout/Header.astro";
-
-import Link from "@/components/navigation/Link.astro";
-
-import Paragraph from "@/components/structure/Paragraph.astro";
-
-import Italic from "@/components/typography/Italic.astro";
+import Link from "@/components/Link/Link.astro";
 ---
 
 <Html>
   <Head title="Whoops!" description="Page not found" />
   <Body>
     <Header>
-      <PrimaryHeading>Seems like I'm missing this one {"🤔"}</PrimaryHeading>
+      <Heading level={1}>Seems like I'm missing this one {"🤔"}</Heading>
     </Header>
-    <Paragraph>
+    <p class="prose-paragraph">
       I probably forgot to build the page you're looking for &ndash; but no
       worries, you can still look around my <Link href="/">homepage</Link> or my
       <Link href="/blog">
         {/* */}blog{/* */}
       </Link> for some good reads.
-    </Paragraph>
-    <Paragraph>
-      <Italic>Perhaps this page will exist in the future...</Italic>
-    </Paragraph>
+    </p>
+    <p class="prose-paragraph">
+      <em class="font-serif italic"
+        >Perhaps this page will exist in the future...</em
+      >
+    </p>
   </Body>
 </Html>
