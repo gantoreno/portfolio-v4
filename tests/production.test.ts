@@ -4,9 +4,9 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dir, "..");
 const read = (file: string) => readFile(path.join(root, file), "utf8");
-const files = (await readdir(path.join(root, "src/content/blog"))).filter(
-  (file) => file.endsWith(".mdx"),
-);
+const files = (
+  await readdir(path.join(root, "src/content/blog"), { recursive: true })
+).filter((file) => file.endsWith(".mdx"));
 async function elements(html: string, selector: string, attribute?: string) {
   const result: string[] = [];
   await new HTMLRewriter()

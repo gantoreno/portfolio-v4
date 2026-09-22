@@ -21,13 +21,13 @@ import Link from "@/components/Link/Link.astro";
 import Meme from "@/components/Meme/Meme.astro";
 import SavingsChart from "@/components/SavingsChart/SavingsChart.astro";
 import WalkingMeter from "@/components/WalkingMeter/WalkingMeter.astro";
-import Billing from "./assets/005/billing.webp";
+import Billing from "./assets/billing.webp";
 
 APIs are great, especially if they're from a third party that has already solved a complex problem that we might be facing at some point &ndash; who doesn't love a good old `npm install @{company_name}/sdk`? Just a few steps and you're up and running, it feels pretty much like magic.
 
 There's no need to reinvent the wheel... [Right](https://dayssincelastjavascriptframework.com/)?
 
-![And yet, JS devs do it all the time.](./assets/005/js.webp)
+![And yet, JS devs do it all the time.](./assets/js.webp)
 
 But, as wonderful as they can be, they're also one of the easiest ways of shooting yourself in the foot &ndash; nothing is free, and everything comes at a cost, this is why, out of _many_ alternatives & services out there in the market, there's a non-trivial decision-making process behind most (if not all) API choices.
 
@@ -51,7 +51,7 @@ Let's get technical.
 
 First, some context &ndash; you (and by _"you"_ I mean _"me"_, at about 2 years of experience) are working on a multi-database <abbr title={"Software as a Service"}>SaaS</abbr> application, targeted towards companies that handles vehicles & drivers, productivity is measured based off of driver activity, meaning, the app has to collect driver metrics (think <u>GPS location</u>, <u>driving speed</u>, <u>idle time</u>, etc).
 
-![Driving-based apps make heavy use of GPS data, much like Uber, Doordash, Amazon Flex, etc.](./assets/005/delivery.webp)
+![Driving-based apps make heavy use of GPS data, much like Uber, Doordash, Amazon Flex, etc.](./assets/delivery.webp)
 
 The service was fully equipped with a web application made in [React](https://react.dev/) (targeted towards management), a server written in [Node.js](https://nodejs.org), and a mobile app written in, you guessed it, [React Native](https://reactnative.dev/) (targeted towards drivers & other employees). The mobile app was the source of all employee activity, so there was a _special_ focus on it, making sure it works as expected and was tracking properly at all time, sending location data that the server would then save as <u>coordinates</u> in a table (along with a timestamp and some other information).
 
@@ -141,7 +141,7 @@ Alright, we had to come up with something, what are our options? The first solut
 
 This, although didn't necessarily block the so-needed refactor, it definitely made us know that we needed to look for additional short-term measures that helped us at least alleviate the billing, while also thinking forward on how to create a consistent, budget-friendly way of handling locations.
 
-![Although GPS data may be somewhat free, insights over that data aren't.](./assets/005/gps.webp)
+![Although GPS data may be somewhat free, insights over that data aren't.](./assets/gps.webp)
 
 Our CEO mentioned something that at first _kinda_ made sense as well &ndash; can't we pull the address along with the coordinates from the device's GPS itself? We _thought_ there may be a chance, but that was quickly shot down, as we found out the only way is to, guess what, call the Geocoding API from the device, and this would be even worse, as the app reports locations every 5 seconds, for an 8-hour shift that would be 5760 requests per shift, but remember, there's way more drivers active on the road than managers checking the activity feed! About 10-15 were active by that time, if each one of them produces ~5k requests per day... I won't even try to run those numbers.
 
@@ -162,13 +162,13 @@ _"Let's just <u>trim some decimals</u> then"_, my tech-lead said, but that wasn'
 
 Let's take above's coordinates as an example, those locate to this place in particular:
 
-![Figure A: Example location in the middle of the street.](./assets/005/map-a-light.webp "light-mode-only")
-![Figure A: Example location in the middle of the street.](./assets/005/map-a-dark.webp "dark-mode-only")
+![Figure A: Example location in the middle of the street.](./assets/map-a-light.webp "light-mode-only")
+![Figure A: Example location in the middle of the street.](./assets/map-a-dark.webp "dark-mode-only")
 
 What would happen if one of the employees were walking around that area, and the app wanted to process their location _but_ trimming the last 3 decimals? This is approximately what it would look like:
 
-![Figure B: Precision loss by decimal trimming.](./assets/005/map-b-light.webp "light-mode-only")
-![Figure B: Precision loss by decimal trimming.](./assets/005/map-b-dark.webp "dark-mode-only")
+![Figure B: Precision loss by decimal trimming.](./assets/map-b-light.webp "light-mode-only")
+![Figure B: Precision loss by decimal trimming.](./assets/map-b-dark.webp "dark-mode-only")
 
 See the problem? Suddenly the person is 100 meters away from their true location,
 and the speed detection service would start miscalculating everything &ndash; if it took <u>3 decimal places</u> to make a <u>100 meter difference</u>, in the eyes
@@ -195,7 +195,7 @@ My mind was speeding at 1000mph, blood pumping through my veins like engine oil,
 
 _It doesn't «have» to be <u>exact</u>_.
 
-![Just like GPS, locations aren't known right away by the satellite, but approximated via triangulation.](./assets/005/satellite.webp)
+![Just like GPS, locations aren't known right away by the satellite, but approximated via triangulation.](./assets/satellite.webp)
 
 What if we could _"fuzz-out"_ the search and _expand it_ to get the nearest stored point to our location? That way, we would have way more chances of finding a match, and we would have <u> total control</u> over how close we want those points to be, just so we can predictably assume an error tolerance that worked for us without compromising accuracy over the <u>speed calculations</u>.
 
@@ -221,8 +221,8 @@ $$
 
 Where $r$ is the radius of the sphere (in our case, the Earth, sitting at around 6,371 km). What this would end up doing is basically creating a sort of <u>boundary map</u> of known regions within our database, which would self-feed and increase accuracy while decreasing API usage very quickly over time. If we take the street from the previous example, after a simple navigation, the map would be filled with regions like this:
 
-![Figure C: Address clusters on the map](./assets/005/map-c-light.webp "light-mode-only")
-![Figure C: Address clusters on the map](./assets/005/map-c-dark.webp "dark-mode-only")
+![Figure C: Address clusters on the map](./assets/map-c-light.webp "light-mode-only")
+![Figure C: Address clusters on the map](./assets/map-c-dark.webp "dark-mode-only")
 
 And the best part? It's just a query change! This filter can be shoved inside our data-access layer by adding the third term `distance` as the equation result to our query, paired with a `HAVING` clause that sets a clear threshold for the search radius we're going after &ndash; this would end up looking something like this:
 
@@ -267,7 +267,7 @@ _But that's another story._
 
 Granted, the web ecosystem moves at giant steps every day that passes, and this solution &ndash;although useful at that time&ndash; _may_ not have been the best, we were very time constrained and had to act _quickly_. API refactors like this should be carefully studied and definitely planned-out ahead of time.
 
-![Always make sure to carefully review API pricing & usage best practices.](./assets/005/plan.webp)
+![Always make sure to carefully review API pricing & usage best practices.](./assets/plan.webp)
 
 _Maybe_ there's a library that already does this, _perhaps_ there's another way in which we could have stored the data & queried for it that was more efficient. Knowing & using those equations wasn't any kind of _"breakthrough"_ to be honest. If anything, the only thing I _sort of_ did was figuring out how _"places near me"_ recommendations work.
 

@@ -35,7 +35,20 @@ bun run dev
 
 The Markdown component map only replaces images with `Figure`. Articles use native `<u>` and `<abbr>` tags and import richer Astro components directly. Figures retain small background placeholders beneath responsive images, without requiring JavaScript to remove a blur filter.
 
-Edit articles in `src/content/blog`; frontmatter `slug` values determine public URLs. Home, the blog index, and articles are prerendered, so publishing content requires a rebuild.
+Each article lives in `src/content/blog/<slug>/index.mdx`, with its images in an adjacent `assets/` folder:
+
+```text
+src/content/blog/
+  the-thousand-dollar-query-a-story-about-effective-code-optimization/
+    index.mdx
+    assets/
+      billing.webp
+      satellite.webp
+```
+
+Reference article images with `./assets/image.webp`. Shared images belong in `src/images`. Run `bun run create:article` to scaffold an article folder and its assets directory; no sequence number is needed. Optional social thumbnails use a public URL in the `thumbnail` frontmatter field.
+
+Frontmatter `slug` values determine public URLs. Home, the blog index, and articles are prerendered, so publishing content requires a rebuild.
 
 ## Deployment
 
