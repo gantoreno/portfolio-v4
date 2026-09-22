@@ -1,0 +1,164 @@
+svg {
+  font-family: var(--font-sans);
+}
+
+.chart-grid {
+  stroke: var(--color-soft);
+  stroke-dasharray: 3 3;
+}
+
+.chart-axis {
+  stroke: var(--color-disabled);
+}
+
+.chart-label {
+  fill: var(--color-disabled);
+  font-size: 11px;
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.data-point {
+  outline: none;
+}
+
+.chart-crosshair {
+  display: none;
+  pointer-events: none;
+  stroke: var(--color-secondary);
+  stroke-dasharray: 3 3;
+  stroke-width: 1;
+}
+
+.chart-hover-target {
+  cursor: crosshair;
+  fill: transparent;
+}
+
+.chart-dot {
+  fill: var(--background);
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+}
+
+.chart-tooltip {
+  display: none;
+  pointer-events: none;
+}
+
+.data-point:hover .chart-tooltip,
+.data-point:focus .chart-tooltip {
+  display: block;
+}
+
+.data-point:hover .chart-crosshair,
+.data-point:focus .chart-crosshair {
+  display: block;
+}
+
+.data-point:hover .chart-dot,
+.data-point:focus .chart-dot {
+  stroke-width: 3;
+}
+
+.chart-tooltip-background {
+  fill: var(--color-minimal);
+  stroke: var(--color-soft);
+}
+
+.chart-tooltip-title {
+  fill: var(--color-primary);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+}
+
+.chart-tooltip-value {
+  fill: var(--color-secondary);
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .chart-grid,
+  .chart-axis {
+    stroke-width: 1.5;
+  }
+
+  .chart-label {
+    font-size: 18px;
+  }
+
+  .chart-line {
+    stroke-width: 2.5;
+  }
+
+  .chart-dot {
+    r: 4.5px;
+    stroke-width: 2.5;
+  }
+
+  .chart-tooltip-title {
+    font-size: 16px;
+  }
+
+  .chart-tooltip-value {
+    font-size: 15px;
+  }
+}
+
+.subject {
+  position: absolute;
+  top: -12px;
+  left: -8px;
+}
+
+#subject-1 {
+  animation: walking 4s linear infinite;
+}
+
+#subject-2 {
+  animation: teleporting 4s linear infinite;
+}
+
+@keyframes walking {
+  0% {
+    left: -8px;
+  }
+
+  75% {
+    left: calc(100% - 8px);
+  }
+
+  100% {
+    left: calc(100% - 8px);
+  }
+}
+
+@keyframes teleporting {
+  0% {
+    left: -8px;
+  }
+
+  74% {
+    left: -8px;
+  }
+
+  75% {
+    left: calc(100% - 8px);
+  }
+
+  100% {
+    left: calc(100% - 8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .subject {
+    animation: none !important;
+  }
+}
