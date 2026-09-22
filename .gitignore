@@ -24,11 +24,6 @@ pnpm-debug.log*
 # test article
 src/content/blog/100-test.mdx
 
-# Next.js
-.next/
-out/
-*.tsbuildinfo
-packages/content/blog/100-test.mdx
 
 .playwright-cli/
 output/playwright/

@@ -2,14 +2,8 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "bun run dev:astro",
+      "command": "bun run dev",
       "name": "Astro development server",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
-      "command": "bun run dev:next",
-      "name": "Next.js development server",
       "request": "launch",
       "type": "node-terminal"
     }

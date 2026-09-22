@@ -4,10 +4,9 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dir, "..");
 const read = (file: string) => readFile(path.join(root, file), "utf8");
-const files = (await readdir(path.join(root, "packages/content/blog"))).filter(
+const files = (await readdir(path.join(root, "src/content/blog"))).filter(
   (file) => file.endsWith(".mdx"),
 );
-
 async function elements(html: string, selector: string, attribute?: string) {
   const result: string[] = [];
   await new HTMLRewriter()
@@ -23,75 +22,60 @@ async function elements(html: string, selector: string, attribute?: string) {
   return result;
 }
 
-describe("production content parity (run bun run build first)", () => {
+describe("Astro production output (run bun run build first)", () => {
   for (const file of files) {
     test(file, async () => {
-      const source = await read(`packages/content/blog/${file}`);
+      const source = await read(`src/content/blog/${file}`);
       const slug = source.match(/^slug: (.+)$/m)![1];
-      const [astro, next] = await Promise.all([
-        read(`apps/astro/dist/client/blog/${slug}/index.html`),
-        read(`apps/next/.next/server/app/blog/${slug}.html`),
+      const html = await read(`dist/client/blog/${slug}/index.html`);
+      expect(await elements(html, "h1")).toHaveLength(1);
+      expect(await elements(html, 'link[rel="canonical"]', "href")).toEqual([
+        `https://gantoreno.com/blog/${slug}/`,
       ]);
-      expect(await elements(next, "h1")).toHaveLength(1);
-      expect(await elements(next, 'link[rel="canonical"]', "href")).toEqual([
-        `https://gantoreno.com/blog/${slug}`,
-      ]);
-      expect(await elements(next, "figure")).toHaveLength(
-        (await elements(astro, "figure")).length,
-      );
-      expect(await elements(next, "pre code")).toHaveLength(
-        (await elements(astro, "pre code")).length,
-      );
-      expect(await elements(next, "mjx-container")).toHaveLength(
-        (await elements(astro, "mjx-container")).length,
-      );
-      expect(astro).not.toContain("data-loaded=");
-      expect(astro).not.toMatch(/<p\b[^>]*>\s*<figure/);
-      expect(astro).not.toContain("#undefined");
-      const astroHeadingIds = await elements(
-        astro,
+      expect(html).not.toContain("data-loaded=");
+      expect(html).not.toMatch(/<p\b[^>]*>\s*<figure/);
+      expect(html).not.toContain("#undefined");
+      const ids = await elements(
+        html,
         ".article-content h2:not(.sr-only)",
         "id",
       );
-      const astroAnchors = await elements(
-        astro,
-        ".article-content h2:not(.sr-only) .heading-anchor",
-        "href",
-      );
-      expect(astroAnchors).toEqual(astroHeadingIds.map((id) => `#${id}`));
-      expect(next).not.toMatch(/<p\b[^>]*>\s*<figure/);
-      expect(next).not.toContain("#undefined");
+      expect(ids.every(Boolean)).toBe(true);
+      expect(new Set(ids).size).toBe(ids.length);
       expect(
-        await elements(next, "#blur-container figure img", "src"),
-      ).not.toContain("[object Object]");
-      const headingIds = await elements(next, "#blur-container h2", "id");
-      expect(headingIds.every(Boolean)).toBe(true);
-      expect(new Set(headingIds).size).toBe(headingIds.length);
+        await elements(
+          html,
+          ".article-content h2:not(.sr-only) .heading-anchor",
+          "href",
+        ),
+      ).toEqual(ids.map((id) => `#${id}`));
+      const images = await elements(html, ".article-content figure img", "src");
+      expect(images.length).toBeGreaterThan(0);
+      for (const image of images) expect(image).toMatch(/^\/_astro\//);
       expect(
-        await elements(next, 'meta[property="og:type"]', "content"),
-      ).toEqual(["article"]);
+        await elements(html, 'meta[property="og:type"]', "content"),
+      ).toContain("article");
     });
   }
-  test("all articles are linked and statically prerendered", async () => {
-    const manifest = JSON.parse(
-      await read("apps/next/.next/prerender-manifest.json"),
+  test("blog index links to all articles", async () => {
+    const links = await elements(
+      await read("dist/client/blog/index.html"),
+      "main a",
+      "href",
     );
-    const index = await read("apps/next/.next/server/app/blog.html");
-    const links = await elements(index, "main a", "href");
-    expect(
-      Object.keys(manifest.routes).filter((route) =>
-        route.startsWith("/blog/"),
+    const slugs = await Promise.all(
+      files.map(
+        async (file) =>
+          (await read(`src/content/blog/${file}`)).match(/^slug: (.+)$/m)![1],
       ),
-    ).toHaveLength(files.length);
-    expect(links.filter((link) => link.startsWith("/blog/"))).toHaveLength(
-      files.length,
     );
-    expect(manifest.routes["/"]).toBeDefined();
-    expect(manifest.routes["/blog"]).toBeDefined();
+    expect(links.filter((link) => link.startsWith("/blog/")).sort()).toEqual(
+      slugs.map((slug) => `/blog/${slug}`).sort(),
+    );
   });
-  test("rich article retains all chart points and theme-specific figures", async () => {
+  test("rich article preserves demos, math, and syntax highlighting", async () => {
     const html = await read(
-      "apps/next/.next/server/app/blog/the-thousand-dollar-query-a-story-about-effective-code-optimization.html",
+      "dist/client/blog/the-thousand-dollar-query-a-story-about-effective-code-optimization/index.html",
     );
     expect(await elements(html, ".data-point")).toHaveLength(30);
     expect(
@@ -100,6 +84,8 @@ describe("production content parity (run bun run build first)", () => {
     expect(
       await elements(html, '[data-theme-directive="dark-mode-only"]'),
     ).toHaveLength(3);
+    expect(await elements(html, "pre code")).toHaveLength(2);
+    expect(await elements(html, "mjx-container")).toHaveLength(16);
     expect(await elements(html, "pre .line.highlighted")).not.toHaveLength(0);
   });
 });
