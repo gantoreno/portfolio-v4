@@ -1,0 +1,49 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getImage, Image } from "astro:assets";
+
+type Props = Omit<HTMLAttributes<"img">, "src" | "alt"> & {
+  src: ImageMetadata;
+  alt?: string;
+  withCaption?: boolean;
+};
+
+const {
+  src,
+  alt = "",
+  title: themeDirective,
+  withCaption = true,
+} = Astro.props;
+
+const preview = await getImage({
+  src,
+  width: Math.min(src.width, 24),
+  quality: 10,
+  format: "webp",
+});
+
+const width = Math.min(src.width, 1200);
+---
+
+<figure class="mb-[20px]" data-blurrable data-theme-directive={themeDirective}>
+  <div class="mb-[20px] rounded-md overflow-hidden">
+    <Image
+      style={`background-image: url(${preview.src}); background-size: cover;`}
+      src={src ?? ""}
+      alt={alt ?? ""}
+      layout="constrained"
+      width={width}
+      sizes="(max-width: 640px) calc(100vw - 40px), 600px"
+    />
+  </div>
+  {
+    withCaption && (
+      <figcaption class="text-disabled! text-center">
+        <em class="font-serif italic">
+          {alt}
+          <slot />
+        </em>
+      </figcaption>
+    )
+  }
+</figure>

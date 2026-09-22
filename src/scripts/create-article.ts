@@ -1,18 +1,15 @@
-import chalk from "chalk";
-import { join } from "path";
-import { spawn } from "child_process";
-import { cwd, exit } from "process";
-import { writeFileSync, mkdirSync, readdirSync } from "fs";
-
-import { input, checkbox } from "@inquirer/prompts";
-
-import { render } from "@/utils/template";
-import { slugify } from "@/utils/slug";
 import { getDefaultDate } from "@/utils/date";
+import { slugify } from "@/utils/slug";
+import { render } from "@/utils/template";
+import { checkbox, input } from "@inquirer/prompts";
+import chalk from "chalk";
+import { spawn } from "child_process";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { join } from "path";
+import { cwd, exit } from "process";
 
 const config = {
-  target: "src/content/blog",
-  ignore: ["100-test.mdx", "assets"],
+  target: "./src/content/blog",
   tags: [
     "Leadership",
     "Teamwork",
@@ -27,7 +24,6 @@ const config = {
     "Experiences",
   ],
   template: `---
-thumbnail: /assets/img/blog/{{ id }}.png
 slug: {{ slug }}
 title: "{{ title }}"
 shorthand: "{{ shorthand }}"
@@ -41,19 +37,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 `,
 };
 
-const id = (
-  readdirSync(join(cwd(), config.target)).filter(
-    (child) => !config.ignore.includes(child)
-  ).length + 1
-)
-  .toString()
-  .padStart(3, "0");
 const title = await input({
   message: "Title",
 });
 const slug = await input({
   message: "Slug",
   default: slugify(title),
+  validate: (value) => {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)) {
+      return "Use lowercase letters, numbers, and hyphens.";
+    }
+    return (
+      !existsSync(join(cwd(), config.target, value)) ||
+      "An article with this slug already exists."
+    );
+  },
 });
 const shorthand = await input({
   message: "Shorthand title",
@@ -80,9 +78,8 @@ const tags = (
   })
 ).join("");
 
-const filename = `${id}-${slug}.mdx`;
+const directory = join(cwd(), config.target, slug);
 const content = render(config.template, {
-  id,
   slug,
   title,
   shorthand,
@@ -110,11 +107,12 @@ Aborting...
   exit(1);
 }
 
-writeFileSync(join(cwd(), config.target, filename), content);
-mkdirSync(join(cwd(), config.target, "assets", id));
+mkdirSync(directory);
+mkdirSync(join(directory, "assets"));
+writeFileSync(join(directory, "index.mdx"), content, { flag: "wx" });
 
 spawn("open", [`http://localhost:4321/blog/${slug}`]);
 
 console.log(`
-Successfully created ${chalk.green(filename)} under ${chalk.cyan(join(cwd(), config.target))}
+Successfully created ${chalk.green("index.mdx")} under ${chalk.cyan(directory)}
 `);

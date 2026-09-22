@@ -114,10 +114,9 @@
     display: block;
   }
 
-  .shiki,
-  .shiki span {
+  .astro-code,
+  .astro-code span {
     color: var(--shiki-dark) !important;
-    background-color: none !important;
   }
 }
 /* Scroll position */
@@ -163,33 +162,6 @@ a {
   -webkit-backdrop-filter: blur(12px);
   -moz-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-}
-
-/* Initial letter on articles */
-article #blur-container > p:nth-of-type(1)::first-letter {
-  initial-letter: 2;
-  -webkit-initial-letter: 2;
-  margin-right: 1ch;
-}
-
-/* Image optimization */
-img {
-  transition: all 0.3s ease-in-out;
-  transition-behavior: allow-discrete;
-
-  &[data-loaded="false"] {
-    filter: blur(30px);
-  }
-
-  &[data-loaded="true"] {
-    filter: blur(0px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  img {
-    transition: none;
-  }
 }
 
 /* MJX & LaTeX */
@@ -329,4 +301,17 @@ pre > code .line.remove::before {
   &:has(.meme-image:hover) .meme-popover {
     display: block;
   }
+}
+
+/* Page copy outside Markdown uses native paragraphs. */
+.prose-paragraph {
+  margin-bottom: 20px;
+  color: var(--color-secondary);
+}
+.prose-paragraph > a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-disabled);
+  text-underline-offset: 2px;
+  margin-inline: 1px;
 }

@@ -1,28 +1,16 @@
 ---
-import { getCollection } from "astro:content";
-
-import { isNew } from "@/utils/article";
-
-import Html from "@/layouts/Html.astro";
-import Head from "@/layouts/Head.astro";
+import CompanyLogo from "@/components/CompanyLogo/CompanyLogo.astro";
+import Entry from "@/components/Entry/Entry.astro";
+import Header from "@/components/Header/Header.astro";
+import Heading from "@/components/Heading/Heading.astro";
+import Link from "@/components/Link/Link.astro";
+import Section from "@/components/Section/Section.astro";
+import SectionDivider from "@/components/SectionDivider/SectionDivider.astro";
 import Body from "@/layouts/Body.astro";
-
-import Entry from "@/components/custom/Entry.astro";
-import Section from "@/components/custom/Section.astro";
-import SectionDivider from "@/components/custom/SectionDivider.astro";
-
-import CompanyLogo from "@/components/extras/CompanyLogo.astro";
-
-import PrimaryHeading from "@/components/headings/PrimaryHeading.astro";
-import SecondaryHeading from "@/components/headings/SecondaryHeading.astro";
-
-import Header from "@/components/layout/Header.astro";
-
-import Italic from "@/components/typography/Italic.astro";
-
-import Link from "@/components/navigation/Link.astro";
-
-import Paragraph from "@/components/structure/Paragraph.astro";
+import Head from "@/layouts/Head.astro";
+import Html from "@/layouts/Html.astro";
+import { isNew } from "@/utils/article";
+import { getCollection } from "astro:content";
 
 export const prerender = true;
 
@@ -41,23 +29,25 @@ const posts = (await getCollection("blog"))
   <Body>
     <main>
       <Header>
-        <PrimaryHeading>Hey there! Gabriel here {"👋🏻"}</PrimaryHeading>
+        <Heading level={1}>Hey there! Gabriel here {"👋🏻"}</Heading>
       </Header>
-      <Paragraph>
+      <p class="prose-paragraph">
         Software engineer delivering exceptional digital experiences, creating
         scalable, secure &amp; performant solutions, exploring emerging
         technologies, and continuously striving to deliver excellence.
-      </Paragraph>
-      <Paragraph>
-        Always evolving, learning and improving &ndash; <Italic>
+      </p>
+      <p class="prose-paragraph">
+        Always evolving, learning and improving &ndash; <em
+          class="font-serif italic"
+        >
           one day at a time{/* */}
-        </Italic>.
-      </Paragraph>
+        </em>.
+      </p>
       <SectionDivider class="mt-[60px]">
         <strong slot="title" class="text-primary">Working at</strong>
         <div slot="items">
           <Section>
-            <Paragraph>
+            <p class="prose-paragraph">
               <Link
                 href="https://metabase.com"
                 target="_blank"
@@ -66,7 +56,7 @@ const posts = (await getCollection("blog"))
                 <CompanyLogo /> Metabase
               </Link>, the open source Business Intelligence and Embedded
               Analytics tool that lets everyone work with data.
-            </Paragraph>
+            </p>
           </Section>
         </div>
       </SectionDivider>
@@ -104,18 +94,20 @@ const posts = (await getCollection("blog"))
           }
         </div>
       </SectionDivider>
-      <SecondaryHeading linkable={false}> More about me </SecondaryHeading>
-      <Paragraph>
+      <Heading linkable={false}> More about me </Heading>
+      <p class="prose-paragraph">
         Apart from my work, I'm all about sharing knowledge, fostering growth,
-        and building strong developer communities &ndash; <Italic>
+        and building strong developer communities &ndash; <em
+          class="font-serif italic"
+        >
           especially through mentoring{/* */}
-        </Italic>.
-      </Paragraph>
-      <Paragraph>
+        </em>.
+      </p>
+      <p class="prose-paragraph">
         If you're interested in my work and/or skillsets, you can always get in
         touch at <Link href="https://twitter.com/gantoreno">@gantoreno</Link> or
         <Link href="mailto:gantoreno@gmail.com">gantoreno@gmail.com</Link>.
-      </Paragraph>
+      </p>
     </main>
   </Body>
 </Html>

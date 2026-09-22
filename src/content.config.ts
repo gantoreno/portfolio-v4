@@ -1,5 +1,5 @@
-import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
+import { defineCollection, z } from "astro:content";
 
 const work = defineCollection({
   loader: glob({ pattern: "**/*.{yaml,yml}", base: "./src/content/work" }),

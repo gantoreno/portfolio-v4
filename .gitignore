@@ -22,4 +22,8 @@ pnpm-debug.log*
 .vercel
 
 # test article
-src/content/blog/100-test.mdx
+src/content/blog/test/
+
+
+.playwright-cli/
+output/playwright/

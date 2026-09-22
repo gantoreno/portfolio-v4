@@ -1,0 +1,30 @@
+---
+import Link from "@/components/Link/Link.astro";
+
+type Props = {
+  title: string;
+  description: string;
+  link: string;
+  external?: boolean;
+  new?: boolean;
+};
+
+const {
+  title,
+  description,
+  link,
+  external = false,
+  new: isNew = false,
+} = Astro.props;
+---
+
+<div>
+  {isNew ? "✨ " : ""}<Link
+    href={link}
+    class="mb-[5px]"
+    target={external ? "_blank" : ""}
+  >
+    {title}
+  </Link>
+  <p class="prose-paragraph">{description}</p>
+</div>
