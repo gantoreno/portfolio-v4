@@ -1,21 +1,17 @@
-import { defineConfig } from "astro/config";
-
-import vercel from "@astrojs/vercel";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import { unified } from "@astrojs/markdown-remark";
-
-import remarkMath from "remark-math";
-import rehypeSlug from "rehype-slug";
-import { rehypeArticle } from "./plugins/rehype-article.mjs";
-import rehypeMathjax from "rehype-mathjax";
-
-import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
-
+import vercel from "@astrojs/vercel";
 import {
-  transformerNotationHighlight,
   transformerNotationDiff,
+  transformerNotationHighlight,
 } from "@shikijs/transformers";
+import { defineConfig } from "astro/config";
+import rehypeMathjax from "rehype-mathjax";
+import rehypeSlug from "rehype-slug";
+import remarkMath from "remark-math";
+import { rehypeArticle } from "./plugins/rehype-article.mjs";
+import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({

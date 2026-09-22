@@ -1,14 +1,12 @@
-import chalk from "chalk";
-import { join } from "path";
-import { spawn } from "child_process";
-import { cwd, exit } from "process";
-import { writeFileSync, mkdirSync, readdirSync } from "fs";
-
-import { input, checkbox } from "@inquirer/prompts";
-
-import { render } from "@/utils/template";
-import { slugify } from "@/utils/slug";
 import { getDefaultDate } from "@/utils/date";
+import { slugify } from "@/utils/slug";
+import { render } from "@/utils/template";
+import { checkbox, input } from "@inquirer/prompts";
+import chalk from "chalk";
+import { spawn } from "child_process";
+import { mkdirSync, readdirSync, writeFileSync } from "fs";
+import { join } from "path";
+import { cwd, exit } from "process";
 
 const config = {
   target: "./src/content/blog",
@@ -43,7 +41,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 const id = (
   readdirSync(join(cwd(), config.target)).filter(
-    (child) => child.endsWith(".mdx") && !config.ignore.includes(child)
+    (child) => child.endsWith(".mdx") && !config.ignore.includes(child),
   ).length + 1
 )
   .toString()

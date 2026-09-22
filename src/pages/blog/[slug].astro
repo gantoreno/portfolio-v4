@@ -1,26 +1,18 @@
 ---
 import ArticleContent from "@/components/ArticleContent/ArticleContent.astro";
-import Heading from "@/components/Heading/Heading.astro";
-import { type CollectionEntry, getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
-
-import { format } from "date-fns";
-
-import { isNew } from "@/utils/article";
-
-import Html from "@/layouts/Html.astro";
-import Head from "@/layouts/Head.astro";
-import Body from "@/layouts/Body.astro";
-
-import Entry from "@/components/Entry/Entry.astro";
-
-import signature from "@/images/signature.svg";
-
-import Figure from "@/components/Figure/Figure.astro";
-
-import Link from "@/components/Link/Link.astro";
-
 import Avatar from "@/components/Avatar/Avatar.astro";
+import Entry from "@/components/Entry/Entry.astro";
+import Figure from "@/components/Figure/Figure.astro";
+import Heading from "@/components/Heading/Heading.astro";
+import Link from "@/components/Link/Link.astro";
+import signature from "@/images/signature.svg";
+import Body from "@/layouts/Body.astro";
+import Head from "@/layouts/Head.astro";
+import Html from "@/layouts/Html.astro";
+import { isNew } from "@/utils/article";
+import { Image } from "astro:assets";
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import { format } from "date-fns";
 
 export const prerender = true;
 

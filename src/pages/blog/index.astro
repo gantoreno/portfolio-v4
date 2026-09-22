@@ -1,18 +1,14 @@
 ---
-import Heading from "@/components/Heading/Heading.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-import { isNew } from "@/utils/article";
-
-import Html from "@/layouts/Html.astro";
-import Head from "@/layouts/Head.astro";
-import Body from "@/layouts/Body.astro";
-
 import EntryAlt from "@/components/EntryAlt/EntryAlt.astro";
+import Header from "@/components/Header/Header.astro";
+import Heading from "@/components/Heading/Heading.astro";
 import Section from "@/components/Section/Section.astro";
 import SectionDivider from "@/components/SectionDivider/SectionDivider.astro";
-
-import Header from "@/components/Header/Header.astro";
+import Body from "@/layouts/Body.astro";
+import Head from "@/layouts/Head.astro";
+import Html from "@/layouts/Html.astro";
+import { isNew } from "@/utils/article";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export const prerender = true;
 
