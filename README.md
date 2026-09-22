@@ -46,7 +46,7 @@ src/content/blog/
       satellite.webp
 ```
 
-Reference article images with `./assets/image.webp`. Shared images belong in `src/images`. Run `bun run create:article` to scaffold an article folder and its assets directory; no sequence number is needed. Optional social thumbnails use a public URL in the `thumbnail` frontmatter field.
+Reference article images with `./assets/image.webp`. Shared images belong in `src/images`. Run `bun run create:article` to scaffold an article folder and its assets directory; no sequence number is needed. Optional social thumbnails live at `public/assets/img/blog/<slug>.png`, referenced as `/assets/img/blog/<slug>.png` in the `thumbnail` frontmatter field. The original `001.png`–`005.png` files remain available for cached social previews and previously shared image URLs; keep these compatibility copies when updating assets.
 
 Frontmatter `slug` values determine public URLs. Home, the blog index, and articles are prerendered, so publishing content requires a rebuild.
 
