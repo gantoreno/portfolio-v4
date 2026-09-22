@@ -1,7 +1,9 @@
+import { Navbar } from "@/components/Navbar/Navbar";
 import type { Metadata } from "next";
 import { getPosts } from "@/lib/content";
-import { Heading } from "@/components/mdx";
-import { Entry, SectionDivider } from "@/components/entries";
+import { Heading } from "@/components/Heading/Heading";
+import { Entry } from "@/components/Entry/Entry";
+import { SectionDivider } from "@/components/SectionDivider/SectionDivider";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Experiences, lessons & more",
@@ -18,31 +20,34 @@ export default async function Blog() {
   const posts = await getPosts();
   const years = [...new Set(posts.map((post) => post.date.getUTCFullYear()))];
   return (
-    <main>
-      <header className="my-[60px]">
-        <Heading level={1}>Experiences, lessons &amp; more 📖</Heading>
-      </header>
-      <div className="mt-[60px]">
-        {years.map((year) => (
-          <SectionDivider
-            key={year}
-            title={<span className="text-disabled">{year}</span>}
-          >
-            {posts
-              .filter((post) => post.date.getUTCFullYear() === year)
-              .map((post) => (
-                <Entry
-                  key={post.slug}
-                  title={post.shorthand}
-                  description={post.description}
-                  href={`/blog/${post.slug}`}
-                  date={post.date}
-                  showDate
-                />
-              ))}
-          </SectionDivider>
-        ))}
-      </div>
-    </main>
+    <>
+      <Navbar activeSection="blog" />
+      <main>
+        <header className="my-[60px]">
+          <Heading level={1}>Experiences, lessons &amp; more 📖</Heading>
+        </header>
+        <div className="mt-[60px]">
+          {years.map((year) => (
+            <SectionDivider
+              key={year}
+              title={<span className="text-disabled">{year}</span>}
+            >
+              {posts
+                .filter((post) => post.date.getUTCFullYear() === year)
+                .map((post) => (
+                  <Entry
+                    key={post.slug}
+                    title={post.shorthand}
+                    description={post.description}
+                    href={`/blog/${post.slug}`}
+                    date={post.date}
+                    showDate
+                  />
+                ))}
+            </SectionDivider>
+          ))}
+        </div>
+      </main>
+    </>
   );
 }

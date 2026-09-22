@@ -1,25 +1,6 @@
-import type { ReactNode } from "react";
-import { Link, Paragraph } from "./mdx";
+import { Link } from "@/components/Link/Link";
+import { Paragraph } from "@/components/Paragraph/Paragraph";
 import { isNew } from "@/lib/content";
-
-export function SectionDivider({
-  title,
-  children,
-  className = "",
-}: {
-  title: ReactNode;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <section
-      className={`grid grid-cols-4 gap-5 border-t border-soft pt-5 ${className}`}
-    >
-      {title}
-      <div className="col-span-3">{children}</div>
-    </section>
-  );
-}
 export function Entry({
   title,
   description,

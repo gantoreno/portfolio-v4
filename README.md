@@ -36,7 +36,9 @@ bun run dev
 
 Edit articles in `packages/content/blog`. Both implementations use the existing frontmatter `slug`, so public URLs are preserved. Next.js validates metadata during the build and rejects duplicate slugs. Restart Next.js development after adding a new article if its import context has not refreshed.
 
-Shared articles import custom components from `@portfolio/mdx`. Each app resolves that alias to its own adapter: `apps/astro/src/mdx.ts` or `apps/next/src/components/mdx.tsx`. Add a custom article component to both adapters when needed. Local image imports and ordinary Markdown images work in both apps.
+Shared articles import custom components from `@portfolio/mdx`. Each app resolves that alias to its own adapter: `apps/astro/src/mdx.ts` or `apps/next/src/lib/mdx.tsx`. Add a custom article component to both adapters when needed. Local image imports and ordinary Markdown images work in both apps.
+
+Next.js components follow `src/components/ComponentName/ComponentName.tsx`, with component CSS beside the component. The MDX adapter and callback mappings live in `src/lib/mdx.tsx`.
 
 Next.js uses one `Heading` component with a `level` prop, and inline callbacks in the MDX map. Simple formatting tags no longer need separate wrapper files. The article demos remain server-rendered SVG/CSS; the chart does not load a charting library. Standalone Markdown images are lifted out of paragraph tags before rendering figures to keep the HTML valid.
 
@@ -46,7 +48,7 @@ Next.js uses one `Heading` component with a `level` prop, and inline callbacks i
 - MDX, syntax highlighting, and MathJax run at build time, outside the browser bundle.
 - `next/image` supplies responsive image sizes, intrinsic dimensions, lazy loading, local blur placeholders, and AVIF/WebP negotiation. Image variants are generated on demand and cached by the Next.js image optimizer or deployment platform.
 - `next/font/local` self-hosts the existing font subsets with `display: swap`; only the primary font is preloaded.
-- App-owned client components are limited to active navigation and the Alt-click reading-focus interaction. Next.js Link and Image also include their framework runtime.
+- The navbar is a Server Component rendered by each page with an explicit active section. The only app-owned client component is the Alt-click reading-focus interaction. Next.js Link and Image also include their framework runtime.
 - Webpack is selected explicitly so the MDX pipeline can use Shiki transformer functions. This choice affects compilation, not whether pages are statically served.
 
 For a fair speed comparison, use production builds, identical routes/devices, and the same hosting region. Astro was already prerendering the main pages; Next.js adds a React runtime, so this migration does not itself establish that Next.js is faster. Lighthouse and real-user measurements should determine that.

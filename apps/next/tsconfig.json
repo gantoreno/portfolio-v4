@@ -16,7 +16,7 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./src/*"],
-      "@portfolio/mdx": ["./src/components/mdx.tsx"]
+      "@portfolio/mdx": ["./src/lib/mdx.tsx"]
     }
   },
   "include": [

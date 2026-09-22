@@ -46,7 +46,7 @@ export default withMDX({
   images: { formats: ["image/avif", "image/webp"] },
   webpack(config) {
     config.resolve.alias["@portfolio/mdx"] = new URL(
-      "./src/components/mdx.tsx",
+      "./src/lib/mdx.tsx",
       import.meta.url,
     ).pathname;
     return config;
