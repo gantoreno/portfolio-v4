@@ -44,7 +44,15 @@ src/content/blog/
     assets/
       billing.webp
       satellite.webp
+    components/
+      SavingsChart/
+        SavingsChart.astro
+      WalkingMeter/
+        WalkingMeter.astro
+        WalkingMeter.scss
 ```
+
+Article-specific demos live in `components/ComponentName/ComponentName.astro` inside the article folder, with any stylesheet alongside the component. Import them with relative paths such as `./components/SavingsChart/SavingsChart.astro`. Reusable components remain in `src/components`.
 
 Reference article images with `./assets/image.webp`. Shared images belong in `src/images`. Run `bun run create:article` to scaffold an article folder and its assets directory; no sequence number is needed. Optional social thumbnails live at `public/assets/img/blog/<slug>.png`, referenced as `/assets/img/blog/<slug>.png` in the `thumbnail` frontmatter field. The original `001.png`–`005.png` files remain available for cached social previews and previously shared image URLs; keep these compatibility copies when updating assets.
 
